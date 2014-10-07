@@ -49,7 +49,7 @@ public interface IStewardDAO {
     Steward find(Long id);
 
     /**
-     * Get all stewards from storage.
+     * Get all stewards from storage ordered by last name then first name.
      *
      * @return all stewards or empty list.
      */
