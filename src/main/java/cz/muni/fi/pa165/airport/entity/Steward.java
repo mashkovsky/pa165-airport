@@ -1,14 +1,22 @@
 package cz.muni.fi.pa165.airport.entity;
 
+import javax.persistence.*;
+
 /**
  * @author Mariia Shevchenko
  */
+@Entity
+@Table(name = "STEWARD")
 public class Steward {
 
     private Long id;
     private String firstName;
     private String lastName;
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }
@@ -17,6 +25,7 @@ public class Steward {
         this.id = id;
     }
 
+    @Column(name = "FIRST_NAME")
     public String getFirstName() {
         return firstName;
     }
@@ -25,6 +34,7 @@ public class Steward {
         this.firstName = firstName;
     }
 
+    @Column(name = "LAST_NAME")
     public String getLastName() {
         return lastName;
     }
