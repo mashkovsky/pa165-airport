@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airport.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -7,7 +8,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "STEWARD")
-public class Steward {
+public class Steward implements Serializable {
 
     private Long id;
     private String firstName;
