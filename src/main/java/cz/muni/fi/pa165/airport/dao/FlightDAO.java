@@ -38,6 +38,11 @@ public class FlightDAO implements IFlightDAO {
         if (flight.getArrival() == null) {
             throw new IllegalArgumentException("Flight arrival is null.");
         }
+        
+        if(flight.getDeparture().compareTo(flight.getArrival()) >= 0){
+            throw new IllegalArgumentException("Flight arrival must be after its departure.");
+        }
+        
         if (flight.getOrigin() == null) {
             throw new IllegalArgumentException("Flight origin is null.");
         }
@@ -70,6 +75,9 @@ public class FlightDAO implements IFlightDAO {
         }
         if (flight.getArrival() == null) {
             throw new IllegalArgumentException("Flight arrival is null.");
+        }
+        if(flight.getDeparture().compareTo(flight.getArrival()) >= 0){
+            throw new IllegalArgumentException("Flight arrival must be after its departure.");
         }
         if (flight.getOrigin() == null) {
             throw new IllegalArgumentException("Flight origin is null.");
