@@ -6,7 +6,6 @@
 package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Plane;
-import cz.muni.fi.pa165.airport.exception.RepositoryException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -73,7 +72,7 @@ public class PlaneDAO implements IPlaneDAO {
         }
         Plane plane = em.find(Plane.class, id);
         if (plane == null) {
-            throw new RepositoryException("Plane with ID " + id + "does not exist");
+            throw new IllegalArgumentException("Plane with ID " + id + "does not exist");
         }
 
         em.remove(plane);

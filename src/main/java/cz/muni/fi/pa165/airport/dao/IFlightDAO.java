@@ -40,7 +40,6 @@ public interface IFlightDAO {
      *
      * @param id flight unique identifier
      * @throws IllegalArgumentException if {@code id} is {@code null}
-     * @throws cz.muni.fi.pa165.airport.exception.RepositoryException
      *                                  if flight with given {@code id} does not exist
      */
     

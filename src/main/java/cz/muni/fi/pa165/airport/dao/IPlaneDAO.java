@@ -32,8 +32,7 @@ public interface IPlaneDAO {
      *
      * @param id plane unique identifier
      * @throws IllegalArgumentException if {@code id} is {@code null}
-     * @throws cz.muni.fi.pa165.airport.exception.RepositoryException if plane
-     * with given {@code id} does not exist
+     *                                  if plane with given {@code id} does not exist
      */
     void delete(Long id);
 

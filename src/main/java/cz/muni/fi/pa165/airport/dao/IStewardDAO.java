@@ -34,7 +34,6 @@ public interface IStewardDAO {
      *
      * @param id steward unique identifier
      * @throws IllegalArgumentException if {@code id} is {@code null}
-     * @throws cz.muni.fi.pa165.airport.exception.RepositoryException
      *                                  if steward with given {@code id} does not exist
      */
     void delete(Long id);
