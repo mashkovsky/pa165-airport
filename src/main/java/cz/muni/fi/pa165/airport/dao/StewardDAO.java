@@ -65,7 +65,7 @@ public class StewardDAO implements IStewardDAO {
 
         Steward steward = em.find(Steward.class, id);
         if (steward == null) {
-            throw new RepositoryException("Steward with ID " + id + "does not exist");
+            throw new IllegalArgumentException("Steward with ID " + id + "does not exist");
         }
 
         em.remove(steward);

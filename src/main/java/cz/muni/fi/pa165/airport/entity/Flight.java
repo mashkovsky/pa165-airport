@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.airport.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.persistence.*;
@@ -20,7 +22,7 @@ public class Flight implements Serializable {
     private Destination origin;
     private Destination destination;
     private Plane plane;
-    private Set<Steward> stewards;
+    private List<Steward> stewards;
     
     // id
     @Id
@@ -52,9 +54,8 @@ public class Flight implements Serializable {
     }
     
     // origin
-    @Column(name = "ORIGIN")
     @OneToOne
-    @JoinColumn(name="DESTINATION.ID", nullable=false)
+    @JoinColumn(name="ORIGIN", nullable=false)
     public Destination getOrigin() {
         return origin;
     }
@@ -63,9 +64,8 @@ public class Flight implements Serializable {
     }
     
     // destination
-    @Column(name = "DESTINATION")
     @OneToOne
-    @JoinColumn(name="DESTINATION.ID", nullable=false)
+    @JoinColumn(name="DESTINATION", nullable=false)
     public Destination getDestination() {
         return destination;
     }
@@ -74,9 +74,8 @@ public class Flight implements Serializable {
     }
     
     // plane
-    @Column(name = "PLANE")
-    @OneToOne
-    @JoinColumn(name="PLANE.ID", nullable=false)
+    @OneToOne()
+    @JoinColumn(name="PLANE_ID", nullable=false)
     public Plane getPlane() {
         return plane;
     }
@@ -85,13 +84,14 @@ public class Flight implements Serializable {
     }
     
     // stewards
-    @OneToMany(mappedBy="STEWARD.ID")
-    public Set<Steward> getStewards() {
-        return Collections.unmodifiableSet(stewards);
+    @ManyToMany
+    @JoinColumn(name = "STEWARD_ID", nullable = false)
+    public List<Steward> getStewards() {
+        return stewards;
     }
-    public void setStewards(Set<Steward> stewards) {
-        this.stewards.clear();
-        this.stewards.addAll(stewards);
+
+    public void setStewards(List<Steward> stewards) {
+        this.stewards = stewards;
     }
     
     
@@ -99,7 +99,7 @@ public class Flight implements Serializable {
      * Default constructor
      */
     public Flight() {
-        this.stewards = new TreeSet<Steward>();
+        this.stewards = new ArrayList<Steward>();
     }
     
     /**

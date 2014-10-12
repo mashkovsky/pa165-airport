@@ -99,7 +99,7 @@ public class FlightDAO implements IFlightDAO {
 
         Flight flight = em.find(Flight.class, id);
         if (flight == null) {
-            throw new RepositoryException("Flight with ID " + id + "does not exist");
+            throw new IllegalArgumentException("Flight with ID " + id + "does not exist");
         }
 
         em.remove(flight);
