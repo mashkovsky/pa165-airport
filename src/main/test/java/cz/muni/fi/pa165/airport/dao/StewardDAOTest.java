@@ -3,18 +3,22 @@ package cz.muni.fi.pa165.airport.dao;
 import cz.muni.fi.pa165.airport.entity.Steward;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Assert;
+import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.assertNotNull;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * @author Matej Chrenko
  */
 public class StewardDAOTest extends BaseDAOTest {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private IStewardDAO stewardDAO;
@@ -42,16 +46,33 @@ public class StewardDAOTest extends BaseDAOTest {
         steward4.setFirstName("Ján");
         steward4.setLastName("Mrkvi?ka");
 
-        stewardDAO.create(steward1);
-        stewardDAO.create(steward2);
-        stewardDAO.create(steward3);
-        stewardDAO.create(steward4);
-
     }
 
+    /**
+     * Test of create method, of class StewardDAO.
+     */
     @Test
-    private void test() {
-
+    public void testCreate() {
+        System.out.println("Test create steward.");
+        try {
+            stewardDAO.create(null);
+            Assert.fail("Didn't throw exception when steward is null.");
+        } catch (IllegalArgumentException e) {
+            //this should happen
+        } catch (Exception e) {
+            Assert.fail("Thrown unexpected exception when steward is null.");
+        }
+        try {
+            steward1.setId(3L);
+            stewardDAO.create(steward1);
+            Assert.fail("Didn't throw exception when steward id is already set.");
+        } catch (IllegalArgumentException e) {
+            //this should happen
+        } catch (Exception e) {
+            Assert.fail("Thrown unexpected exception when steward id is already set.");
+        }
+        stewardDAO.create(steward2);
+        Assert.assertEquals(steward2.getFirstName(), "Benjamin");
     }
 
 }
