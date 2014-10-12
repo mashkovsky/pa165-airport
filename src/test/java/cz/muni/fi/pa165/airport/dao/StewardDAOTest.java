@@ -49,7 +49,7 @@ public class StewardDAOTest extends BaseDAOTest {
     }
 
     /*
-     * Uodate
+     * Update
      */
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateNullId() {
