@@ -36,12 +36,13 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
+                <prop key="hbm2ddl.auto">create</prop>
             </props>
         </property>
     </bean>
 
     <jdbc:embedded-database id="dataSource" type="DERBY">
-        <jdbc:script location="tables.sql" />
+        <!--<jdbc:script location="tables.sql" />-->
     </jdbc:embedded-database>
 
 </beans>
