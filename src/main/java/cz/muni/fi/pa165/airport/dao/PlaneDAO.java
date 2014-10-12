@@ -50,8 +50,8 @@ public class PlaneDAO implements IPlaneDAO {
         if (plane == null) {
             throw new IllegalArgumentException("Plane is null");
         }
-        if (plane.getId() != null) {
-            throw new IllegalArgumentException("Plane id is not null.");
+        if (plane.getId() == null) {
+            throw new IllegalArgumentException("Plane id is null.");
         }
         if (plane.getName() == null) {
             throw new IllegalArgumentException("Plane name is null.");
