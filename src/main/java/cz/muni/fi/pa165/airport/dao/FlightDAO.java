@@ -6,7 +6,6 @@
 package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Flight;
-import cz.muni.fi.pa165.airport.exception.RepositoryException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
