@@ -99,7 +99,6 @@ public class Flight implements Serializable {
      * Default constructor
      */
     public Flight() {
-        this.capacity = 0;
         this.stewards = new TreeSet<Steward>();
     }
     
@@ -139,7 +138,7 @@ public class Flight implements Serializable {
 
     @Override
     public int hashCode() {
-        return (int)id;
+        return id.intValue();
     }
 
     @Override
