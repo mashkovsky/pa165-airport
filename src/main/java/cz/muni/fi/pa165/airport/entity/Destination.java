@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author Mariia Shevchenko
+ */
 @Entity
 @Table(name = "DESTINATION")
 public class Destination {
