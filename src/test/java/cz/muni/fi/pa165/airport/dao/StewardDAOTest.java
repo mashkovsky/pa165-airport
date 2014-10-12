@@ -110,8 +110,8 @@ public class StewardDAOTest extends BaseDAOTest {
 
         Steward fromDb = dao.find(steward.getId());
         assertEquals(steward, fromDb);
-        assertEquals("CZ", fromDb.getFirstName());
-        assertEquals("Brno", fromDb.getLastName());
+        assertEquals("Janko", fromDb.getFirstName());
+        assertEquals("Homer", fromDb.getLastName());
     }
 
     /*
