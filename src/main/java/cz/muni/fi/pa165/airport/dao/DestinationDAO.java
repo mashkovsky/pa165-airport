@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 /**
- * @author Mariia Shevchenko
+ * @author Zdenek Kanovsky
  */
 @Repository
 @Transactional
