@@ -6,13 +6,12 @@
 package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Flight;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -39,6 +38,11 @@ public class FlightDAO implements IFlightDAO {
         if (flight.getArrival() == null) {
             throw new IllegalArgumentException("Flight arrival is null.");
         }
+        
+        if(flight.getDeparture().compareTo(flight.getArrival()) >= 0){
+            throw new IllegalArgumentException("Flight arrival must be after its departure.");
+        }
+        
         if (flight.getOrigin() == null) {
             throw new IllegalArgumentException("Flight origin is null.");
         }
@@ -71,6 +75,9 @@ public class FlightDAO implements IFlightDAO {
         }
         if (flight.getArrival() == null) {
             throw new IllegalArgumentException("Flight arrival is null.");
+        }
+        if(flight.getDeparture().compareTo(flight.getArrival()) >= 0){
+            throw new IllegalArgumentException("Flight arrival must be after its departure.");
         }
         if (flight.getOrigin() == null) {
             throw new IllegalArgumentException("Flight origin is null.");
