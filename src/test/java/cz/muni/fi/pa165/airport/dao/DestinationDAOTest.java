@@ -1,12 +1,13 @@
 package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Destination;
-import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertNotNull;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -82,13 +83,13 @@ public class DestinationDAOTest extends BaseDAOTest {
         dao.create(destination);
 
         destination.setCountry("GE");
-        destination.setCity("München");
+        destination.setCity("Mï¿½nchen");
 
         dao.update(destination);
 
         Destination fromDb = dao.find(destination.getId());
         assertEquals("GE", fromDb.getCountry());
-        assertEquals("München", fromDb.getCity());
+        assertEquals("Mï¿½nchen", fromDb.getCity());
     }
 
 
@@ -132,7 +133,7 @@ public class DestinationDAOTest extends BaseDAOTest {
     @Test
     public void testDelete() {        
         Destination destination1 = createDestination(null, "CZ", "Brno");
-        Destination destination2 = createDestination(null, "GE", "München");
+        Destination destination2 = createDestination(null, "GE", "Mï¿½nchen");
         dao.create(destination1);
         dao.create(destination2);
         
@@ -145,7 +146,7 @@ public class DestinationDAOTest extends BaseDAOTest {
     @Test
     public void testGetAll() {
         Destination destination1 = createDestination(null, "CZ", "Brno");
-        Destination destination2 = createDestination(null, "GE", "München");
+        Destination destination2 = createDestination(null, "GE", "Mï¿½nchen");
         dao.create(destination1);
         dao.create(destination2);
 
