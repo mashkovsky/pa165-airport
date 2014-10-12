@@ -1,78 +1,164 @@
 package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Steward;
-import org.junit.Before;
+import java.util.List;
 import org.junit.Test;
-import org.junit.Assert;
-import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Matej Chrenko
  */
 public class StewardDAOTest extends BaseDAOTest {
 
-    @PersistenceContext
-    private EntityManager em;
-
     @Autowired
-    private IStewardDAO stewardDAO;
+    private IStewardDAO dao;
 
-    private Steward steward1;
-    private Steward steward2;
-    private Steward steward3;
-    private Steward steward4;
-
-    @Before
-    public void setUp() {
-        steward1 = new Steward();
-        steward1.setFirstName("John");
-        steward1.setLastName("Lennon");
-
-        steward2 = new Steward();
-        steward2.setFirstName("Benjamin");
-        steward2.setLastName("Franklin");
-
-        steward3 = new Steward();
-        steward3.setFirstName("Benjamin");
-        steward3.setLastName("Franklin");
-
-        steward4 = new Steward();
-        steward4.setFirstName("Ján");
-        steward4.setLastName("Mrkvi?ka");
-
+    /*
+     * Create
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateNotNullId() {
+        dao.create(createSteward(1L, "Janko", "Mrkvi?ka"));
     }
 
-    /**
-     * Test of create method, of class StewardDAO.
-     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateNullCountry() {
+        dao.create(createSteward(null, null, "Mrkvi?ka"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateNullCity() {
+        dao.create(createSteward(null, "Janko", null));
+    }
+
     @Test
     public void testCreate() {
-        System.out.println("Test create steward.");
-        try {
-            stewardDAO.create(null);
-            Assert.fail("Didn't throw exception when steward is null.");
-        } catch (IllegalArgumentException e) {
-            //this should happen
-        } catch (Exception e) {
-            Assert.fail("Thrown unexpected exception when steward is null.");
-        }
-        try {
-            steward1.setId(3L);
-            stewardDAO.create(steward1);
-            Assert.fail("Didn't throw exception when steward id is already set.");
-        } catch (IllegalArgumentException e) {
-            //this should happen
-        } catch (Exception e) {
-            Assert.fail("Thrown unexpected exception when steward id is already set.");
-        }
-        stewardDAO.create(steward2);
-        Assert.assertEquals(steward2.getFirstName(), "Benjamin");
+        Steward steward = createSteward(null, "Janko", "Mrkvi?ka");
+
+        dao.create(steward);
+        assertNotNull(steward.getId());
+
+        Steward fromDb = dao.find(steward.getId());
+        assertEquals(steward, fromDb);
+    }
+
+    /*
+     * Uodate
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateNullId() {
+        dao.update(createSteward(null, "Janko", "Mrkvi?ka"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateNullCountry() {
+        Steward steward = createSteward(null, "Janko", "Mrkvi?ka");
+        dao.create(steward);
+
+        steward.setFirstName(null);
+        dao.update(steward);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateNullCity() {
+        Steward steward = createSteward(null, "Janko", "Mrkvi?ka");
+        dao.create(steward);
+
+        steward.setLastName(null);
+        dao.update(steward);
+    }
+
+    @Test
+    public void testUpdate() {
+        Steward steward = createSteward(null, "Janko", "Mrkvi?ka");
+        dao.create(steward);
+
+        steward.setFirstName("Homer");
+        steward.setLastName("Simpson");
+
+        dao.update(steward);
+
+        Steward fromDb = dao.find(steward.getId());
+        assertEquals("Homer", fromDb.getFirstName());
+        assertEquals("Simpson", fromDb.getLastName());
+    }
+
+
+    /*
+     * Find
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindNullId() {
+        dao.find(null);
+    }
+
+    @Test
+    public void testFindNotExistent() {
+        assertNull(dao.find(1L));
+    }
+
+    @Test
+    public void testFind() {
+        Steward steward = createSteward(null, "Janko", "Homer");
+        dao.create(steward);
+
+        Steward fromDb = dao.find(steward.getId());
+        assertEquals(steward, fromDb);
+        assertEquals("CZ", fromDb.getFirstName());
+        assertEquals("Brno", fromDb.getLastName());
+    }
+
+    /*
+     * Delete
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeleteNullId() {
+        dao.delete(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeleteNotExistent() {
+        dao.delete(1L);
+    }
+
+    @Test
+    public void testDelete() {
+        Steward steward1 = createSteward(null, "Janko", "Mrkvi?ka");
+        Steward steward2 = createSteward(null, "Homer", "Simpson");
+        dao.create(steward1);
+        dao.create(steward2);
+
+        dao.delete(steward1.getId());
+
+        assertNull(dao.find(steward1.getId()));
+        assertEquals(steward2, dao.find(steward2.getId()));
+    }
+
+    @Test
+    public void testGetAll() {
+        Steward steward1 = createSteward(null, "Janko", "Mrkvi?ka");
+        Steward steward2 = createSteward(null, "Homer", "Simpson");
+        dao.create(steward1);
+        dao.create(steward2);
+
+        List<Steward> fromDb = dao.getAll();
+        assertEquals(2, fromDb.size());
+        assertTrue(fromDb.contains(steward1));
+        assertTrue(fromDb.contains(steward2));
+    }
+
+    private static Steward createSteward(Long id, String firstName, String lastName) {
+        Steward steward = new Steward();
+        steward.setId(id);
+        steward.setLastName(lastName);
+        steward.setFirstName(firstName);
+
+        return steward;
     }
 
 }
