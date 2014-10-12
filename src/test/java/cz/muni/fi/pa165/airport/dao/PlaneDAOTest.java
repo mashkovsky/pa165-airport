@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * @author Mariia Shevchenko
+ * @author Zdenek Kanovsky
  */
 public class PlaneDAOTest extends BaseDAOTest {
 
