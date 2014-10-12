@@ -54,7 +54,7 @@ public class Plane {
     }
 
     public void setCapacity(Integer capacity) {
-        if (capacity < 0) {
+        if (capacity < 1) {
             this.capacity = 0;
             throw new IllegalArgumentException("Capacity can not be smaller than zero");
         } else {
