@@ -332,7 +332,7 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.find(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testFindNotExistentId() {
         assertNull(flightDAO.find(1L));
     }
