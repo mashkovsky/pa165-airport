@@ -6,7 +6,7 @@ import cz.muni.fi.pa165.airport.entity.Steward;
 import java.util.List;
 
 /**
- * @author Mariia Shevchenko
+ * @author Zdenek Kanovsky
  */
 public interface IDestinationDAO {
 
