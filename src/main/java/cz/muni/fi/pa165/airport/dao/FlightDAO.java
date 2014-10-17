@@ -6,19 +6,18 @@
 package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Flight;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 /**
  *
  * @author Zdenek Kanovsky
  */
 @Repository
-@Transactional
 public class FlightDAO implements IFlightDAO {
     @PersistenceContext
     private EntityManager em;

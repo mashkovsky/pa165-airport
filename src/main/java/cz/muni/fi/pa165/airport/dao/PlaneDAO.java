@@ -7,7 +7,6 @@ package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Plane;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +17,6 @@ import java.util.List;
  * @author Matej Chrenko
  */
 @Repository
-@Transactional
 public class PlaneDAO implements IPlaneDAO {
 
     @PersistenceContext
