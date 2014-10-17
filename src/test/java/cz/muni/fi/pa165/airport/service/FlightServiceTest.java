@@ -8,9 +8,11 @@ import cz.muni.fi.pa165.airport.entity.Destination;
 import cz.muni.fi.pa165.airport.entity.Flight;
 import cz.muni.fi.pa165.airport.entity.Plane;
 import cz.muni.fi.pa165.airport.entity.Steward;
+import cz.muni.fi.pa165.airport.service.dto.FlightDetailDTO;
 import cz.muni.fi.pa165.airport.service.dto.FlightMinimalDTO;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -20,6 +22,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -37,6 +43,7 @@ public class FlightServiceTest extends BaseServiceTest {
 
     @Before
     public void setUp() {
+        super.setUp();
         // Inject dozer mapper into service - it hasn't access to Spring context so we have to do it manually
         flightService.setMapper(mapper);
     }
@@ -45,6 +52,51 @@ public class FlightServiceTest extends BaseServiceTest {
     public void testGetAllEmpty() {
         when(flightDAO.getAll()).thenReturn(new ArrayList<Flight>());
         assertTrue(flightService.getAllFlights().isEmpty());
+    }
+
+    @Test
+    public void testCreate() {
+        // Create flight
+        Flight flight = prepareFlight();
+        flight.setId(null);
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        // Create flight
+        flightService.createFlight(dto);
+
+        // Get entity value that was passed to DAO from service
+        ArgumentCaptor<Flight> argument = ArgumentCaptor.forClass(Flight.class);
+        verify(flightDAO).create(argument.capture());
+
+        // Check that service sent correct entity to DAO with no attributes changed
+        AssertTestHelper.assertDeepEqualFlight(argument.getValue(), dto);
+    }
+
+    @Test
+    public void testCreateWrongTimes() {
+        // Create flight
+        Flight flight = prepareFlight();
+        flight.setId(null);
+
+        // Set departure after arrival
+        flight.setDeparture(new Date(1413139350));
+        flight.setArrival(new Date(1413139340));
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        // Create flight
+        try {
+            flightService.createFlight(dto);
+            fail("It should not be possible to create flight with departure after arrival");
+        } catch (IllegalStateException e) {
+            // OK
+        }
+
+        // Check that DAO was not called at all
+        verify(flightDAO, times(0)).create(any(Flight.class));
     }
 
     @Test
