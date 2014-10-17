@@ -18,6 +18,10 @@
 
 
     <!-- Persistence configuration -->
+
+    <!-- Translate JPA exceptions to Spring exception hierarchy on @Repository level -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
     <tx:annotation-driven transaction-manager="txManager"/>
 
     <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
