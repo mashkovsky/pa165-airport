@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.airport.entity.Flight;
 import cz.muni.fi.pa165.airport.entity.Plane;
 import cz.muni.fi.pa165.airport.entity.Steward;
 import cz.muni.fi.pa165.airport.service.dto.DestinationDTO;
+import cz.muni.fi.pa165.airport.service.dto.FlightDetailDTO;
 import cz.muni.fi.pa165.airport.service.dto.FlightMinimalDTO;
 import cz.muni.fi.pa165.airport.service.dto.PlaneDTO;
 import cz.muni.fi.pa165.airport.service.dto.StewardDTO;
@@ -36,6 +37,26 @@ public final class AssertTestHelper {
         assertEquals(entity.getDeparture(), dto.getDeparture());
         assertDeepEqualDestination(entity.getDestination(), dto.getDestination());
         assertDeepEqualDestination(entity.getOrigin(), dto.getOrigin());
+    }
+
+    /**
+     * Assert each attribute of entity to equal each attribute of DTO
+     * @param entity entity
+     * @param dto dto
+     */
+    public static void assertDeepEqualFlight(Flight entity, FlightDetailDTO dto) {
+        assertEquals(entity.getId(), dto.getId());
+        assertEquals(entity.getArrival(), dto.getArrival());
+        assertEquals(entity.getDeparture(), dto.getDeparture());
+        assertDeepEqualDestination(entity.getDestination(), dto.getDestination());
+        assertDeepEqualDestination(entity.getOrigin(), dto.getOrigin());
+        assertDeepEqualPlane(entity.getPlane(), dto.getPlane());
+
+        // Deeply assert all stewards. Order should not be changed between mappings so we can count on it.
+        assertEquals(entity.getStewards().size(), dto.getStewards().size());
+        for (int i = 0; i < entity.getStewards().size(); i++) {
+            assertDeepEqualSteward(entity.getStewards().get(i), dto.getStewards().get(i));
+        }
     }
 
     /**
