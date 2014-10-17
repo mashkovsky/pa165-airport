@@ -48,4 +48,9 @@
     <jdbc:embedded-database id="dataSource" type="DERBY">
     </jdbc:embedded-database>
 
+    <!-- Dozer mapping configuration -->
+    <bean id="dozerBeanMapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+        <property name="mappingFiles" value="classpath*:mapping/global.xml"/>
+    </bean>
+
 </beans>
