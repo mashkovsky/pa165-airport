@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.airport.dao.IDestinationDAO;
 import cz.muni.fi.pa165.airport.dao.IFlightDAO;
 import cz.muni.fi.pa165.airport.dao.IPlaneDAO;
 import cz.muni.fi.pa165.airport.dao.IStewardDAO;
+import cz.muni.fi.pa165.airport.entity.Flight;
 import cz.muni.fi.pa165.airport.service.dto.FlightDetailDTO;
 import cz.muni.fi.pa165.airport.service.dto.FlightMinimalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,17 @@ public class FlightService extends ConversionAware implements IFlightService {
 
     @Override
     public void createFlight(FlightDetailDTO flight) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if (flight.getDeparture().after(flight.getArrival())) {
+            throw new IllegalStateException("Departure is after arrival");
+        }
+
+        Flight entity = mapper.map(flight, Flight.class);
+
+        // Check if plane is available
+
+        // Check is stewards are available
+
+        flightDAO.create(entity);
     }
 
     @Override
