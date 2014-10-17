@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.airport.dao;
 import cz.muni.fi.pa165.airport.entity.Destination;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import java.util.List;
 
@@ -23,17 +24,17 @@ public class DestinationDAOTest extends BaseDAOTest {
      * Create
      */
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNotNullId() {
         dao.create(createDestination(1L, "CZ", "Brno"));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullCountry() {
         dao.create(createDestination(null, null, "Brno"));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullCity() {
         dao.create(createDestination(null, "CZ", null));
     }
@@ -54,12 +55,12 @@ public class DestinationDAOTest extends BaseDAOTest {
      * Uodate
      */
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullId() {
         dao.update(createDestination(null, "CZ", "Brno"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullCountry() {
         Destination destination = createDestination(null, "CZ", "Brno");
         dao.create(destination);
@@ -68,7 +69,7 @@ public class DestinationDAOTest extends BaseDAOTest {
         dao.update(destination);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullCity() {
         Destination destination = createDestination(null, "CZ", "Brno");
         dao.create(destination);
@@ -96,7 +97,7 @@ public class DestinationDAOTest extends BaseDAOTest {
     /*
      * Find
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testFindNullId() {
         dao.find(null);
     }
@@ -120,12 +121,12 @@ public class DestinationDAOTest extends BaseDAOTest {
     /*
      * Delete
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testDeleteNullId() {
         dao.delete(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testDeleteNotExistent() {
         dao.delete(1L);
     }

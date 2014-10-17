@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.airport.entity.Steward;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -140,50 +141,50 @@ public class FlightDAOTest extends BaseDAOTest {
      * Create
      */
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullOrigin() {
         flight.setOrigin(null);
         flightDAO.create(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullDestination() {
         flight.setDestination(null);
         flightDAO.create(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullArrival() {
         flight.setArrival(null);
         flightDAO.create(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullDeparture() {
         flight.setDeparture(null);
         flightDAO.create(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateArrivalBeforeDeparture() {
         flight.setDeparture(new Date(1413139000));
         flight.setArrival(new Date(1413138000));
         flightDAO.create(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullPlane() {
         flight.setPlane(null);
         flightDAO.create(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullStewards() {
         flight.setStewards(null);
         flightDAO.create(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNoStewards() {
         flight.setStewards(new ArrayList<Steward>());
         flightDAO.create(flight);
@@ -211,7 +212,7 @@ public class FlightDAOTest extends BaseDAOTest {
      * Update
      */
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullOrigin() {
         flightDAO.create(flight);
 
@@ -219,7 +220,7 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.update(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullDestination() {
         flightDAO.create(flight);
 
@@ -227,7 +228,7 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.update(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullArrival() {
         flightDAO.create(flight);
 
@@ -235,7 +236,7 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.update(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullDeparture() {
         flightDAO.create(flight);
 
@@ -243,7 +244,7 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.update(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateArrivalBeforeDeparture() {
         flightDAO.create(flight);
 
@@ -252,7 +253,7 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.update(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullPlane() {
         flightDAO.create(flight);
 
@@ -260,7 +261,7 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.update(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullStewards() {
         flightDAO.create(flight);
 
@@ -268,7 +269,7 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.update(flight);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNoStewards() {
         flightDAO.create(flight);
 
@@ -300,12 +301,12 @@ public class FlightDAOTest extends BaseDAOTest {
      * Delete
      */
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testDeleteNotExistentId() {
         flightDAO.delete(1L);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testDeleteNullId() {
         flightDAO.delete(null);
     }
@@ -327,7 +328,7 @@ public class FlightDAOTest extends BaseDAOTest {
      * Find
      */
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testFindNullId() {
         flightDAO.find(null);
     }

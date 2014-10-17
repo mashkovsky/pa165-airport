@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.airport.dao;
 import cz.muni.fi.pa165.airport.entity.Steward;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import java.util.List;
 
@@ -22,17 +23,17 @@ public class StewardDAOTest extends BaseDAOTest {
     /*
      * Create
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNotNullId() {
         dao.create(createSteward(1L, "Janko", "Mrkvi?ka"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullCountry() {
         dao.create(createSteward(null, null, "Mrkvi?ka"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullCity() {
         dao.create(createSteward(null, "Janko", null));
     }
@@ -51,12 +52,12 @@ public class StewardDAOTest extends BaseDAOTest {
     /*
      * Update
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullId() {
         dao.update(createSteward(null, "Janko", "Mrkvi?ka"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullCountry() {
         Steward steward = createSteward(null, "Janko", "Mrkvi?ka");
         dao.create(steward);
@@ -65,7 +66,7 @@ public class StewardDAOTest extends BaseDAOTest {
         dao.update(steward);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullCity() {
         Steward steward = createSteward(null, "Janko", "Mrkvi?ka");
         dao.create(steward);
@@ -93,7 +94,7 @@ public class StewardDAOTest extends BaseDAOTest {
     /*
      * Find
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testFindNullId() {
         dao.find(null);
     }
@@ -117,12 +118,12 @@ public class StewardDAOTest extends BaseDAOTest {
     /*
      * Delete
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testDeleteNullId() {
         dao.delete(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testDeleteNotExistent() {
         dao.delete(1L);
     }

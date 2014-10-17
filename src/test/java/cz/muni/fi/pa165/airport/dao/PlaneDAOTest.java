@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.airport.dao;
 import cz.muni.fi.pa165.airport.entity.Plane;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import java.util.List;
 
@@ -24,22 +25,22 @@ public class PlaneDAOTest extends BaseDAOTest {
      * Create
      */
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNotNullId() {
         dao.create(createPlane(1L, "Airbus", "A180", 30));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullName() {
         dao.create(createPlane(1L, null, "A180", 30));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateNullType() {
         dao.create(createPlane(1L, "Airbus", null, 30));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testCreateBadCapacity() {
         dao.create(createPlane(1L, "Airbus", null, 0));
     }
@@ -59,12 +60,12 @@ public class PlaneDAOTest extends BaseDAOTest {
      * Uodate
      */
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullId() {
         dao.update(createPlane(null, "Airbus", "A180", 30));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullName() {
         Plane plane = createPlane(null, "Airbus", "A180", 30);
         dao.create(plane);
@@ -73,7 +74,7 @@ public class PlaneDAOTest extends BaseDAOTest {
         dao.update(plane);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateNullType() {
         Plane plane = createPlane(null, "Airbus", "A180", 30);
         dao.create(plane);
@@ -82,7 +83,7 @@ public class PlaneDAOTest extends BaseDAOTest {
         dao.update(plane);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testUpdateWrongCapacity() {
         Plane plane = createPlane(null, "Airbus", "A180", 30);
         dao.create(plane);
@@ -113,7 +114,7 @@ public class PlaneDAOTest extends BaseDAOTest {
     /*
      * Find
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testFindNullId() {
         dao.find(null);
     }
@@ -138,12 +139,12 @@ public class PlaneDAOTest extends BaseDAOTest {
     /*
      * Delete
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testDeleteNullId() {
         dao.delete(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testDeleteNotExistent() {
         dao.delete(1L);
     }
