@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.airport.entity.Destination;
 import cz.muni.fi.pa165.airport.entity.Flight;
 import cz.muni.fi.pa165.airport.entity.Plane;
 import cz.muni.fi.pa165.airport.entity.Steward;
+import cz.muni.fi.pa165.airport.service.dto.FlightMinimalDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -48,6 +49,25 @@ public class FlightServiceTest extends BaseServiceTest {
 
     @Test
     public void testGetAll() {
+        // Prepare flights
+        Flight flight1 = prepareFlight();
+        // Second flight is just to test if all planes are converted, don't have to have sensible values
+        Flight flight2 = ServiceTestHelper.prepareFlight(7L, new Date(1413139380), new Date(1413139390), new Plane(), new Destination(), new Destination(), new ArrayList<Steward>());
+
+        List<Flight> flights = new ArrayList<Flight>();
+        flights.add(flight1);
+        flights.add(flight2);
+
+        // Configure mock DAO
+        when(flightDAO.getAll()).thenReturn(flights);
+
+        // Check that conversion between entity -> DTO works
+        List<FlightMinimalDTO> allFlights = flightService.getAllFlights();
+        assertEquals(2, allFlights.size());
+        AssertTestHelper.assertDeepEqualFlightMinimal(flight1, allFlights.get(0));
+    }
+
+    private Flight prepareFlight() {
         Plane plane = ServiceTestHelper.preparePlane(1L, 100, "Airbus", "A180");
         Destination origin = ServiceTestHelper.prepareDestination(2L, "CZ", "Prague");
         Destination destination = ServiceTestHelper.prepareDestination(3L, "FR", "Paris");
@@ -58,16 +78,6 @@ public class FlightServiceTest extends BaseServiceTest {
         stewards.add(stewardHomer);
         stewards.add(stewardRandy);
 
-        Flight flight1 = ServiceTestHelper.prepareFlight(6L, new Date(1413139340), new Date(1413139350), plane, origin, destination, stewards);
-        Flight flight2 = ServiceTestHelper.prepareFlight(7L, new Date(1413139380), new Date(1413139390), new Plane(), new Destination(), new Destination(), new ArrayList<Steward>());
-
-        List<Flight> flights = new ArrayList<Flight>();
-        flights.add(flight1);
-        flights.add(flight2);
-
-        when(flightDAO.getAll()).thenReturn(flights);
-
-        assertEquals(2, flightService.getAllFlights().size());
+        return ServiceTestHelper.prepareFlight(6L, new Date(1413139340), new Date(1413139350), plane, origin, destination, stewards);
     }
-
 }
