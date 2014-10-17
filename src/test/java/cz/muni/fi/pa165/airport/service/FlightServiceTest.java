@@ -38,7 +38,7 @@ public class FlightServiceTest extends BaseServiceTest {
     @Before
     public void setUp() {
         // Inject dozer mapper into service - it hasn't access to Spring context so we have to do it manually
-        injectDozer(flightService);
+        flightService.setMapper(mapper);
     }
 
     @Test

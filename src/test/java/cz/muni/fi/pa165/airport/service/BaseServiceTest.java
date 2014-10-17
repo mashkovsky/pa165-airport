@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.airport.service;
 
 import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -17,20 +18,14 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public abstract class BaseServiceTest {
 
+    protected Mapper mapper;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-    }
 
-    /**
-     * Inject dozer mapper into conversion aware service
-     * @param service service to inject dozer to
-     * @param <T>
-     */
-    protected <T extends ConversionAware> void injectDozer(T service) {
         List<String> mappingFiles = new ArrayList<String>();
         mappingFiles.add("mapping/global.xml");
-
-        service.setMapper(new DozerBeanMapper(mappingFiles));
+        mapper = new DozerBeanMapper(mappingFiles);
     }
 }
