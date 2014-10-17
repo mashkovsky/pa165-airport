@@ -6,12 +6,13 @@
 package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Plane;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 /**
  * @author Matej Chrenko
@@ -37,6 +38,9 @@ public class PlaneDAO implements IPlaneDAO {
         if (plane.getCapacity() == null) {
             throw new IllegalArgumentException("Plane capacity is null.");
         }
+        if (plane.getCapacity() < 1) {
+            throw new IllegalArgumentException("Capacity can not be smaller than zero");
+        }
         if (plane.getType() == null) {
             throw new IllegalArgumentException("Plane type is null.");
         }
@@ -57,6 +61,9 @@ public class PlaneDAO implements IPlaneDAO {
         }
         if (plane.getCapacity() == null) {
             throw new IllegalArgumentException("Plane capacity is null.");
+        }
+        if (plane.getCapacity() < 1) {
+            throw new IllegalArgumentException("Capacity can not be smaller than zero");
         }
         if (plane.getType() == null) {
             throw new IllegalArgumentException("Plane type is null.");
