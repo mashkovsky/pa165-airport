@@ -4,11 +4,13 @@ import cz.muni.fi.pa165.airport.dao.IDestinationDAO;
 import cz.muni.fi.pa165.airport.dao.IFlightDAO;
 import cz.muni.fi.pa165.airport.dao.IPlaneDAO;
 import cz.muni.fi.pa165.airport.dao.IStewardDAO;
+import cz.muni.fi.pa165.airport.entity.Flight;
 import cz.muni.fi.pa165.airport.service.dto.FlightDetailDTO;
 import cz.muni.fi.pa165.airport.service.dto.FlightMinimalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ import java.util.List;
  * @author Mariia Schevchenko
  */
 @Service
-public class FlightService implements IFlightService {
+public class FlightService extends ConversionAware implements IFlightService {
 
     @Autowired
     private IFlightDAO flightDAO;
@@ -50,11 +52,17 @@ public class FlightService implements IFlightService {
 
     @Override
     public List<FlightMinimalDTO> getAllFlights() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        List<FlightMinimalDTO> result = new ArrayList<FlightMinimalDTO>();
+        for (Flight flight : flightDAO.getAll()) {
+            result.add(mapper.map(flight, FlightMinimalDTO.class));
+        }
+
+        return result;
     }
 
     @Override
     public FlightDetailDTO getFlightDetail(Long flightId) {
+
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
