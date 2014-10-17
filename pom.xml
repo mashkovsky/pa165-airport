@@ -10,6 +10,7 @@
 
     <properties>
         <spring-core.version>4.1.1.RELEASE</spring-core.version>
+        <dozer-spring.version>5.5.1</dozer-spring.version>
     </properties>
 
     <dependencies>
@@ -68,6 +69,18 @@
             <artifactId>spring-test</artifactId>
             <version>${spring-core.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Dozer -->
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>${dozer-spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer-spring</artifactId>
+            <version>${dozer-spring.version}</version>
         </dependency>
 
         <!--Testing-->
