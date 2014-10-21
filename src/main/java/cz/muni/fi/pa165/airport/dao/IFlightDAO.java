@@ -73,5 +73,16 @@ public interface IFlightDAO {
      * @throws IllegalArgumentException if any of argument is {@code null} or {@code from} is after {@code to}
      */
     boolean isPlaneAvailableForFlight(Long planeId, Date from, Date to);
+
+    /**
+     * Check if steward is not occupied by another flight at time {@code from} - {@code to}
+     *
+     * @param stewardId steward unique ID which is checked for availability
+     * @param from starting date
+     * @param to ending date
+     * @return {@code true} if steward is not occupied, {@code false} otherwise
+     * @throws IllegalArgumentException if any of argument is {@code null} or {@code from} is after {@code to}
+     */
+    boolean isStewardAvailableForFlight(Long stewardId, Date from, Date to);
 }
 

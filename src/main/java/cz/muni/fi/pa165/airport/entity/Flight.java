@@ -30,6 +30,17 @@ import java.util.List;
                             "(f.arrival BETWEEN :fromT AND :toT) OR " +
                             "(f.departure <= :fromT AND f.arrival >= :toT))" +
                         ")"
+        ),
+        @NamedQuery(
+                name = Flight.QUERY_IS_STEWARD_AVAILABLE4FLIGHT,
+                query = "SELECT COUNT(f) FROM Flight f " +
+                        "JOIN f.stewards s " +
+                        "WHERE s.id = :stewardId " +
+                        "AND (" +
+                            "((f.departure BETWEEN :fromT AND :toT) OR " +
+                            "(f.arrival BETWEEN :fromT AND :toT) OR " +
+                            "(f.departure <= :fromT AND f.arrival >= :toT))" +
+                        ")"
         )
 })
 @Entity
@@ -37,6 +48,7 @@ import java.util.List;
 public class Flight implements Serializable {
 
     public static final String QUERY_IS_PLANE_AVAILABLE4FLIGHT = "isPlaneAvailable4Flight";
+    public static final String QUERY_IS_STEWARD_AVAILABLE4FLIGHT = "isStewardAvailable4Flight";
 
 
     private Long id;

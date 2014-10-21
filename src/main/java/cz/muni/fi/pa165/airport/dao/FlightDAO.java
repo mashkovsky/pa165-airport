@@ -147,4 +147,29 @@ public class FlightDAO implements IFlightDAO {
 
         return count == 0;
     }
+
+    @Override
+    public boolean isStewardAvailableForFlight(Long stewardId, Date from, Date to) {
+        if (stewardId == null) {
+            throw new IllegalArgumentException("Steward ID is null");
+        }
+        if (from == null) {
+            throw new IllegalArgumentException("From date is null");
+        }
+        if (to == null) {
+            throw new IllegalArgumentException("To date is null");
+        }
+        if (from.after(to)){
+            throw new IllegalArgumentException("From date is after to date");
+        }
+
+        Query query = em.createNamedQuery(Flight.QUERY_IS_STEWARD_AVAILABLE4FLIGHT);
+        query.setParameter("stewardId", stewardId);
+        query.setParameter("fromT", from);
+        query.setParameter("toT", to);
+
+        Long count = (Long) query.getSingleResult();
+
+        return count == 0;
+    }
 }

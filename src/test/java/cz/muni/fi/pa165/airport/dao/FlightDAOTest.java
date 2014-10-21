@@ -366,6 +366,10 @@ public class FlightDAOTest extends BaseDAOTest {
         assertTrue(flights.contains(flight));
         assertTrue(flights.contains(second));
     }
+    
+    /*
+     * Plane is available for flight
+     */
 
     @Test(expected = InvalidDataAccessApiUsageException.class)
     public void testIsPlaneAvailableNullPlaneId() {
@@ -429,5 +433,73 @@ public class FlightDAOTest extends BaseDAOTest {
         flightDAO.create(flight);
 
         assertTrue(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139351), new Date(1413139355)));
+    }
+    
+    /*
+     * Steward is available for flight
+     */
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void testIsStewardAvailableNullStewardId() {
+        flightDAO.isStewardAvailableForFlight(null, new Date(1413139341), new Date(1413139342));
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void testIsStewardAvailableNullFrom() {
+        flightDAO.isStewardAvailableForFlight(steward1.getId(), null, new Date(1413139342));
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void testIsStewardAvailableNullTo() {
+        flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139341), null);
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void testIsStewardAvailableSwappedDates() {
+        flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139341), new Date(1413139340));
+    }
+
+    @Test
+    public void testIsStewardAvailableArrivalInInterval() {
+        flightDAO.create(flight);
+
+        assertFalse(flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139339), new Date(1413139340)));
+        assertFalse(flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139339), new Date(1413139341)));
+    }
+
+    @Test
+    public void testIsStewardAvailableBothInInterval() {
+        flightDAO.create(flight);
+
+        assertFalse(flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139341), new Date(1413139342)));
+    }
+
+    @Test
+    public void testIsStewardAvailableDepartureInInterval() {
+        flightDAO.create(flight);
+
+        assertFalse(flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139349), new Date(1413139352)));
+        assertFalse(flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139350), new Date(1413139352)));
+    }
+
+    @Test
+    public void testIsStewardAvailableIntersectInterval() {
+        flightDAO.create(flight);
+
+        assertFalse(flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139339), new Date(1413139351)));
+    }
+
+    @Test
+    public void testIsStewardAvailableOkBefore() {
+        flightDAO.create(flight);
+
+        assertTrue(flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139335), new Date(1413139339)));
+    }
+
+    @Test
+    public void testIsStewardAvailableOkAfter() {
+        flightDAO.create(flight);
+
+        assertTrue(flightDAO.isStewardAvailableForFlight(steward1.getId(), new Date(1413139351), new Date(1413139355)));
     }
 }
