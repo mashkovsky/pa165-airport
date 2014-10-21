@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.airport.dao.IFlightDAO;
 import cz.muni.fi.pa165.airport.dao.IPlaneDAO;
 import cz.muni.fi.pa165.airport.dao.IStewardDAO;
 import cz.muni.fi.pa165.airport.entity.Flight;
+import cz.muni.fi.pa165.airport.entity.Steward;
 import cz.muni.fi.pa165.airport.service.dto.FlightDetailDTO;
 import cz.muni.fi.pa165.airport.service.dto.FlightMinimalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,21 @@ public class FlightService extends ConversionAware implements IFlightService {
         Flight entity = mapper.map(flight, Flight.class);
 
         // Check if plane is available
+        if (!flightDAO.isPlaneAvailableForFlight(flight.getPlane().getId(), flight.getDeparture(), flight.getArrival())) {
+            throw new IllegalStateException("Plane " + flight.getPlane().getId()
+                    + " cannot be used for flight at dates from = "
+                    + flight.getDeparture() + " to = " + flight.getArrival());
+        }
 
         // Check is stewards are available
+        List<Steward> stewards = map(flight.getStewards(), Steward.class);
+        for (Steward steward : stewards) {
+            if (!flightDAO.isStewardAvailableForFlight(steward.getId(), flight.getDeparture(), flight.getArrival())) {
+                throw new IllegalStateException("Steward " + flight.getPlane().getId()
+                        + " cannot be used for flight at dates from = "
+                        + flight.getDeparture() + " to = " + flight.getArrival());
+            }
+        }
 
         flightDAO.create(entity);
     }
