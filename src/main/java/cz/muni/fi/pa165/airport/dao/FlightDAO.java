@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -120,5 +121,30 @@ public class FlightDAO implements IFlightDAO {
     public List<Flight> getAll() {
         Query query = em.createQuery("SELECT f FROM Flight f ORDER BY f.departure DESC");
         return (List<Flight>) query.getResultList();
+    }
+
+    @Override
+    public boolean isPlaneAvailableForFlight(Long planeId, Date from, Date to) {
+        if (planeId == null) {
+            throw new IllegalArgumentException("Plane ID is null");
+        }
+        if (from == null) {
+            throw new IllegalArgumentException("From date is null");
+        }
+        if (to == null) {
+            throw new IllegalArgumentException("To date is null");
+        }
+        if (from.after(to)){
+            throw new IllegalArgumentException("From date is after to date");
+        }
+
+        Query query = em.createNamedQuery(Flight.QUERY_IS_PLANE_AVAILABLE4FLIGHT);
+        query.setParameter("planeId", planeId);
+        query.setParameter("fromT", from);
+        query.setParameter("toT", to);
+
+        Long count = (Long) query.getSingleResult();
+
+        return count == 0;
     }
 }

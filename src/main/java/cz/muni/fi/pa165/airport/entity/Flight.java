@@ -1,21 +1,44 @@
 package cz.muni.fi.pa165.airport.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import javax.persistence.*;
 
 /**
  * @author Zdenek Kanovsky
  */
-
+@NamedQueries({
+        @NamedQuery(
+                name = Flight.QUERY_IS_PLANE_AVAILABLE4FLIGHT,
+                query = "SELECT COUNT(f) FROM Flight f " +
+                        "JOIN f.plane p " +
+                        "WHERE p.id = :planeId " +
+                        "AND (" +
+                            "((f.departure BETWEEN :fromT AND :toT) OR " +
+                            "(f.arrival BETWEEN :fromT AND :toT) OR " +
+                            "(f.departure <= :fromT AND f.arrival >= :toT))" +
+                        ")"
+        )
+})
 @Entity
 @Table(name = "FLIGHT")
 public class Flight implements Serializable {
+
+    public static final String QUERY_IS_PLANE_AVAILABLE4FLIGHT = "isPlaneAvailable4Flight";
+
+
     private Long id;
     private Date departure;
     private Date arrival;

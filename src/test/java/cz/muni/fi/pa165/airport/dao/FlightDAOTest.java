@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -84,8 +85,8 @@ public class FlightDAOTest extends BaseDAOTest {
         stewards.add(steward2);
 
         flight = new Flight();
-        flight.setArrival(new Date(1413139341));
         flight.setDeparture(new Date(1413139340));
+        flight.setArrival(new Date(1413139350));
         flight.setOrigin(origin);
         flight.setDestination(destination);
         flight.setPlane(plane);
@@ -201,7 +202,7 @@ public class FlightDAOTest extends BaseDAOTest {
         assertEquals(origin, fromDb.getOrigin());
         assertEquals(destination, fromDb.getDestination());
         assertEquals(new Date(1413139340), fromDb.getDeparture());
-        assertEquals(new Date(1413139341), fromDb.getArrival());
+        assertEquals(new Date(1413139350), fromDb.getArrival());
         assertEquals(2, fromDb.getStewards().size());
         assertTrue(fromDb.getStewards().contains(steward1));
         assertTrue(fromDb.getStewards().contains(steward2));
@@ -364,5 +365,69 @@ public class FlightDAOTest extends BaseDAOTest {
         assertEquals(2, flights.size());
         assertTrue(flights.contains(flight));
         assertTrue(flights.contains(second));
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void testIsPlaneAvailableNullPlaneId() {
+        flightDAO.isPlaneAvailableForFlight(null, new Date(1413139341), new Date(1413139342));
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void testIsPlaneAvailableNullFrom() {
+        flightDAO.isPlaneAvailableForFlight(plane.getId(), null, new Date(1413139342));
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void testIsPlaneAvailableNullTo() {
+        flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139341), null);
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void testIsPlaneAvailableSwappedDates() {
+        flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139341), new Date(1413139340));
+    }
+
+    @Test
+    public void testIsPlaneAvailableArrivalInInterval() {
+        flightDAO.create(flight);
+
+        assertFalse(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139339), new Date(1413139340)));
+        assertFalse(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139339), new Date(1413139341)));
+    }
+
+    @Test
+    public void testIsPlaneAvailableBothInInterval() {
+        flightDAO.create(flight);
+
+        assertFalse(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139341), new Date(1413139342)));
+    }
+
+    @Test
+    public void testIsPlaneAvailableDepartureInInterval() {
+        flightDAO.create(flight);
+
+        assertFalse(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139349), new Date(1413139352)));
+        assertFalse(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139350), new Date(1413139352)));
+    }
+
+    @Test
+    public void testIsPlaneAvailableIntersectInterval() {
+        flightDAO.create(flight);
+
+        assertFalse(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139339), new Date(1413139351)));
+    }
+
+    @Test
+    public void testIsPlaneAvailableOkBefore() {
+        flightDAO.create(flight);
+
+        assertTrue(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139335), new Date(1413139339)));
+    }
+
+    @Test
+    public void testIsPlaneAvailableOkAfter() {
+        flightDAO.create(flight);
+
+        assertTrue(flightDAO.isPlaneAvailableForFlight(plane.getId(), new Date(1413139351), new Date(1413139355)));
     }
 }

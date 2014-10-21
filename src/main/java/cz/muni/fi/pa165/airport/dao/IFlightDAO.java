@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Flight;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,5 +63,15 @@ public interface IFlightDAO {
      */
     List<Flight> getAll();
 
+    /**
+     * Check if plane is not occupied by another flight at time {@code from} - {@code to}
+     *
+     * @param planeId plane unique ID which is checked for availability
+     * @param from starting date
+     * @param to ending date
+     * @return {@code true} if plane is not occupied, {@code false} otherwise
+     * @throws IllegalArgumentException if any of argument is {@code null} or {@code from} is after {@code to}
+     */
+    boolean isPlaneAvailableForFlight(Long planeId, Date from, Date to);
 }
 
