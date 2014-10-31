@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.airport.dao;
 
 import cz.muni.fi.pa165.airport.entity.Flight;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,22 +66,20 @@ public interface IFlightDAO {
      * Check if plane is not occupied by another flight at time {@code from} - {@code to}
      *
      * @param planeId plane unique ID which is checked for availability
-     * @param from starting date
-     * @param to ending date
+     * @param flight flight for which check is done
      * @return {@code true} if plane is not occupied, {@code false} otherwise
      * @throws IllegalArgumentException if any of argument is {@code null} or {@code from} is after {@code to}
      */
-    boolean isPlaneAvailableForFlight(Long planeId, Date from, Date to);
+    boolean isPlaneAvailableForFlight(Long planeId, Flight flight);
 
     /**
      * Check if steward is not occupied by another flight at time {@code from} - {@code to}
      *
      * @param stewardId steward unique ID which is checked for availability
-     * @param from starting date
-     * @param to ending date
+     * @param flight flight for which check is done
      * @return {@code true} if steward is not occupied, {@code false} otherwise
      * @throws IllegalArgumentException if any of argument is {@code null} or {@code from} is after {@code to}
      */
-    boolean isStewardAvailableForFlight(Long stewardId, Date from, Date to);
+    boolean isStewardAvailableForFlight(Long stewardId, Flight flight);
 }
 

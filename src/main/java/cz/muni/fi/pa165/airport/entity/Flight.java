@@ -29,7 +29,20 @@ import java.util.List;
                             "((f.departure BETWEEN :fromT AND :toT) OR " +
                             "(f.arrival BETWEEN :fromT AND :toT) OR " +
                             "(f.departure <= :fromT AND f.arrival >= :toT))" +
-                        ")"
+                        ") "
+        ),
+        // Do not count actual flight
+        @NamedQuery(
+                name = Flight.QUERY_IS_PLANE_AVAILABLE4FLIGHT_EXCLUSIVE,
+                query = "SELECT COUNT(f) FROM Flight f " +
+                        "JOIN f.plane p " +
+                        "WHERE p.id = :planeId " +
+                        "AND (" +
+                        "((f.departure BETWEEN :fromT AND :toT) OR " +
+                        "(f.arrival BETWEEN :fromT AND :toT) OR " +
+                        "(f.departure <= :fromT AND f.arrival >= :toT))" +
+                        ") " +
+                        "AND f.id != :flightId"
         ),
         @NamedQuery(
                 name = Flight.QUERY_IS_STEWARD_AVAILABLE4FLIGHT,
@@ -40,7 +53,20 @@ import java.util.List;
                             "((f.departure BETWEEN :fromT AND :toT) OR " +
                             "(f.arrival BETWEEN :fromT AND :toT) OR " +
                             "(f.departure <= :fromT AND f.arrival >= :toT))" +
-                        ")"
+                        ") "
+        ),
+        // Do not count actual flight
+        @NamedQuery(
+                name = Flight.QUERY_IS_STEWARD_AVAILABLE4FLIGHT_EXCLUSIVE,
+                query = "SELECT COUNT(f) FROM Flight f " +
+                        "JOIN f.stewards s " +
+                        "WHERE s.id = :stewardId " +
+                        "AND (" +
+                        "((f.departure BETWEEN :fromT AND :toT) OR " +
+                        "(f.arrival BETWEEN :fromT AND :toT) OR " +
+                        "(f.departure <= :fromT AND f.arrival >= :toT))" +
+                        ") " +
+                        "AND f.id != :flightId"
         )
 })
 @Entity
@@ -48,7 +74,9 @@ import java.util.List;
 public class Flight implements Serializable {
 
     public static final String QUERY_IS_PLANE_AVAILABLE4FLIGHT = "isPlaneAvailable4Flight";
+    public static final String QUERY_IS_PLANE_AVAILABLE4FLIGHT_EXCLUSIVE = "isPlaneAvailable4FlightExclusive";
     public static final String QUERY_IS_STEWARD_AVAILABLE4FLIGHT = "isStewardAvailable4Flight";
+    public static final String QUERY_IS_STEWARD_AVAILABLE4FLIGHT_EXCLUSIVE = "isStewardAvailable4FlightExclusive";
 
 
     private Long id;

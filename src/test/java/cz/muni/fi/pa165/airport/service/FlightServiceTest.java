@@ -24,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -63,6 +64,9 @@ public class FlightServiceTest extends BaseServiceTest {
         // Make DTO from entity (assume dozer conversion is tested correctly)
         FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
 
+        when(flightDAO.isPlaneAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.TRUE);
+        when(flightDAO.isStewardAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.TRUE);
+
         // Create flight
         flightService.createFlight(dto);
 
@@ -72,6 +76,48 @@ public class FlightServiceTest extends BaseServiceTest {
 
         // Check that service sent correct entity to DAO with no attributes changed
         AssertTestHelper.assertDeepEqualFlight(argument.getValue(), dto);
+    }
+
+    @Test
+    public void testCreatePlaneNotAvailable() {
+        // Create flight
+        Flight flight = prepareFlight();
+        flight.setId(null);
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        when(flightDAO.isPlaneAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.FALSE);
+        when(flightDAO.isStewardAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.TRUE);
+
+        // Create flight, should fail because no plane is available
+        try {
+            flightService.createFlight(dto);
+            fail();
+        } catch (IllegalStateException e) {
+            // OK
+        }
+    }
+
+    @Test
+    public void testCreateStewardNotAvailable() {
+        // Create flight
+        Flight flight = prepareFlight();
+        flight.setId(null);
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        when(flightDAO.isPlaneAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.TRUE);
+        when(flightDAO.isStewardAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.FALSE);
+
+        // Create flight, should fail because no plane is available
+        try {
+            flightService.createFlight(dto);
+            fail();
+        } catch (IllegalStateException e) {
+            // OK
+        }
     }
 
     @Test

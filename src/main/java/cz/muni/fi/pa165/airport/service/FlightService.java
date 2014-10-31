@@ -44,16 +44,16 @@ public class FlightService extends ConversionAware implements IFlightService {
         Flight entity = mapper.map(flight, Flight.class);
 
         // Check if plane is available
-        if (!flightDAO.isPlaneAvailableForFlight(flight.getPlane().getId(), flight.getDeparture(), flight.getArrival())) {
+        if (!flightDAO.isPlaneAvailableForFlight(flight.getPlane().getId(), entity)) {
             throw new IllegalStateException("Plane " + flight.getPlane().getId()
                     + " cannot be used for flight at dates from = "
                     + flight.getDeparture() + " to = " + flight.getArrival());
         }
 
-        // Check is stewards are available
+        // Check if stewards are available
         List<Steward> stewards = map(flight.getStewards(), Steward.class);
         for (Steward steward : stewards) {
-            if (!flightDAO.isStewardAvailableForFlight(steward.getId(), flight.getDeparture(), flight.getArrival())) {
+            if (!flightDAO.isStewardAvailableForFlight(steward.getId(), entity)) {
                 throw new IllegalStateException("Steward " + flight.getPlane().getId()
                         + " cannot be used for flight at dates from = "
                         + flight.getDeparture() + " to = " + flight.getArrival());

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -124,24 +123,34 @@ public class FlightDAO implements IFlightDAO {
     }
 
     @Override
-    public boolean isPlaneAvailableForFlight(Long planeId, Date from, Date to) {
+    public boolean isPlaneAvailableForFlight(Long planeId, Flight flight) {
         if (planeId == null) {
             throw new IllegalArgumentException("Plane ID is null");
         }
-        if (from == null) {
-            throw new IllegalArgumentException("From date is null");
+        if (flight == null) {
+            throw new IllegalArgumentException("Flight is null");
         }
-        if (to == null) {
-            throw new IllegalArgumentException("To date is null");
+        if (flight.getDeparture() == null) {
+            throw new IllegalArgumentException("Flight departure is null");
         }
-        if (from.after(to)){
-            throw new IllegalArgumentException("From date is after to date");
+        if (flight.getArrival() == null) {
+            throw new IllegalArgumentException("Flight arrival is null");
+        }
+        if (flight.getDeparture().after(flight.getArrival())){
+            throw new IllegalArgumentException("Departure is after arrival");
         }
 
-        Query query = em.createNamedQuery(Flight.QUERY_IS_PLANE_AVAILABLE4FLIGHT);
+        Query query = null;
+        if (flight.getId() != null) {
+            query = em.createNamedQuery(Flight.QUERY_IS_PLANE_AVAILABLE4FLIGHT_EXCLUSIVE);
+            query.setParameter("flightId", flight.getId());
+        } else {
+            query = em.createNamedQuery(Flight.QUERY_IS_PLANE_AVAILABLE4FLIGHT);
+        }
+
         query.setParameter("planeId", planeId);
-        query.setParameter("fromT", from);
-        query.setParameter("toT", to);
+        query.setParameter("fromT", flight.getDeparture());
+        query.setParameter("toT", flight.getArrival());
 
         Long count = (Long) query.getSingleResult();
 
@@ -149,24 +158,34 @@ public class FlightDAO implements IFlightDAO {
     }
 
     @Override
-    public boolean isStewardAvailableForFlight(Long stewardId, Date from, Date to) {
+    public boolean isStewardAvailableForFlight(Long stewardId, Flight flight) {
         if (stewardId == null) {
             throw new IllegalArgumentException("Steward ID is null");
         }
-        if (from == null) {
-            throw new IllegalArgumentException("From date is null");
+        if (flight == null) {
+            throw new IllegalArgumentException("Flight is null");
         }
-        if (to == null) {
-            throw new IllegalArgumentException("To date is null");
+        if (flight.getDeparture() == null) {
+            throw new IllegalArgumentException("Flight departure is null");
         }
-        if (from.after(to)){
-            throw new IllegalArgumentException("From date is after to date");
+        if (flight.getArrival() == null) {
+            throw new IllegalArgumentException("Flight arrival is null");
+        }
+        if (flight.getDeparture().after(flight.getArrival())){
+            throw new IllegalArgumentException("Departure is after arrival");
         }
 
-        Query query = em.createNamedQuery(Flight.QUERY_IS_STEWARD_AVAILABLE4FLIGHT);
+        Query query = null;
+        if (flight.getId() != null) {
+            query = em.createNamedQuery(Flight.QUERY_IS_STEWARD_AVAILABLE4FLIGHT_EXCLUSIVE);
+            query.setParameter("flightId", flight.getId());
+        } else {
+            query = em.createNamedQuery(Flight.QUERY_IS_STEWARD_AVAILABLE4FLIGHT);
+        }
+
         query.setParameter("stewardId", stewardId);
-        query.setParameter("fromT", from);
-        query.setParameter("toT", to);
+        query.setParameter("fromT", flight.getDeparture());
+        query.setParameter("toT", flight.getArrival());
 
         Long count = (Long) query.getSingleResult();
 
