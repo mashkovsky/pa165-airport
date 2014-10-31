@@ -65,7 +65,35 @@ public class FlightService extends ConversionAware implements IFlightService {
 
     @Override
     public void updateFlight(FlightDetailDTO flight) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if (flight.getDeparture().after(flight.getArrival())) {
+            throw new IllegalStateException("Departure is after arrival");
+        }
+
+        // ID is needed for exclusivity check in is*AvailableForFlight methods
+        if (flight.getId() == null) {
+            throw new IllegalArgumentException("Flight ID is null");
+        }
+
+        Flight entity = mapper.map(flight, Flight.class);
+
+        // Check if plane is available
+        if (!flightDAO.isPlaneAvailableForFlight(flight.getPlane().getId(), entity)) {
+            throw new IllegalStateException("Plane " + flight.getPlane().getId()
+                    + " cannot be used for flight at dates from = "
+                    + flight.getDeparture() + " to = " + flight.getArrival());
+        }
+
+        // Check if stewards are available
+        List<Steward> stewards = map(flight.getStewards(), Steward.class);
+        for (Steward steward : stewards) {
+            if (!flightDAO.isStewardAvailableForFlight(steward.getId(), entity)) {
+                throw new IllegalStateException("Steward " + flight.getPlane().getId()
+                        + " cannot be used for flight at dates from = "
+                        + flight.getDeparture() + " to = " + flight.getArrival());
+            }
+        }
+
+        flightDAO.update(entity);
     }
 
     @Override

@@ -97,6 +97,9 @@ public class FlightServiceTest extends BaseServiceTest {
         } catch (IllegalStateException e) {
             // OK
         }
+
+        // Check that DAO was not called at all
+        verify(flightDAO, times(0)).create(any(Flight.class));
     }
 
     @Test
@@ -118,6 +121,9 @@ public class FlightServiceTest extends BaseServiceTest {
         } catch (IllegalStateException e) {
             // OK
         }
+
+        // Check that DAO was not called at all
+        verify(flightDAO, times(0)).create(any(Flight.class));
     }
 
     @Test
@@ -143,6 +149,122 @@ public class FlightServiceTest extends BaseServiceTest {
 
         // Check that DAO was not called at all
         verify(flightDAO, times(0)).create(any(Flight.class));
+    }
+
+    /*
+     * Update tests
+     */
+
+    @Test
+    public void testUpdate() {
+        // Create flight
+        Flight flight = prepareFlight();
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        when(flightDAO.isPlaneAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.TRUE);
+        when(flightDAO.isStewardAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.TRUE);
+
+        // Update flight
+        flightService.updateFlight(dto);
+
+        // Get entity value that was passed to DAO from service
+        ArgumentCaptor<Flight> argument = ArgumentCaptor.forClass(Flight.class);
+        verify(flightDAO).update(argument.capture());
+
+        // Check that service sent correct entity to DAO with no attributes changed
+        AssertTestHelper.assertDeepEqualFlight(argument.getValue(), dto);
+    }
+
+    @Test
+    public void testUpdateNullId() {
+        // Create flight
+        Flight flight = prepareFlight();
+        flight.setId(null);
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        try {
+            flightService.updateFlight(dto);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // OK
+        }
+
+        // Check that DAO was not called at all
+        verify(flightDAO, times(0)).update(any(Flight.class));
+    }
+
+    @Test
+    public void testUpdatePlaneNotAvailable() {
+        // Create flight
+        Flight flight = prepareFlight();
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        when(flightDAO.isPlaneAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.FALSE);
+        when(flightDAO.isStewardAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.TRUE);
+
+        // Update flight, should fail because no plane is available
+        try {
+            flightService.updateFlight(dto);
+            fail();
+        } catch (IllegalStateException e) {
+            // OK
+        }
+
+        // Check that DAO was not called at all
+        verify(flightDAO, times(0)).update(any(Flight.class));
+    }
+
+    @Test
+    public void testUpdateStewardNotAvailable() {
+        // Create flight
+        Flight flight = prepareFlight();
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        when(flightDAO.isPlaneAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.TRUE);
+        when(flightDAO.isStewardAvailableForFlight(anyLong(), any(Flight.class))).thenReturn(Boolean.FALSE);
+
+        // Update flight, should fail because no plane is available
+        try {
+            flightService.updateFlight(dto);
+            fail();
+        } catch (IllegalStateException e) {
+            // OK
+        }
+
+        // Check that DAO was not called at all
+        verify(flightDAO, times(0)).update(any(Flight.class));
+    }
+
+    @Test
+    public void testUpdateWrongTimes() {
+        // Create flight
+        Flight flight = prepareFlight();
+
+        // Set departure after arrival
+        flight.setDeparture(new Date(1413139350));
+        flight.setArrival(new Date(1413139340));
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        // Udate flight
+        try {
+            flightService.updateFlight(dto);
+            fail("It should not be possible to create flight with departure after arrival");
+        } catch (IllegalStateException e) {
+            // OK
+        }
+
+        // Check that DAO was not called at all
+        verify(flightDAO, times(0)).update(any(Flight.class));
     }
 
     @Test
