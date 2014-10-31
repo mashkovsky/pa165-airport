@@ -80,6 +80,28 @@ public class FlightServiceTest extends BaseServiceTest {
     }
 
     @Test
+    public void testCreateNotNullId() {
+        // Create flight
+        Flight flight = prepareFlight();
+
+        // Make DTO from entity (assume dozer conversion is tested correctly)
+        FlightDetailDTO dto = mapper.map(flight, FlightDetailDTO.class);
+
+        // Create flight, should fail because ID is not null
+        try {
+            flightService.createFlight(dto);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // OK
+        }
+
+        // None of this methods should have been called
+        verify(flightDAO, times(0)).create(any(Flight.class));
+        verify(flightDAO, times(0)).isPlaneAvailableForFlight(anyLong(), any(Flight.class));
+        verify(flightDAO, times(0)).isStewardAvailableForFlight(anyLong(), any(Flight.class));
+    }
+
+    @Test
     public void testCreatePlaneNotAvailable() {
         // Create flight
         Flight flight = prepareFlight();
@@ -195,7 +217,9 @@ public class FlightServiceTest extends BaseServiceTest {
         }
 
         // Check that DAO was not called at all
-        verify(flightDAO, times(0)).update(any(Flight.class));
+        verify(flightDAO, times(0)).create(any(Flight.class));
+        verify(flightDAO, times(0)).isPlaneAvailableForFlight(anyLong(), any(Flight.class));
+        verify(flightDAO, times(0)).isStewardAvailableForFlight(anyLong(), any(Flight.class));
     }
 
     @Test

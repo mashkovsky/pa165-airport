@@ -37,6 +37,12 @@ public class FlightService extends ConversionAware implements IFlightService {
 
     @Override
     public void createFlight(FlightDetailDTO flight) {
+
+        // Make sure that exclusive is*AvailableForFlight is not called => id has to be null
+        if (flight.getId() != null) {
+            throw new IllegalArgumentException("Flight is is not null");
+        }
+
         if (flight.getDeparture().after(flight.getArrival())) {
             throw new IllegalStateException("Departure is after arrival");
         }

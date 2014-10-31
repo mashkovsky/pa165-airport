@@ -16,8 +16,8 @@ public interface IFlightService {
      * Create new flight
      *
      * @param flight flight to create
-     * @throws IllegalStateException    if plane or steward is not available for flight duration
-     *                                  if departure date is in future according to arrival (past arrival)
+     * @throws IllegalStateException if plane or steward is not available for flight duration
+     *                               if departure date is in future according to arrival (past arrival)
      */
     void createFlight(FlightDetailDTO flight);
 
@@ -25,8 +25,9 @@ public interface IFlightService {
      * Update existing flight
      *
      * @param flight flight to create
-     * @throws IllegalStateException    if plane or steward is not available for flight duration
-     *                                  if departure date is in future according to arrival (past arrival)
+     * @throws IllegalStateException if plane or steward is not available for flight duration
+     *                               if departure date is in future according to arrival (past arrival)
+     * @throws IllegalArgumentException if {@code flight.id} is {@code null}
      */
     void updateFlight(FlightDetailDTO flight);
 
@@ -34,6 +35,7 @@ public interface IFlightService {
      * Delete flight identified by {@code id} from system.
      *
      * @param flightId flight unique ID
+     * @throws IllegalArgumentException if {@code flightId} is {@code null}
      */
     void deleteFlight(Long flightId);
 
@@ -49,6 +51,7 @@ public interface IFlightService {
      *
      * @param flightId unique flight ID
      * @return flight detail or {@code null} if no such flight exist
+     * @throws IllegalArgumentException if {@code flightId} is {@code null}
      */
     FlightDetailDTO getFlightDetail(Long flightId);
 }
