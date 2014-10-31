@@ -267,6 +267,32 @@ public class FlightServiceTest extends BaseServiceTest {
         verify(flightDAO, times(0)).update(any(Flight.class));
     }
 
+    /*
+     *  Delete flight
+     */
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeleteFlightNullID() {
+        flightService.deleteFlight(null);
+    }
+
+    @Test
+    public void testDeleteFlight() {
+        flightService.deleteFlight(1L);
+
+        // Get ID value that was passed to DAO from service
+        ArgumentCaptor<Long> argument = ArgumentCaptor.forClass(Long.class);
+        verify(flightDAO).delete(argument.capture());
+
+        // Check that service sent correct ID to DAO
+        assertEquals(argument.getValue(), Long.valueOf(1));
+
+    }
+
+    /*
+     * Get all flights
+     */
+
     @Test
     public void testGetAll() {
         // Prepare flights

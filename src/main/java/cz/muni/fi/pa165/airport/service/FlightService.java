@@ -98,7 +98,11 @@ public class FlightService extends ConversionAware implements IFlightService {
 
     @Override
     public void deleteFlight(Long flightId) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if (flightId == null) {
+            throw new IllegalArgumentException("Flight ID is null");
+        }
+
+        flightDAO.delete(flightId);
     }
 
     @Override
