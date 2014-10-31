@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
@@ -296,6 +297,13 @@ public class FlightServiceTest extends BaseServiceTest {
     @Test(expected = IllegalArgumentException.class)
     public void testGetFlightDetailNullId() {
         flightService.getFlightDetail(null);
+    }
+
+    @Test
+    public void testGetFlightDetailNonExistent() {
+        // Configure mock DAO
+        when(flightDAO.find(anyLong())).thenReturn(null);
+        assertNull(flightService.getFlightDetail(1L));
     }
 
     @Test

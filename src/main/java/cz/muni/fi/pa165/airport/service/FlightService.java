@@ -119,6 +119,6 @@ public class FlightService extends ConversionAware implements IFlightService {
 
         Flight flight = flightDAO.find(flightId);
 
-        return mapper.map(flight, FlightDetailDTO.class);
+        return flight == null ? null : mapper.map(flight, FlightDetailDTO.class);
     }
 }
