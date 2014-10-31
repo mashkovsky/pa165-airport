@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.airport.service.dto;
 
 /**
- * @author kurocenko
+ * @author Mariia Shevchenko
  */
 public class StewardDTO extends BaseDTO {
 
