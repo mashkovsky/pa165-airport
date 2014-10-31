@@ -290,6 +290,29 @@ public class FlightServiceTest extends BaseServiceTest {
     }
 
     /*
+     * Get flight detail
+     */
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetFlightDetailNullId() {
+        flightService.getFlightDetail(null);
+    }
+
+    @Test
+    public void testGetFlightDetail() {
+        // Prepare flights
+        Flight flight = prepareFlight();
+
+        // Configure mock DAO
+        when(flightDAO.find(flight.getId())).thenReturn(flight);
+
+        // Check that conversion between entity -> DTO works
+        FlightDetailDTO detail = flightService.getFlightDetail(flight.getId());
+
+        AssertTestHelper.assertDeepEqualFlight(flight, detail);
+    }
+
+    /*
      * Get all flights
      */
 

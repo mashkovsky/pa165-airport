@@ -113,6 +113,12 @@ public class FlightService extends ConversionAware implements IFlightService {
     @Override
     public FlightDetailDTO getFlightDetail(Long flightId) {
 
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        if (flightId == null) {
+            throw new IllegalArgumentException("Flight ID is null");
+        }
+
+        Flight flight = flightDAO.find(flightId);
+
+        return mapper.map(flight, FlightDetailDTO.class);
     }
 }
