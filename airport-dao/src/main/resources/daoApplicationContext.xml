@@ -42,6 +42,8 @@
     <jdbc:embedded-database id="dataSource" type="DERBY">
     </jdbc:embedded-database>
 
+
+    <!-- Only for testing purpose, transaction management is driven on service layer -->
     <beans profile="testing">
         <tx:annotation-driven transaction-manager="txManager"/>
 
