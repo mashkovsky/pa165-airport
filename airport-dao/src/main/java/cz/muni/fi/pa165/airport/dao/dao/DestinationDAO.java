@@ -82,4 +82,18 @@ public class DestinationDAO implements IDestinationDAO {
         Query query = em.createQuery("SELECT d FROM Destination d ORDER BY d.country, d.city");
         return (List<Destination>) query.getResultList();
     }
+    
+    @Override
+    public boolean isNotUsedInFlights(Long destinationId) {
+        if (destinationId == null) {
+            throw new IllegalArgumentException("Destination ID is null");
+        }
+
+        Query query = em.createNamedQuery(Destination.QUERY_IS_NOT_USED_IN_FLIGHTS);
+
+        query.setParameter("destinationId", destinationId);
+        Long count = (Long) query.getSingleResult();
+
+        return count == 0;
+    }
 }

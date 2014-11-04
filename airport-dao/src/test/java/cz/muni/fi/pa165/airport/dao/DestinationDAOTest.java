@@ -135,7 +135,7 @@ public class DestinationDAOTest extends BaseDAOTest {
     @Test
     public void testDelete() {        
         Destination destination1 = createDestination(null, "CZ", "Brno");
-        Destination destination2 = createDestination(null, "GE", "Mï¿½nchen");
+        Destination destination2 = createDestination(null, "GE", "München");
         dao.create(destination1);
         dao.create(destination2);
         
@@ -148,7 +148,7 @@ public class DestinationDAOTest extends BaseDAOTest {
     @Test
     public void testGetAll() {
         Destination destination1 = createDestination(null, "CZ", "Brno");
-        Destination destination2 = createDestination(null, "GE", "Mï¿½nchen");
+        Destination destination2 = createDestination(null, "GE", "München");
         dao.create(destination1);
         dao.create(destination2);
 
@@ -157,6 +157,8 @@ public class DestinationDAOTest extends BaseDAOTest {
         assertTrue(fromDb.contains(destination1));
         assertTrue(fromDb.contains(destination2));
     }
+    
+    
 
 
     private static Destination createDestination(Long id, String country, String city) {

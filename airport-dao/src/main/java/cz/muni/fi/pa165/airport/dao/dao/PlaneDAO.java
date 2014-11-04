@@ -37,7 +37,7 @@ public class PlaneDAO implements IPlaneDAO {
             throw new IllegalArgumentException("Plane capacity is null.");
         }
         if (plane.getCapacity() < 1) {
-            throw new IllegalArgumentException("Capacity can not be smaller than zero");
+            throw new IllegalArgumentException("Capacity can not be smaller than 1");
         }
         if (plane.getType() == null) {
             throw new IllegalArgumentException("Plane type is null.");

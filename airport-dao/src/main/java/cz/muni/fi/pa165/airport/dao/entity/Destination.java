@@ -4,16 +4,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  * @author Mariia Shevchenko
  */
+@NamedQueries({
+        @NamedQuery(
+                name = Destination.QUERY_IS_NOT_USED_IN_FLIGHTS,
+                query = "SELECT COUNT(f) FROM Flight f " +
+                        "JOIN f.origin o " +
+                        "JOIN f.destination d " +
+                        "WHERE o.id = :destinationId OR d.id = :destinationId "
+        )
+})
 @Entity
 @Table(name = "DESTINATION")
 public class Destination {
     
-
+    public static final String QUERY_IS_NOT_USED_IN_FLIGHTS = "isNotUsedInFlights";
+    
     private Long id;
     private String country;
     private String city;
