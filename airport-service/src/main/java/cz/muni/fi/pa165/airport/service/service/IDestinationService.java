@@ -15,8 +15,7 @@ public interface IDestinationService {
      * Create new destination
      *
      * @param destination destination to create
-     * @throws IllegalStateException if plane or steward is not available for flight duration
-     *                               if departure date is in future according to arrival (past arrival)
+     * @throws IllegalArgumentException if {@code destination.id} is not {@code null}
      */
     void createDestination(DestinationDTO destination);
 
@@ -24,9 +23,7 @@ public interface IDestinationService {
      * Update existing destination
      *
      * @param destination destination to update
-     * @throws IllegalStateException if plane or steward is not available for flight duration
-     *                               if departure date is in future according to arrival (past arrival)
-     * @throws IllegalArgumentException if {@code flight.id} is {@code null}
+     * @throws IllegalArgumentException if {@code destination.id} is {@code null}
      */
     void updateDestination(DestinationDTO destination);
 
@@ -39,7 +36,7 @@ public interface IDestinationService {
     void deleteDestination(Long destinationId);
 
     /**
-     * Get all destinations ordered by name
+     * Get all destinations ordered by coutry, city
      *
      * @return list of all destinations or empty list if no destination exist
      */
