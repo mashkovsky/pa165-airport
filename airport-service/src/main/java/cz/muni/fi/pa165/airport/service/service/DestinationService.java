@@ -40,7 +40,7 @@ public class DestinationService extends ConversionAware implements IDestinationS
         }
 
         Destination entity = mapper.map(destination, Destination.class);
-        destinationDAO.create(entity);
+        destinationDAO.update(entity);
     }
     
     @Override
