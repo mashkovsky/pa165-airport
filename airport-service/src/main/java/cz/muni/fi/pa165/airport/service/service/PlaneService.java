@@ -27,8 +27,8 @@ public class PlaneService extends ConversionAware implements IPlaneService {
         if (plane.getId() != null) {
             throw new IllegalArgumentException("Plane ID is not null");
         }
-        if(plane.getCapacity() == 0) {
-            throw new IllegalArgumentException("Capacity cannot be 0");
+        if(plane.getCapacity() <= 0) {
+            throw new IllegalArgumentException("Capacity must be greater than 0");
         }
 
         Plane entity = mapper.map(plane, Plane.class);
@@ -38,11 +38,11 @@ public class PlaneService extends ConversionAware implements IPlaneService {
 
     @Override
     public void updatePlane(PlaneDTO plane) {
-        if (plane.getId() != null) {
-            throw new IllegalArgumentException("Plane ID is not null");
+        if (plane.getId() == null) {
+            throw new IllegalArgumentException("Plane ID is null");
         }
-        if(plane.getCapacity() == 0) {
-            throw new IllegalArgumentException("Capacity cannot be 0");
+        if(plane.getCapacity() <= 0) {
+            throw new IllegalArgumentException("Capacity must be greater than 0");
         }
 
         Plane entity = mapper.map(plane, Plane.class);
