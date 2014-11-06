@@ -1,9 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.airport.service.service;
-
 import cz.muni.fi.pa165.airport.dao.dao.IPlaneDAO;
 import cz.muni.fi.pa165.airport.dao.entity.Plane;
 import cz.muni.fi.pa165.airport.service.service.dto.PlaneDTO;
