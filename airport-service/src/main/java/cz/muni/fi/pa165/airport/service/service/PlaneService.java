@@ -33,6 +33,7 @@ public class PlaneService extends ConversionAware implements IPlaneService {
 
         Plane entity = mapper.map(plane, Plane.class);
         planeDAO.create(entity);
+        plane.setId(entity.getId());
         
     }
 

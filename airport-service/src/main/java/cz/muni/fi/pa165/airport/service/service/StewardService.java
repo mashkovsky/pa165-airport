@@ -31,6 +31,7 @@ public class StewardService extends ConversionAware implements IStewardService {
         }
         Steward entity = mapper.map(steward, Steward.class);
         stewardDAO.create(entity);
+        steward.setId(entity.getId());
 
     }
 

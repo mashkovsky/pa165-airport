@@ -70,6 +70,7 @@ public class FlightService extends ConversionAware implements IFlightService {
         }
 
         flightDAO.create(entity);
+        flight.setId(entity.getId());
     }
 
     @Override
