@@ -17,6 +17,8 @@
     <properties>
         <spring-core.version>4.1.1.RELEASE</spring-core.version>
         <dozer-spring.version>5.5.1</dozer-spring.version>
+        <jackson-asl.version>1.9.13</jackson-asl.version>
+        <jackson.version>2.4.3</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -99,6 +101,29 @@
                 <artifactId>dozer-spring</artifactId>
                 <version>${dozer-spring.version}</version>
             </dependency>
+
+            <!-- Jackson JSON mapper -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson-asl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${jackson-asl.version}</version>
+            </dependency>
+
 
             <!--Testing-->
             <dependency>
