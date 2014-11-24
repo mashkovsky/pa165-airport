@@ -30,18 +30,22 @@
         </property>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
-                <prop key="hbm2ddl.auto">create</prop>
             </props>
         </property>
     </bean>
 
-    <jdbc:embedded-database id="dataSource" type="DERBY">
-    </jdbc:embedded-database>
+    <!-- UNCOMMENT FOR DEV PURPOSE (dont forget to comment out apache commons DS -->
+    <!--<jdbc:embedded-database id="dataSource" type="DERBY">-->
+    <!--</jdbc:embedded-database>-->
 
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver"/>
+        <property name="url" value="jdbc:derby://localhost:1527/pa165"/>
+    </bean>
 
     <!-- Only for testing purpose, transaction management is driven on service layer -->
     <beans profile="testing">
@@ -50,5 +54,8 @@
         <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
             <property name="entityManagerFactory" ref="entityManagerFactory"/>
         </bean>
+
+        <jdbc:embedded-database id="dataSource" type="DERBY">
+        </jdbc:embedded-database>
     </beans>
 </beans>

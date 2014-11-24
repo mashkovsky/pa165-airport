@@ -14,7 +14,7 @@
 
     <mvc:annotation-driven />
 
-    <!--<import resource="serviceApplicationContext.xml" />-->
+    <import resource="serviceApplicationContext.xml" />
 
 
 </beans>
