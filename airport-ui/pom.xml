@@ -42,6 +42,7 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
+        <!-- Jackson JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
