@@ -1,21 +1,21 @@
 package cz.muni.fi.pa165.airport.service;
 
+import cz.muni.fi.pa165.airport.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airport.dao.dao.IStewardDAO;
 import cz.muni.fi.pa165.airport.dao.entity.Steward;
 import cz.muni.fi.pa165.airport.service.service.StewardService;
-import cz.muni.fi.pa165.airport.service.service.dto.StewardDTO;
-import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import org.mockito.Mock;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

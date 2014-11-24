@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.airport.service;
 
+import cz.muni.fi.pa165.airport.api.dto.FlightDetailDTO;
+import cz.muni.fi.pa165.airport.api.dto.FlightMinimalDTO;
 import cz.muni.fi.pa165.airport.dao.dao.IDestinationDAO;
 import cz.muni.fi.pa165.airport.dao.dao.IFlightDAO;
 import cz.muni.fi.pa165.airport.dao.dao.IPlaneDAO;
@@ -9,8 +11,6 @@ import cz.muni.fi.pa165.airport.dao.entity.Flight;
 import cz.muni.fi.pa165.airport.dao.entity.Plane;
 import cz.muni.fi.pa165.airport.dao.entity.Steward;
 import cz.muni.fi.pa165.airport.service.service.FlightService;
-import cz.muni.fi.pa165.airport.service.service.dto.FlightDetailDTO;
-import cz.muni.fi.pa165.airport.service.service.dto.FlightMinimalDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;

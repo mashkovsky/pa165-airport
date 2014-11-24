@@ -13,7 +13,14 @@
 
 
     <dependencies>
-        <!-- Service module-->
+        <!-- Backend API module -->
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>airport-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Service module (backend API implementation) -->
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>airport-service</artifactId>

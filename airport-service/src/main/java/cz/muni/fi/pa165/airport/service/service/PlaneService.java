@@ -1,10 +1,14 @@
 package cz.muni.fi.pa165.airport.service.service;
+
+import cz.muni.fi.pa165.airport.api.dto.PlaneDTO;
+import cz.muni.fi.pa165.airport.api.service.IPlaneService;
 import cz.muni.fi.pa165.airport.dao.dao.IPlaneDAO;
 import cz.muni.fi.pa165.airport.dao.entity.Plane;
-import cz.muni.fi.pa165.airport.service.service.dto.PlaneDTO;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Methods of this class can throw subclasses of org.springframework.dao.DataAccessException if error occurs on persistence layer
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @author Jan Jilek
  */
 @Service
+@Transactional
 public class PlaneService extends ConversionAware implements IPlaneService {
     
     @Autowired

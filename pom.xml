@@ -12,6 +12,7 @@
         <module>airport-dao</module>
         <module>airport-service</module>
         <module>airport-ui</module>
+        <module>airport-api</module>
     </modules>
 
     <properties>

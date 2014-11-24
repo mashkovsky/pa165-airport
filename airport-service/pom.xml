@@ -19,6 +19,13 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- API Module -->
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>airport-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

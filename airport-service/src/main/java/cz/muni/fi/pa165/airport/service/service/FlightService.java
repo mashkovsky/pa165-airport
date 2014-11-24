@@ -1,15 +1,17 @@
 package cz.muni.fi.pa165.airport.service.service;
 
+import cz.muni.fi.pa165.airport.api.dto.FlightDetailDTO;
+import cz.muni.fi.pa165.airport.api.dto.FlightMinimalDTO;
+import cz.muni.fi.pa165.airport.api.service.IFlightService;
 import cz.muni.fi.pa165.airport.dao.dao.IDestinationDAO;
 import cz.muni.fi.pa165.airport.dao.dao.IFlightDAO;
 import cz.muni.fi.pa165.airport.dao.dao.IPlaneDAO;
 import cz.muni.fi.pa165.airport.dao.dao.IStewardDAO;
 import cz.muni.fi.pa165.airport.dao.entity.Flight;
 import cz.muni.fi.pa165.airport.dao.entity.Steward;
-import cz.muni.fi.pa165.airport.service.service.dto.FlightDetailDTO;
-import cz.muni.fi.pa165.airport.service.service.dto.FlightMinimalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ import java.util.List;
  * @author Mariia Schevchenko
  */
 @Service
+@Transactional
 public class FlightService extends ConversionAware implements IFlightService {
 
     @Autowired
