@@ -1,11 +1,14 @@
 package cz.muni.fi.pa165.airport.service.service;
 
+import cz.muni.fi.pa165.airport.api.dto.DestinationDTO;
+import cz.muni.fi.pa165.airport.api.service.IDestinationService;
 import cz.muni.fi.pa165.airport.dao.dao.IDestinationDAO;
-import cz.muni.fi.pa165.airport.service.service.dto.DestinationDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import cz.muni.fi.pa165.airport.dao.entity.Destination;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Methods of this class can throw subclasses of org.springframework.dao.DataAccessException if error occurs on
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Zdenek Kanovsky
  */
 @Service
+@Transactional
 public class DestinationService extends ConversionAware implements IDestinationService {
     
     @Autowired
@@ -29,6 +33,7 @@ public class DestinationService extends ConversionAware implements IDestinationS
 
         Destination entity = mapper.map(destination, Destination.class);
         destinationDAO.create(entity);
+        destination.setId(entity.getId());
     }
     
     @Override

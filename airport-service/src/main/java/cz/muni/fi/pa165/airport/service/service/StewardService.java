@@ -1,11 +1,14 @@
 package cz.muni.fi.pa165.airport.service.service;
 
+import cz.muni.fi.pa165.airport.api.dto.StewardDTO;
+import cz.muni.fi.pa165.airport.api.service.IStewardService;
 import cz.muni.fi.pa165.airport.dao.dao.IStewardDAO;
 import cz.muni.fi.pa165.airport.dao.entity.Steward;
-import cz.muni.fi.pa165.airport.service.service.dto.StewardDTO;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Methods of this class can throw subclasses of
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @author Matej Chrenko
  */
 @Service
+@Transactional
 public class StewardService extends ConversionAware implements IStewardService {
 
     @Autowired
@@ -27,6 +31,7 @@ public class StewardService extends ConversionAware implements IStewardService {
         }
         Steward entity = mapper.map(steward, Steward.class);
         stewardDAO.create(entity);
+        steward.setId(entity.getId());
 
     }
 

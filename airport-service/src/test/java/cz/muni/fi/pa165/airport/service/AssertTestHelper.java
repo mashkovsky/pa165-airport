@@ -1,14 +1,14 @@
 package cz.muni.fi.pa165.airport.service;
 
+import cz.muni.fi.pa165.airport.api.dto.DestinationDTO;
+import cz.muni.fi.pa165.airport.api.dto.FlightDetailDTO;
+import cz.muni.fi.pa165.airport.api.dto.FlightMinimalDTO;
+import cz.muni.fi.pa165.airport.api.dto.PlaneDTO;
+import cz.muni.fi.pa165.airport.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airport.dao.entity.Destination;
 import cz.muni.fi.pa165.airport.dao.entity.Flight;
 import cz.muni.fi.pa165.airport.dao.entity.Plane;
 import cz.muni.fi.pa165.airport.dao.entity.Steward;
-import cz.muni.fi.pa165.airport.service.service.dto.DestinationDTO;
-import cz.muni.fi.pa165.airport.service.service.dto.FlightDetailDTO;
-import cz.muni.fi.pa165.airport.service.service.dto.FlightMinimalDTO;
-import cz.muni.fi.pa165.airport.service.service.dto.PlaneDTO;
-import cz.muni.fi.pa165.airport.service.service.dto.StewardDTO;
 
 import static org.junit.Assert.assertEquals;
 

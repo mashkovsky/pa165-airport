@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.airport.service.service.dto;
+package cz.muni.fi.pa165.airport.api.dto;
 
 /**
  * @author Matej Chrenko

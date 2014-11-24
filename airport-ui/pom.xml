@@ -9,20 +9,21 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>airport-service</artifactId>
+    <artifactId>airport-ui</artifactId>
+
 
     <dependencies>
-        <!-- DAO module-->
-        <dependency>
-            <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>airport-dao</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!-- API Module -->
+        <!-- Backend API module -->
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>airport-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Service module (backend API implementation) -->
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>airport-service</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -41,36 +42,46 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
+            <artifactId>spring-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
 
-        <!-- Dozer -->
+        <!-- Jackson JSON -->
         <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer-spring</artifactId>
-        </dependency>
-
-        <!--Testing-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <scope>test</scope>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+        </dependency>
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.2.v20140723</version>
+                <configuration>
+                    <webApp>
+                        <contextPath>/pa165</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

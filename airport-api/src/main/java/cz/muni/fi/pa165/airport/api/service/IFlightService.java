@@ -1,15 +1,13 @@
-package cz.muni.fi.pa165.airport.service.service;
+package cz.muni.fi.pa165.airport.api.service;
 
-import cz.muni.fi.pa165.airport.service.service.dto.FlightDetailDTO;
-import cz.muni.fi.pa165.airport.service.service.dto.FlightMinimalDTO;
-import org.springframework.transaction.annotation.Transactional;
+import cz.muni.fi.pa165.airport.api.dto.FlightDetailDTO;
+import cz.muni.fi.pa165.airport.api.dto.FlightMinimalDTO;
 
 import java.util.List;
 
 /**
  * @author Mariia Shevchenko
  */
-@Transactional
 public interface IFlightService {
 
     /**

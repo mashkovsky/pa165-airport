@@ -1,13 +1,12 @@
-package cz.muni.fi.pa165.airport.service.service;
+package cz.muni.fi.pa165.airport.api.service;
 
-import cz.muni.fi.pa165.airport.service.service.dto.PlaneDTO;
+import cz.muni.fi.pa165.airport.api.dto.PlaneDTO;
+
 import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Jan Jilek
  */
-@Transactional
 public interface IPlaneService {
     /**
      * Create new plane

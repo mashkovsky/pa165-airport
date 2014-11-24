@@ -1,13 +1,12 @@
-package cz.muni.fi.pa165.airport.service.service;
+package cz.muni.fi.pa165.airport.api.service;
 
-import cz.muni.fi.pa165.airport.service.service.dto.StewardDTO;
+import cz.muni.fi.pa165.airport.api.dto.StewardDTO;
+
 import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Matej Chrenko
  */
-@Transactional
 public interface IStewardService {
     /**
      * Create new steward
