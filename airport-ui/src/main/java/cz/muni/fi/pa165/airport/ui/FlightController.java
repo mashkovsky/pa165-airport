@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,6 +39,18 @@ public class FlightController {
 
 
         // Test that it is found
+        return steward;
+    }
+
+    @RequestMapping("/error")
+    public StewardDTO error() {
+
+        StewardDTO steward = new StewardDTO();
+        steward.setErrorCodes(new ArrayList<String>() {{
+            add("STEWARD_NOT_AVAILABLE");
+            add("SOMETHING_ELSE");
+        }});
+
         return steward;
     }
 
