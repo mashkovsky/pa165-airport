@@ -1,2 +1,29 @@
-TODO implement index
-everything else (index excluded) add to /static/ dir.
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name='description' content='' />
+    <meta name='keywords' content='' />
+    <meta name='robots' content='' />
+    <meta name='author' content='' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta charset="UTF-8" />
+
+    <script src="static/js/angular.min.js"></script>
+    <script src="static/js/angular-route.js"></script>
+    <script src="static/js/angular-resource.js"></script>
+    <script src="static/js/angular-translate.min.js"></script>
+    <script src="static/js/app.js"></script>
+    <script src="static/js/translation.js"></script>
+    <script src="static/js/controlers/flight.js"></script>
+    <script src="static/js/controlers/plane.js"></script>
+    <script src="static/js/controlers/steward.js"></script>
+    <script src="static/js/controlers/destination.js"></script>
+</head>
+<body>
+    <h1>{{ 'appName' | translate }}</h1>
+    
+    <div ng-view></div>
+
+</body>
+</html>
