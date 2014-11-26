@@ -45,6 +45,8 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver"/>
         <property name="url" value="jdbc:derby://localhost:1527/pa165"/>
+        <property name="username" value="pa165" />
+        <property name="password" value="pa165" />
     </bean>
 
     <!-- Only for testing purpose, transaction management is driven on service layer -->
