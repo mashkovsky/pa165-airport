@@ -5,6 +5,7 @@ var app = angular.module('airport', ['ngResource', 'ngRoute', 'pascalprecht.tran
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
+      /* flight */
       when('/flight', {
         templateUrl: 'static/partials/flight/list.html',
         controller: 'FlightController'
@@ -13,6 +14,7 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/flight/edit.html',
         controller: 'FlightController'
       }).
+      /* destination */
       when('/destination', {
         templateUrl: 'static/partials/destination/list.html',
         controller: 'DestinationController'
@@ -21,6 +23,7 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/destination/edit.html',
         controller: 'DestinationController'
       }).
+      /* plane */
       when('/plane', {
         templateUrl: 'static/partials/plane/list.html',
         controller: 'PlaneController'
@@ -33,10 +36,12 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/steward/list.html',
         controller: 'StewardController'
       }).
+      /* steward */
       when('/steward/:stewardId', {
         templateUrl: 'static/partials/steward/edit.html',
         controller: 'StewardController'
       }).
+      /* default */
       otherwise({
         redirectTo: '/',
         templateUrl: 'static/partials/index.html',

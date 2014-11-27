@@ -8,6 +8,10 @@
     <meta name='author' content='' />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
     <meta charset="UTF-8" />
+    
+    <!-- Include stylesheets -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" href="static/partials/styles.css">
 
     <script src="static/js/angular.min.js"></script>
     <script src="static/js/angular-route.js"></script>
@@ -23,7 +27,38 @@
 <body>
     <h1>{{ 'appName' | translate }}</h1>
     
-    <div ng-view></div>
+    <ul id="menu">
+        <li>
+            <h2>{{ 'menuFlight' | translate }}</h2>
+            <ul>
+                <li><a href="index.html#/flight">{{ 'menuView' | translate }}</a></li>
+                <li><a href="index.html#/flight/create">{{ 'menuCreate' | translate }}</a></li>
+            </ul>
+        </li>
+        <li>
+            <h2>{{ 'menuPlane' | translate }}</h2>
+            <ul>
+                <li><a href="index.html#/plane">{{ 'menuView' | translate }}</a></li>
+                <li><a href="index.html#/plane/create">{{ 'menuCreate' | translate }}</a></li>
+            </ul>
+        </li>
+        <li>
+            <h2>{{ 'menuSteward' | translate }}</h2>
+            <ul>
+                <li><a href="index.html#/steward">{{ 'menuView' | translate }}</a></li>
+                <li><a href="index.html#/steward/create">{{ 'menuCreate' | translate }}</a></li>
+            </ul>
+        </li>
+        <li>
+            <h2>{{ 'menuDestination' | translate }}</h2>
+            <ul>
+                <li><a href="index.html#/destination">{{ 'menuView' | translate }}</a></li>
+                <li><a href="index.html#/destination/create">{{ 'menuCreate' | translate }}</a></li>
+            </ul>
+        </li>
+    </ul>
+    
+    <div id="content" ng-view></div>
 
 </body>
 </html>

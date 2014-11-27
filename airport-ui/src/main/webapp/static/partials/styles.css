@@ -1,0 +1,97 @@
+html, body {
+    margin:0; 
+    padding:0; 
+    border:0;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    color:#333;
+    padding:20px 30px;
+    background: url('design/background.png') repeat-x top left;
+    font-size: 15px;
+    line-height: 1;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+h1, h2, h3, a {font-family: Arial, Verdana;}
+
+h1 {
+    font-size:30px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: normal;
+    margin:0 0 20px 0; 
+    padding:0;
+    color: #a4a4a4;
+}
+
+ul#menu {
+    display: block;
+    clear: both;
+    float: left;
+    margin: 0;
+    margin-bottom: 100px;
+    padding: 0;
+}
+
+ul#menu>li {
+    display: block;
+    float: left;
+    margin-right: 30px;
+}
+
+ul#menu>li h2 {
+    color: #2048a9;
+    font-size: 15px;
+    font-weight: bold;
+    margin:0;
+    padding: 0;
+    text-align: center;
+    font-variant: small-caps;
+}
+
+ul#menu>li ul {
+    display: block;
+    float: left;
+    background: url('design/window.png') no-repeat top left;
+    width: 150px;
+    height: 178px;
+    margin:0;
+    padding: 55px 22px 0 20px;
+    list-style-position: inside;
+    list-style-type: none;
+}
+
+ul#menu>li ul li {
+    position: relative;
+}
+
+ul#menu>li ul li a {
+    color: #eee;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    font-size:14px;
+    padding: 5px 0;
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    margin-bottom:2px;
+}
+
+ul#menu>li ul li a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+div#content {
+    float: left;
+    clear: both;
+    padding: 10px;
+}
+
+

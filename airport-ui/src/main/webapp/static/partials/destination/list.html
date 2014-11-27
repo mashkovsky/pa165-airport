@@ -1,1 +1,31 @@
-<p>table</p>
+<div ng-app="" ng-controller="DestinationController"> 
+    <h3>{{ 'destinationManage' | translate }}</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{{ 'id' | translate }}</th>
+                <th>{{ 'country' | translate }}</th>
+                <th>{{ 'city' | translate }}</th>
+                <th>{{ 'edit' | translate }}</th>
+                <th>{{ 'delete' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="destination in destinations">
+                <td>{{ destination.Id }}</td>
+                <td>{{ destination.Country }}</td>
+                <td>{{ destination.City }}</td>
+                <td>
+                    <button class="btn" ng-click="">
+                        <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
+                    </button>
+                </td>
+                <td>
+                    <button class="btn" ng-click="">
+                        <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
