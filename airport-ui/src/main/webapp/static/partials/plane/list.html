@@ -12,22 +12,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="plane in planes">
-                <td>{{ plane.Id }}</td>
-                <td>{{ plane.Type }}</td>
-                <td>{{ plane.Name }}</td>
-                <td>{{ plane.Capacity }}</td>
+            <tr ng-repeat="item in planes">
+                <td>{{ item.Id }}</td>
+                <td>{{ item.Type }}</td>
+                <td>{{ item.Name }}</td>
+                <td>{{ item.Capacity }}</td>
                 <td>
-                    <button class="btn" ng-click="edit(plane.Id)">
+                    <a class="btn" href="plane/edit/{{item.Id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
-                    </button>
+                    </a>
                 </td>
                 <td>
-                    <button class="btn" ng-click="delete(plane.Id)">
+                    <a class="btn" href="plane/delete/{{item.Id}}">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
-                    </button>
+                    </a>
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table>    
 </div>
