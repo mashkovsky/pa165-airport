@@ -14,7 +14,7 @@ import java.util.List;
  * @author Mariia Schevchenko
  */
 @RestController
-@RequestMapping("/flight")
+@RequestMapping("/flights")
 public class FlightController {
 
     @Autowired

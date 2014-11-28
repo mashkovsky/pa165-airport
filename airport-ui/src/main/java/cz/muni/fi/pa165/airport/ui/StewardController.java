@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.airport.ui;
 
-import cz.muni.fi.pa165.airport.api.dto.PlaneDTO;
-import cz.muni.fi.pa165.airport.api.service.IPlaneService;
+import cz.muni.fi.pa165.airport.api.dto.StewardDTO;
+import cz.muni.fi.pa165.airport.api.service.IStewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,46 +17,46 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Matej Chrenko
  */
 @RestController
-@RequestMapping("/planes")
-public class PlaneController {
+@RequestMapping("/stewards")
+public class StewardController {
 
     @Autowired
-    private IPlaneService planeService;
+    private IStewardService stewardService;
 
-    //POST /plane
+    //POST /steward
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = "application/json")
-    public PlaneDTO create(@RequestBody PlaneDTO plane) {
-        planeService.createPlane(plane);
-        return plane;
+    public StewardDTO create(@RequestBody StewardDTO steward) {
+        stewardService.createSteward(steward);
+        return steward;
     }
 
-    //GET /plane
+    //GET /steward
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<PlaneDTO> index() {
-        List<PlaneDTO> planes = planeService.getAllPlanes();
-        return planes;
+    public List<StewardDTO> index() {
+        List<StewardDTO> stewards = stewardService.getAllStewards();
+        return stewards;
     }
 
-    //GET /plane/{id}
+    //GET /steward/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public PlaneDTO index(@PathVariable long id) {
-        PlaneDTO plane = planeService.getPlane(id);
-        return plane;
+    public StewardDTO index(@PathVariable long id) {
+        StewardDTO steward = stewardService.getSteward(id);
+        return steward;
     }
 
-    //DELETE /plane/{id}
+    //DELETE /steward/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable long id) {
-        planeService.deletePlane(id);
+        stewardService.deleteSteward(id);
     }
 
-    //PUT /plane/{id}
+    //PUT /steward/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public PlaneDTO index(@PathVariable long id, @RequestBody PlaneDTO plane) {
+    public StewardDTO index(@PathVariable long id, @RequestBody StewardDTO steward) {
 
-        plane.setId(id);
-        planeService.updatePlane(plane);
-        return plane;
+        steward.setId(id);
+        stewardService.updateSteward(steward);
+        return steward;
     }
 
 }
