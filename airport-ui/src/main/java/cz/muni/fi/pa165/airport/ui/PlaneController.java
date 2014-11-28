@@ -24,14 +24,14 @@ public class PlaneController {
     private IPlaneService planeService;
 
     //POST /plane
-    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
     public PlaneDTO create(@RequestBody PlaneDTO plane) {
         planeService.createPlane(plane);
         return plane;
     }
 
     //GET /plane
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<PlaneDTO> index() {
         List<PlaneDTO> planes = planeService.getAllPlanes();
         return planes;
@@ -60,3 +60,7 @@ public class PlaneController {
     }
 
 }
+//        steward.setErrorCodes(new ArrayList<String>() {{
+//            add("STEWARD_NOT_AVAILABLE");
+//            add("SOMETHING_ELSE");
+//        }});

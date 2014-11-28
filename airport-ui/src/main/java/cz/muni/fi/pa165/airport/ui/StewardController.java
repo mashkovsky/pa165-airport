@@ -24,14 +24,14 @@ public class StewardController {
     private IStewardService stewardService;
 
     //POST /steward
-    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
     public StewardDTO create(@RequestBody StewardDTO steward) {
         stewardService.createSteward(steward);
         return steward;
     }
 
     //GET /steward
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<StewardDTO> index() {
         List<StewardDTO> stewards = stewardService.getAllStewards();
         return stewards;

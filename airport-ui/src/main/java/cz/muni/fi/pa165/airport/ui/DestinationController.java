@@ -24,14 +24,14 @@ public class DestinationController {
     private IDestinationService destinationService;
 
     //POST /destination
-    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
     public DestinationDTO create(@RequestBody DestinationDTO destination) {
         destinationService.createDestination(destination);
         return destination;
     }
 
     //GET /destination
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<DestinationDTO> index() {
         List<DestinationDTO> destinations = destinationService.getAllDestinations();
         return destinations;

@@ -1,7 +1,8 @@
 package cz.muni.fi.pa165.airport.ui;
 
-import cz.muni.fi.pa165.airport.api.dto.StewardDTO;
-import cz.muni.fi.pa165.airport.api.service.IStewardService;
+import cz.muni.fi.pa165.airport.api.dto.FlightDetailDTO;
+import cz.muni.fi.pa165.airport.api.dto.FlightMinimalDTO;
+import cz.muni.fi.pa165.airport.api.service.IFlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,58 +10,58 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @author Mariia Schevchenko
+ * @author Matej Chrenko
  */
 @RestController
 @RequestMapping("/flights")
 public class FlightController {
 
     @Autowired
-    private IStewardService stewardService;
+    private IFlightService flightService;
 
-
-    @RequestMapping("/")
-    public StewardDTO index() {
-
-        StewardDTO steward = null;
-
-        List<StewardDTO> stewards = stewardService.getAllStewards();
-        if (stewards.isEmpty()) {
-            steward = new StewardDTO();
-            steward.setFirstName("Homer");
-            steward.setLastName("Simpson");
-
-            stewardService.createSteward(steward);
-        } else {
-            steward = stewards.get(0);
-        }
-
-
-        // Test that it is found
-        return steward;
+    //POST /flight
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
+    public FlightDetailDTO create(@RequestBody FlightDetailDTO flight) {
+        flightService.createFlight(flight);
+        return flight;
     }
 
-    @RequestMapping("/error")
-    public StewardDTO error() {
-
-        StewardDTO steward = new StewardDTO();
-        steward.setErrorCodes(new ArrayList<String>() {{
-            add("STEWARD_NOT_AVAILABLE");
-            add("SOMETHING_ELSE");
-        }});
-
-        return steward;
+    //GET /flight
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public List<FlightMinimalDTO> index() {
+        List<FlightMinimalDTO> flights = flightService.getAllFlights();
+        return flights;
     }
 
-    @RequestMapping("/{stewardName}")
-    public StewardDTO index(@PathVariable String stewardName) {
+    //GET /flight/{id}
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public FlightDetailDTO index(@PathVariable long id) {
+        FlightDetailDTO flight = flightService.getFlightDetail(id);
+        return flight;
+    }
 
-        StewardDTO steward = new StewardDTO();
-        steward.setFirstName(stewardName);
+    //DELETE /flight/{id}
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable long id) {
+        flightService.deleteFlight(id);
+    }
 
-        return steward;
+    //PUT /flight/{id}
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    public FlightDetailDTO index(@PathVariable long id, @RequestBody FlightDetailDTO flight) {
+
+        flight.setId(id);
+        flightService.updateFlight(flight);
+        return flight;
     }
 
 }
+//        steward.setErrorCodes(new ArrayList<String>() {{
+//            add("STEWARD_NOT_AVAILABLE");
+//            add("SOMETHING_ELSE");
+//        }});
