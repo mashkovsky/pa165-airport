@@ -1,1 +1,41 @@
-<p>table</p>
+<div ng-app="" ng-controller="FlightController"> 
+    <h3>{{ 'flightManage' | translate }}</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{{ 'id' | translate }}</th>
+                <th>{{ 'origin' | translate }}</th>
+                <th>{{ 'destination' | translate }}</th>
+                <th>{{ 'departure' | translate }}</th>
+                <th>{{ 'arrival' | translate }}</th>
+                <th>{{ 'capacity' | translate }}</th>
+                <th>{{ 'plane' | translate }}</th>
+                <th>{{ 'stewards' | translate }}</th>
+                <th class="action">{{ 'edit' | translate }}</th>
+                <th class="action">{{ 'delete' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="flight in flights">
+                <td>{{ flight.Id }}</td>
+                <td>{{ flight.Origin }}</td>
+                <td>{{ flight.Destination }}</td>
+                <td>{{ flight.Departure }}</td>
+                <td>{{ flight.Arrival }}</td>
+                <td>{{ flight.Capacity }}</td>
+                <td>{{ flight.Plane }}</td>
+                <td>{{ flight.Stewards }}</td>
+                <td>
+                    <button class="btn" ng-click="edit(flight.Id)">
+                        <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
+                    </button>
+                </td>
+                <td>
+                    <button class="btn" ng-click="delete(flight.Id)">
+                        <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -89,9 +89,18 @@ ul#menu>li ul li a:hover {
 }
 
 div#content {
-    float: left;
     clear: both;
     padding: 10px;
 }
 
+div#content h2 {
+    margin-top: 0;
+}
 
+div#content table th.action {
+    width: 10em;
+}
+
+div#content input {
+    width:20em;
+}

@@ -1,5 +1,5 @@
 <div ng-app="" ng-controller="FlightController">
-    <h2>{{ 'flightEdit' | translate}}</h2>
+    <h2>{{ 'flightDelete' | translate}}</h2>
     <form class="form-horizontal" role="form">
       <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'id' | translate }}</label>
@@ -11,7 +11,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'origin' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-repeat="destination in destinations | orderBy : 'Country'" class="form-control" id="sel1">
+            <select ng-disabled="true" ng-repeat="destination in destinations | orderBy : 'Country'" class="form-control" id="sel1">
                 <option>{{destination.Country}} - {{destination.City}}</option>
             </select>
         </div>
@@ -20,7 +20,7 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'destination' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-repeat="destination in destinations | orderBy : 'Country'" class="form-control" id="sel1">
+            <select ng-disabled="true" ng-repeat="destination in destinations | orderBy : 'Country'" class="form-control" id="sel1">
                 <option>{{destination.Country}} - {{destination.City}}</option>
             </select>
         </div>
@@ -29,7 +29,7 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'departure' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="departure" placeholder="{{ 'departure' | translate }}" class="form-control">
+            <input ng-disabled="true" type="text" ng-model="departure" placeholder="{{ 'departure' | translate }}" class="form-control">
             <br>
             <span>{{ 'format' | translate }}: mm/dd/yyyy hh:mm</span>
         </div>
@@ -38,7 +38,7 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'arrival' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="arrival" placeholder="{{ 'arrival' | translate }}" class="form-control">
+            <input ng-disabled="true" type="text" ng-model="arrival" placeholder="{{ 'arrival' | translate }}" class="form-control">
             <br>
             <span>{{ 'format' | translate }}: mm/dd/yyyy hh:mm</span>
         </div>
@@ -47,14 +47,14 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'capacity' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="capacity" placeholder="{{ 'capacity' | translate }}" class="form-control">
+            <input ng-disabled="true" type="text" ng-model="capacity" placeholder="{{ 'capacity' | translate }}" class="form-control">
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'plane' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-repeat="plane in planes | orderBy : 'type'" class="form-control" id="sel1">
+            <select ng-disabled="true" ng-repeat="plane in planes | orderBy : 'type'" class="form-control" id="sel1">
                 <option>{{plane.Type}} {{plane.Name}} ({{plane.Capacity}})</option>
             </select>
         </div>
@@ -63,7 +63,7 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'stewards' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-repeat="steward in stewards | orderBy : 'lastName'" class="form-control" id="sel2">
+            <select ng-disabled="true" ng-repeat="steward in stewards | orderBy : 'lastName'" class="form-control" id="sel2">
                 <option>{{steward.FirstName}} {{steward.LastName}}</option>
             </select>
         </div>
@@ -71,8 +71,8 @@
         
       <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-primary" ng-disabled="incomplete">
-              <span class="glyphicon glyphicon-save"></span>{{ 'save' | translate }}
+            <button class="btn btn-danger" ng-disabled="incomplete">
+              <span class="glyphicon glyphicon-trash"></span>{{ 'delete' | translate }}
             </button>
           </div>
         </div>

@@ -10,8 +10,16 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/flight/list.html',
         controller: 'FlightController'
       }).
-      when('/flight/:flightId', {
+      when('/flight/create', {
+        templateUrl: 'static/partials/flight/create.html',
+        controller: 'FlightController'
+      }).
+      when('/flight/edit/:flightId', {
         templateUrl: 'static/partials/flight/edit.html',
+        controller: 'FlightController'
+      }).
+      when('/flight/delete/:flightId', {
+        templateUrl: 'static/partials/flight/delete.html',
         controller: 'FlightController'
       }).
       /* destination */
@@ -19,8 +27,16 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/destination/list.html',
         controller: 'DestinationController'
       }).
-      when('/destination/:destinationtId', {
+      when('/destination/create', {
+        templateUrl: 'static/partials/destination/create.html',
+        controller: 'DestinationController'
+      }).
+      when('/destination/edit/:destinationtId', {
         templateUrl: 'static/partials/destination/edit.html',
+        controller: 'DestinationController'
+      }).
+      when('/destination/delete/:destinationtId', {
+        templateUrl: 'static/partials/destination/delete.html',
         controller: 'DestinationController'
       }).
       /* plane */
@@ -28,17 +44,33 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/plane/list.html',
         controller: 'PlaneController'
       }).
-      when('/plane/:planeId', {
+      when('/plane/create', {
+        templateUrl: 'static/partials/plane/create.html',
+        controller: 'PlaneController'
+      }).
+      when('/plane/edit/:planeId', {
         templateUrl: 'static/partials/plane/edit.html',
         controller: 'PlaneController'
       }).
+      when('/plane/delete/:planeId', {
+        templateUrl: 'static/partials/plane/delete.html',
+        controller: 'PlaneController'
+      }).
+      /* steward */
       when('/steward', {
         templateUrl: 'static/partials/steward/list.html',
         controller: 'StewardController'
       }).
-      /* steward */
-      when('/steward/:stewardId', {
+      when('/steward/create', {
+        templateUrl: 'static/partials/steward/create.html',
+        controller: 'StewardController'
+      }).
+      when('/steward/edit/:stewardId', {
         templateUrl: 'static/partials/steward/edit.html',
+        controller: 'StewardController'
+      }).
+      when('/steward/delete/:stewardId', {
+        templateUrl: 'static/partials/steward/delete.html',
         controller: 'StewardController'
       }).
       /* default */

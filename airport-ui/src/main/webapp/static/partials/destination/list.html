@@ -6,8 +6,8 @@
                 <th>{{ 'id' | translate }}</th>
                 <th>{{ 'country' | translate }}</th>
                 <th>{{ 'city' | translate }}</th>
-                <th>{{ 'edit' | translate }}</th>
-                <th>{{ 'delete' | translate }}</th>
+                <th class="action">{{ 'edit' | translate }}</th>
+                <th class="action">{{ 'delete' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -16,12 +16,12 @@
                 <td>{{ destination.Country }}</td>
                 <td>{{ destination.City }}</td>
                 <td>
-                    <button class="btn" ng-click="">
+                    <button class="btn" ng-click="edit(destination.Id)">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
                     </button>
                 </td>
                 <td>
-                    <button class="btn" ng-click="">
+                    <button class="btn" ng-click="delete(destination.Id)">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </button>
                 </td>

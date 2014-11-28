@@ -1,1 +1,31 @@
-<p>table</p>
+<div ng-app="" ng-controller="StewardController"> 
+    <h3>{{ 'stewardManage' | translate }}</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{{ 'id' | translate }}</th>
+                <th>{{ 'firstName' | translate }}</th>
+                <th>{{ 'lastName' | translate }}</th>
+                <th class="action">{{ 'edit' | translate }}</th>
+                <th class="action">{{ 'delete' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="steward in stewards">
+                <td>{{ steward.Id }}</td>
+                <td>{{ steward.FirstName }}</td>
+                <td>{{ steward.LastName }}</td>
+                <td>
+                    <button class="btn" ng-click="edit(steward.Id)">
+                        <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
+                    </button>
+                </td>
+                <td>
+                    <button class="btn" ng-click="delete(steward.Id)">
+                        <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

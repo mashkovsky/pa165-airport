@@ -1,1 +1,33 @@
-<p>table</p>
+<div ng-app="" ng-controller="PlaneController"> 
+    <h3>{{ 'planeManage' | translate }}</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{{ 'id' | translate }}</th>
+                <th>{{ 'type' | translate }}</th>
+                <th>{{ 'name' | translate }}</th>
+                <th>{{ 'capacity' | translate }}</th>
+                <th class="action">{{ 'edit' | translate }}</th>
+                <th class="action">{{ 'delete' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="plane in planes">
+                <td>{{ plane.Id }}</td>
+                <td>{{ plane.Type }}</td>
+                <td>{{ plane.Name }}</td>
+                <td>{{ plane.Capacity }}</td>
+                <td>
+                    <button class="btn" ng-click="edit(plane.Id)">
+                        <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
+                    </button>
+                </td>
+                <td>
+                    <button class="btn" ng-click="delete(plane.Id)">
+                        <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
