@@ -158,7 +158,7 @@ app.provider('apiProvider', function apiProvider() {
 });
 
 app.config(['apiProviderProvider', function(apiProvider){
-      apiProvider.setBaseUrl('http://localhost:8080/rest');
+      apiProvider.setBaseUrl('http://localhost:8080/pa165/rest');
       apiProvider.setToken('');
       
       // detect lang
