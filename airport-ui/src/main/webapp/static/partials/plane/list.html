@@ -13,17 +13,17 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in planes">
-                <td>{{ item.Id }}</td>
-                <td>{{ item.Type }}</td>
-                <td>{{ item.Name }}</td>
-                <td>{{ item.Capacity }}</td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.type }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.capacity }}</td>
                 <td>
-                    <a class="btn" href="plane/edit/{{item.Id}}">
+                    <a class="btn" href="plane/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
                     </a>
                 </td>
                 <td>
-                    <a class="btn" href="plane/delete/{{item.Id}}">
+                    <a class="btn" href="plane/delete/{{item.id}}">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </a>
                 </td>

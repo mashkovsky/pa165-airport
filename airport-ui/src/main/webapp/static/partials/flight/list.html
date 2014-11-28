@@ -16,24 +16,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="flight in flights">
-                <td>{{ flight.Id }}</td>
-                <td>{{ flight.Origin }}</td>
-                <td>{{ flight.Destination }}</td>
-                <td>{{ flight.Departure }}</td>
-                <td>{{ flight.Arrival }}</td>
-                <td>{{ flight.Capacity }}</td>
-                <td>{{ flight.Plane }}</td>
-                <td>{{ flight.Stewards }}</td>
+            <tr ng-repeat="item in flights">
+                <td>{{ item.id }}</td>
+                <td>{{ item.origin }}</td>
+                <td>{{ item.destination }}</td>
+                <td>{{ item.departure }}</td>
+                <td>{{ item.arrival }}</td>
+                <td>{{ item.capacity }}</td>
+                <td>{{ item.plane }}</td>
+                <td>{{ item.stewards }}</td>
                 <td>
-                    <button class="btn" ng-click="edit(flight.Id)">
+                    <a class="btn" href="flight/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
-                    </button>
+                    </a>
                 </td>
                 <td>
-                    <button class="btn" ng-click="delete(flight.Id)">
+                    <a class="btn" href="flight/delete/{{item.id}}">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
-                    </button>
+                    </a>
                 </td>
             </tr>
         </tbody>

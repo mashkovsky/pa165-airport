@@ -4,15 +4,15 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'id' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="id" ng-disabled="true" placeholder="{{ 'id' | translate }}" class="form-control">
+            <input type="text" ng-model="flight.id" ng-disabled="true" placeholder="{{ 'id' | translate }}" class="form-control">
         </div>
       </div> 
         
       <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'origin' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-repeat="destination in destinations | orderBy : 'Country'" class="form-control" id="sel1">
-                <option>{{destination.Country}} - {{destination.City}}</option>
+            <select ng-repeat="item in destinations | orderBy : 'country'" ng-model="flight.origin" class="form-control" id="sel1">
+                <option value="{{item.id}} ">{{item.city}}, {{item.country}}</option>
             </select>
         </div>
      </div>
@@ -20,8 +20,8 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'destination' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-repeat="destination in destinations | orderBy : 'Country'" class="form-control" id="sel1">
-                <option>{{destination.Country}} - {{destination.City}}</option>
+            <select ng-repeat="item in destinations | orderBy : 'country'" ng-model="flight.destination" class="form-control" id="sel1">
+                <option value="{{item.id}} ">{{item.city}}, {{item.country}}</option>
             </select>
         </div>
      </div>
@@ -29,33 +29,33 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'departure' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="departure" placeholder="{{ 'departure' | translate }}" class="form-control">
+            <input type="text" ng-model="flight.departure" placeholder="{{ 'departure' | translate }}" class="form-control">
             <br>
-            <span>{{ 'format' | translate }}: mm/dd/yyyy hh:mm</span>
+            <span>{{ 'format' | translate }}: yyyy-mm-ddThh:mm:ss.nnn</span>
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'arrival' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="arrival" placeholder="{{ 'arrival' | translate }}" class="form-control">
+            <input type="text" ng-model="flight.arrival" placeholder="{{ 'arrival' | translate }}" class="form-control">
             <br>
-            <span>{{ 'format' | translate }}: mm/dd/yyyy hh:mm</span>
+            <span>{{ 'format' | translate }}: yyyy-mm-ddThh:mm:ss.nnn</span>
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'capacity' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="capacity" placeholder="{{ 'capacity' | translate }}" class="form-control">
+            <input type="text" ng-model="flight.capacity" placeholder="{{ 'capacity' | translate }}" class="form-control">
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'plane' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-repeat="plane in planes | orderBy : 'type'" class="form-control" id="sel1">
-                <option>{{plane.Type}} {{plane.Name}} ({{plane.Capacity}})</option>
+            <select ng-repeat="item in planes | orderBy : 'type'" ng-model="flight.plane" class="form-control" id="sel1">
+                <option value="{{item.id}}">{{item.Type}} {{item.Name}} ({{item.Capacity}})</option>
             </select>
         </div>
      </div>
@@ -63,8 +63,8 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'stewards' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-repeat="steward in stewards | orderBy : 'lastName'" class="form-control" id="sel2">
-                <option>{{steward.FirstName}} {{steward.LastName}}</option>
+            <select ng-repeat="item in allStewards | orderBy : 'lastName'" ng-model="flight.stewards" class="form-control" id="sel2">
+                <option value="{{item.id}}">{{item.FirstName}} {{item.LastName}}</option>
             </select>
         </div>
      </div>
@@ -72,7 +72,7 @@
      
       <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-success" ng-disabled="incomplete">
+            <button class="btn btn-success" ng-disabled="false" ng-click="createFlight()">
               <span class="glyphicon glyphicon-plus"></span>{{ 'create' | translate }}
             </button>
           </div>

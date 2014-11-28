@@ -11,19 +11,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="destination in destinations">
-                <td>{{ destination.Id }}</td>
-                <td>{{ destination.Country }}</td>
-                <td>{{ destination.City }}</td>
+            <tr ng-repeat="item in destinations">
+                <td>{{ item.id }}</td>
+                <td>{{ item.country }}</td>
+                <td>{{ item.city }}</td>
                 <td>
-                    <button class="btn" ng-click="edit(destination.Id)">
+                    <a class="btn" href="destination/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
-                    </button>
+                    </a>
                 </td>
                 <td>
-                    <button class="btn" ng-click="delete(destination.Id)">
+                    <a class="btn" href="destination/delete/{{item.id}}">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
-                    </button>
+                    </a>
                 </td>
             </tr>
         </tbody>

@@ -11,19 +11,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="steward in stewards">
-                <td>{{ steward.Id }}</td>
-                <td>{{ steward.FirstName }}</td>
-                <td>{{ steward.LastName }}</td>
+            <tr ng-repeat="item in stewards">
+                <td>{{ item.id }}</td>
+                <td>{{ item.firstName }}</td>
+                <td>{{ item.lastName }}</td>
                 <td>
-                    <button class="btn" ng-click="edit(steward.Id)">
+                    <a class="btn" href="steward/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
-                    </button>
+                    </a>
                 </td>
                 <td>
-                    <button class="btn" ng-click="delete(steward.Id)">
+                    <a class="btn" href="steward/delete/{{item.id}}">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
-                    </button>
+                    </a>
                 </td>
             </tr>
         </tbody>

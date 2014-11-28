@@ -103,7 +103,7 @@ app.provider('apiProvider', function apiProvider() {
               return baseUrl;
             },
             destination: function() {
-              return $resource(baseUrl + '/destination/:id',
+              return $resource(baseUrl + '/destinations/:id',
                 { id:'@id',
                   token : this.token, 
                   lang : this.language
@@ -112,7 +112,7 @@ app.provider('apiProvider', function apiProvider() {
               );
             },
             flight: function() {
-              return $resource(baseUrl + '/flight/:id',
+              return $resource(baseUrl + '/flights/:id',
                 {
                   id:'@id',
                   token : this.token, 
@@ -122,7 +122,7 @@ app.provider('apiProvider', function apiProvider() {
               );
             },
             plane: function() {
-              return $resource(baseUrl + '/plane/:id',
+              return $resource(baseUrl + '/planes/:id',
                 {
                   id:'@id',
                   token : this.token, 
@@ -132,7 +132,7 @@ app.provider('apiProvider', function apiProvider() {
               );
             },
             steward: function() {
-              return $resource(baseUrl + '/steward/:id',
+              return $resource(baseUrl + '/stewards/:id',
                 {
                   id:'@id',
                   token : this.token, 
