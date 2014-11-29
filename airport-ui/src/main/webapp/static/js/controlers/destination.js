@@ -14,7 +14,7 @@ function DestinationController($scope, $http, apiProvider, $routeParams, $transl
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
             } 
             else {
                 $scope.result = 'error';
@@ -29,7 +29,7 @@ function DestinationController($scope, $http, apiProvider, $routeParams, $transl
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
             } 
             else {
                 $scope.result = 'error';
@@ -44,7 +44,7 @@ function DestinationController($scope, $http, apiProvider, $routeParams, $transl
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
             } 
             else {
                 $scope.result = 'error';

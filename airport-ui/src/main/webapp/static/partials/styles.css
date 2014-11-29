@@ -31,6 +31,20 @@ h1 {
     color: #a4a4a4;
 }
 
+span.info {
+    display:none;
+}
+
+span.info.success {
+    display: inline;
+    color: green;
+}
+
+span.info.error {
+    display: inline;
+    color: red;
+}
+
 ul#menu {
     display: block;
     clear: both;

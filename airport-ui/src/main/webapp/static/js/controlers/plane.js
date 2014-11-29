@@ -17,7 +17,7 @@ function PlaneController($scope, $http, apiProvider, $routeParams, $translate, $
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
             } 
             else {
                 $scope.result = 'error';
@@ -33,7 +33,10 @@ function PlaneController($scope, $http, apiProvider, $routeParams, $translate, $
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
+                setTimeout(function () {
+                    window.location.href = "http://localhost:8080/pa165/index.html#/plane"; //will redirect to your blog page (an ex: blog.html)
+                }, 500);
             } 
             else {
                 $scope.result = 'error';
@@ -48,7 +51,7 @@ function PlaneController($scope, $http, apiProvider, $routeParams, $translate, $
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
             } 
             else {
                 $scope.result = 'error';

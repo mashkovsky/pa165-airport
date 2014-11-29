@@ -21,6 +21,10 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         id: 'ID',
         format: 'Požadovaný formát',
         
+        // messages
+        success: 'Operace byla provedena',
+        error: 'Operace se nezdařila',
+        
         // destination
         destinationManage: 'Seznam destinací',
         destinationEdit: 'Upravit destinaci',
@@ -80,6 +84,10 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         save: 'Save',
         format: 'Valid format',
         id: 'ID',
+        
+        // messages
+        success: 'Operation success',
+        error: 'Operation failed',
         
         // destination
         destinationManage: 'List of destinations',

@@ -14,7 +14,7 @@ function StewardController($scope, $http, apiProvider, $routeParams, $translate,
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
             } 
             else {
                 $scope.result = 'error';
@@ -29,7 +29,7 @@ function StewardController($scope, $http, apiProvider, $routeParams, $translate,
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
             } 
             else {
                 $scope.result = 'error';
@@ -44,7 +44,7 @@ function StewardController($scope, $http, apiProvider, $routeParams, $translate,
         },
         function(res) {
             if(res.$resolved) {
-                $scope.result = 'ok';
+                $scope.result = 'success';
             } 
             else {
                 $scope.result = 'error';
