@@ -1,4 +1,7 @@
 function StewardController($scope, $http, apiProvider, $routeParams, $translate, $timeout) {
+    
+    $scope.steward = {id:'', firstName:'', lastName:''};
+    
     if($routeParams.stewardId) {
         $scope.steward = apiProvider.steward().get({id: $routeParams.stewardId});
     } else {
@@ -15,6 +18,9 @@ function StewardController($scope, $http, apiProvider, $routeParams, $translate,
         function(res) {
             if(res.$resolved) {
                 $scope.result = 'success';
+                setTimeout(function () {
+                    window.location.href = "http://localhost:8080/pa165/index.html#/steward"; //will redirect to your blog page (an ex: blog.html)
+                }, 500);
             } 
             else {
                 $scope.result = 'error';
@@ -30,6 +36,9 @@ function StewardController($scope, $http, apiProvider, $routeParams, $translate,
         function(res) {
             if(res.$resolved) {
                 $scope.result = 'success';
+                setTimeout(function () {
+                    window.location.href = "http://localhost:8080/pa165/index.html#/steward"; //will redirect to your blog page (an ex: blog.html)
+                }, 500);
             } 
             else {
                 $scope.result = 'error';
@@ -45,11 +54,30 @@ function StewardController($scope, $http, apiProvider, $routeParams, $translate,
         function(res) {
             if(res.$resolved) {
                 $scope.result = 'success';
+                setTimeout(function () {
+                    window.location.href = "http://localhost:8080/pa165/index.html#/steward"; //will redirect to your blog page (an ex: blog.html)
+                }, 500);
             } 
             else {
                 $scope.result = 'error';
             }
         });
+    }
+    
+    // test inputs
+    $scope.error = true;
+    $scope.incomplete = true; 
+        
+    $scope.test = function() {
+        
+        $scope.error = false;
+        $scope.incomplete = false;
+                
+        if(!$scope.steward.firstName.length || 
+            !$scope.steward.lastName.length) 
+            {
+                $scope.incomplete = true;
+            }
     }
     
 }

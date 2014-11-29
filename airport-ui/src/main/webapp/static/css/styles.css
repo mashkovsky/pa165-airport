@@ -8,7 +8,7 @@ body {
     font-family: Georgia, "Times New Roman", serif;
     color:#333;
     padding:20px 30px;
-    background: url('design/background.png') repeat-x top left;
+    background: url('../design/background.png') repeat-x top left;
     font-size: 15px;
     line-height: 1;
 }
@@ -33,16 +33,25 @@ h1 {
 
 span.info {
     display:none;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style:dotted;
 }
 
 span.info.success {
     display: inline;
     color: green;
+    border-color: green;
+    background: #ccffcc;
 }
 
 span.info.error {
     display: inline;
     color: red;
+    border-color: red;
+    background: #ffcccc;
 }
 
 ul#menu {
@@ -73,7 +82,7 @@ ul#menu>li h2 {
 ul#menu>li ul {
     display: block;
     float: left;
-    background: url('design/window.png') no-repeat top left;
+    background: url('../design/window.png') no-repeat top left;
     width: 150px;
     height: 178px;
     margin:0;
@@ -115,6 +124,6 @@ div#content table th.action {
     width: 10em;
 }
 
-div#content input {
+div#content input, div#content select {
     width:20em;
 }

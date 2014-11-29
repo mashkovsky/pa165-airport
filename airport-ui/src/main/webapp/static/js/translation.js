@@ -19,7 +19,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         delete: 'Smazat',
         save: 'Uložit',
         id: 'ID',
-        format: 'Požadovaný formát',
+        choose: 'Vyberte',
         
         // messages
         success: 'Operace byla provedena',
@@ -82,8 +82,8 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         edit: 'Edit',
         delete: 'Delete',
         save: 'Save',
-        format: 'Valid format',
         id: 'ID',
+        choose: 'Choose',
         
         // messages
         success: 'Operation success',

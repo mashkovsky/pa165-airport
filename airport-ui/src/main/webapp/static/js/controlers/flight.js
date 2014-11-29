@@ -1,4 +1,8 @@
 function FlightController($scope, $http, apiProvider, $routeParams, $translate, $timeout) {
+    
+    $scope.plane = {id:'', origin:'', destination:'', departure:'', arrival:'', 
+        capacity:'', plane:'', stewards:[]};
+    
     if($routeParams.flightId) {
         $scope.flight = apiProvider.flight().get({id: $routeParams.flightId});
     } else {
@@ -24,6 +28,9 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
         function(res) {
             if(res.$resolved) {
                 $scope.result = 'success';
+                setTimeout(function () {
+                    window.location.href = "http://localhost:8080/pa165/index.html#/flight"; //will redirect to your blog page (an ex: blog.html)
+                }, 500);
             } 
             else {
                 $scope.result = 'error';
@@ -44,6 +51,9 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
         function(res) {
             if(res.$resolved) {
                 $scope.result = 'success';
+                setTimeout(function () {
+                    window.location.href = "http://localhost:8080/pa165/index.html#/flight"; //will redirect to your blog page (an ex: blog.html)
+                }, 500);
             } 
             else {
                 $scope.result = 'error';
@@ -59,11 +69,40 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
         function(res) {
             if(res.$resolved) {
                 $scope.result = 'success';
+                setTimeout(function () {
+                    window.location.href = "http://localhost:8080/pa165/index.html#/flight"; //will redirect to your blog page (an ex: blog.html)
+                }, 500);
             } 
             else {
                 $scope.result = 'error';
             }
         });
+    }
+    
+    // test inputs
+    $scope.error = true;
+    $scope.incomplete = true; 
+        
+    $scope.test = function() {
+        
+        $scope.error = false;
+        $scope.incomplete = false;
+             
+        if(!$scope.flight.origin ||
+            !$scope.flight.destination ||
+            !$scope.flight.departure || 
+            !$scope.flight.arrival || 
+            !$scope.flight.plane || 
+            !$scope.flight.stewards) 
+            {
+                $scope.incomplete = true;
+            }
+        
+        if($scope.flight.capacity == null ||
+            $scope.flight.capacity < 1) 
+            {
+                $scope.error = true;
+            }
     }
 }
 

@@ -1,5 +1,7 @@
 <div ng-app="" ng-controller="FlightController">
     <h2>{{ 'flightEdit' | translate}}</h2>
+    <span class="info {{result}}">{{ result | translate }}</span>
+    
     <form class="form-horizontal" role="form">
       <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'id' | translate }}</label>
@@ -11,60 +13,63 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'origin' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-model="flight.origin" ng-options="item.id as (item.city) group by item.country for item in destinations | orderBy : 'country'" class="form-control" id="sel1"></select>
+            <select ng-model="flight.origin" ng-change="test()" ng-options="item.id as (item.city) group by item.country for item in destinations | orderBy : 'country'" class="form-control">
+                <option value="">- {{ 'choose' | translate }} -</option>
+            </select>
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'destination' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-model="flight.destination" ng-options="item.id as (item.city) group by item.country for item in destinations | orderBy : 'country'" class="form-control" id="sel1"></select>
+            <select multiple ng-model="flight.destination" ng-change="test()" ng-options="item.id as (item.city) group by item.country for item in destinations | orderBy : 'country'" class="form-control">
+            </select>
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'departure' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="flight.departure" placeholder="{{ 'departure' | translate }}" class="form-control">
-            <br>
-            <span>{{ 'format' | translate }}: yyyy-mm-ddThh:mm:ss.nnn</span>
+            <input type="text" ng-model="flight.departure" ng-change="test()" placeholder="{{ 'departure' | translate }}" class="form-control datetime">
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'arrival' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="flight.arrival" placeholder="{{ 'arrival' | translate }}" class="form-control">
-            <br>
-            <span>{{ 'format' | translate }}: yyyy-mm-ddThh:mm:ss.nnn</span>
+            <input type="text" ng-model="flight.arrival" ng-change="test()" placeholder="{{ 'arrival' | translate }}" class="form-control datetime">
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'capacity' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="flight.capacity" placeholder="{{ 'capacity' | translate }}" class="form-control">
+            <input type="number" ng-model="flight.capacity" ng-change="test()" placeholder="{{ 'capacity' | translate }}" class="form-control">
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'plane' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-model="flight.plane" ng-options="item.id as (item.type + ' ' + item.name + ' (' + item.capacity + ')') for item in planes | orderBy : 'type'" class="form-control" id="sel1"></select>
+            <select ng-model="flight.plane" ng-change="test()" ng-options="item.id as (item.type + ' ' + item.name + ' (' + item.capacity + ')') for item in planes | orderBy : 'type'" class="form-control">
+                <option value="">- {{ 'choose' | translate }} -</option>
+            </select>
         </div>
      </div>
 
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'stewards' | translate }}</label>
         <div class="col-sm-10">
-            <select ng-model="flight.stewards" ng-options="item.id as (item.firstName + ' ' + item.lastName) for item in allStewards | orderBy : 'lastName'" class="form-control" id="sel2"></select>
+            <select ng-model="flight.stewards" ng-change="test()" ng-options="item.id as (item.firstName + ' ' + item.lastName) for item in allStewards | orderBy : 'lastName'" class="form-control">
+                <option value="">- {{ 'choose' | translate }} -</option>
+            </select>
         </div>
      </div>
         
      
       <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-success" ng-disabled="false" ng-click="updateFlight()">
+            <button class="btn btn-success" ng-disabled="error || incomplete" ng-click="updateFlight()">
               <span class="glyphicon glyphicon-save"></span>{{ 'create' | translate }}
             </button>
           </div>
@@ -72,3 +77,10 @@
     </form>
     
 </div>
+
+<script>
+$('.datetime').datetimepicker({
+    mask:'9999/19/39 29:59',
+    format:'Y/m/d H:i'
+});
+</script>

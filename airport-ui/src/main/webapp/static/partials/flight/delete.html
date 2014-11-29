@@ -1,5 +1,7 @@
 <div ng-app="" ng-controller="FlightController">
     <h2>{{ 'flightDelete' | translate}}</h2>
+    <span class="info {{result}}">{{ result | translate }}</span>
+    
     <form class="form-horizontal" role="form">
       <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'id' | translate }}</label>
@@ -25,25 +27,21 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'departure' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="flight.departure" placeholder="{{ 'departure' | translate }}" ng-disabled="true" class="form-control">
-            <br>
-            <span>{{ 'format' | translate }}: yyyy-mm-ddThh:mm:ss.nnn</span>
+            <input type="text" ng-model="flight.departure" placeholder="{{ 'departure' | translate }}" ng-disabled="true" class="form-control datetime">
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'arrival' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="flight.arrival" placeholder="{{ 'arrival' | translate }}" ng-disabled="true" class="form-control">
-            <br>
-            <span>{{ 'format' | translate }}: yyyy-mm-ddThh:mm:ss.nnn</span>
+            <input type="text" ng-model="flight.arrival" placeholder="{{ 'arrival' | translate }}" ng-disabled="true" class="form-control datetime">
         </div>
      </div>
         
      <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'capacity' | translate }}</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="flight.capacity" placeholder="{{ 'capacity' | translate }}" ng-disabled="true" class="form-control">
+            <input type="number" ng-model="flight.capacity" placeholder="{{ 'capacity' | translate }}" ng-disabled="true" class="form-control">
         </div>
      </div>
         
@@ -72,3 +70,10 @@
     </form>
     
 </div>
+
+<script>
+$('.datetime').datetimepicker({
+    mask:'9999/19/39 29:59',
+    format:'Y/m/d H:i'
+});
+</script>
