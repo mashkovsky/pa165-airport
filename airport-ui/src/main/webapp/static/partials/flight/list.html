@@ -1,6 +1,10 @@
 <div ng-app="" ng-controller="FlightController"> 
     <h2>{{ 'flightManage' | translate }}</h2>
     
+    <a class="btn btn-success" href="index.html#/flight/create">
+        <span class="glyphicon glyphicon-plus"></span> {{ 'create' | translate }}
+    </a>
+    
     <table class="table table-striped">
         <thead>
             <tr>
@@ -27,12 +31,12 @@
                 <td>{{ item.plane }}</td>
                 <td>{{ item.stewards }}</td>
                 <td>
-                    <a class="btn" href="index.html#/flight/edit/{{item.id}}">
+                    <a class="btn btn-default" href="index.html#/flight/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
                     </a>
                 </td>
                 <td>
-                    <a class="btn" href="index.html#/flight/delete/{{item.id}}">
+                    <a class="btn btn-default" href="index.html#/flight/delete/{{item.id}}">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </a>
                 </td>

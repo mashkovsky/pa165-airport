@@ -1,6 +1,10 @@
 <div ng-app="" ng-controller="DestinationController"> 
     <h2>{{ 'destinationManage' | translate }}</h2>
     
+    <a class="btn btn-success" href="index.html#/destination/create">
+        <span class="glyphicon glyphicon-plus"></span> {{ 'create' | translate }}
+    </a>
+    
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,12 +21,12 @@
                 <td>{{ item.country }}</td>
                 <td>{{ item.city }}</td>
                 <td>
-                    <a class="btn" href="index.html#/destination/edit/{{item.id}}">
+                    <a class="btn btn-default" href="index.html#/destination/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
                     </a>
                 </td>
                 <td>
-                    <a class="btn" href="index.html#/destination/delete/{{item.id}}">
+                    <a class="btn btn-default" href="index.html#/destination/delete/{{item.id}}">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </a>
                 </td>

@@ -7,7 +7,6 @@ html, body {
 body {
     font-family: Georgia, "Times New Roman", serif;
     color:#333;
-    padding:20px 30px;
     background: url('../design/background.png') repeat-x top left;
     font-size: 15px;
     line-height: 1;
@@ -19,40 +18,64 @@ body {
           box-sizing: border-box;
 }
 
-h1, h2, h3, a {font-family: Arial, Verdana;}
+h1, h2, h3, a, form#login_form {font-family: Arial, Verdana;}
 
-h1 {
-    font-size:30px;
+/*********** top panel ************/
+div#top_panel {
+    margin: 0;
+    padding: 5px 15px;
+    width: 100%;
+    background: #071f33;
+    overflow: hidden;
+}
+
+div#top_panel h1, div#top_panel a {
+    font-size:20px;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: normal;
-    margin:0 0 20px 0; 
+    margin:0; 
     padding:0;
-    color: #a4a4a4;
+    color: #a4adc3;
+    float: left;
 }
 
-span.info {
-    display:none;
-    font-size: 18px;
-    padding: 5px;
-    border-radius: 2px;
-    border-width: 1px;
-    border-style:dotted;
+div#top_panel a:hover {
+    text-decoration: none;
 }
 
-span.info.success {
-    display: inline;
-    color: green;
-    border-color: green;
-    background: #ccffcc;
+div#top_panel form {
+    float: right;
+    margin:0; 
+    padding: 0;
+    font-size: 12px;
 }
 
-span.info.error {
-    display: inline;
-    color: red;
-    border-color: red;
-    background: #ffcccc;
+div#top_panel form label {
+    color: #eee;
+    font-size: 10px;
 }
+
+div#top_panel form input[type="text"], div#top_panel form input[type="password"] {
+    width:100px;
+    margin-right:15px;
+}
+
+div#top_panel form button {
+    color: #eeeeee;
+    font-size: 10px;
+    background: #2048a9;
+    padding: 4px 10px;
+    text-decoration: none;
+    border:0;
+}
+
+div#top_panel form button:hover {
+    background: #3e67c7;
+    text-decoration: none;
+}
+
+/************ menu ***************/
 
 ul#menu {
     display: block;
@@ -60,58 +83,88 @@ ul#menu {
     float: left;
     margin: 0;
     margin-bottom: 100px;
-    padding: 0;
+    padding: 30px 0 0 15px;
 }
 
 ul#menu>li {
+    position: relative;
     display: block;
     float: left;
     margin-right: 30px;
 }
 
 ul#menu>li h2 {
-    color: #2048a9;
+    color: #071f33;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: normal;
+    /*position: absolute;
+    top:225px; left:0;*/
     margin:0;
     padding: 0;
-    text-align: center;
-    font-variant: small-caps;
+    text-align: left;
+    text-transform: uppercase;
 }
 
-ul#menu>li ul {
+ul#menu>li a {
     display: block;
-    float: left;
-    background: url('../design/window.png') no-repeat top left;
-    width: 150px;
-    height: 178px;
-    margin:0;
-    padding: 55px 22px 0 20px;
-    list-style-position: inside;
-    list-style-type: none;
+    /*position: absolute;
+    top:0; left:0;*/
+    height: 150px;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-position: top left;
 }
 
-ul#menu>li ul li {
-    position: relative;
+ul#menu>li:hover h2 {
+    font-weight: bold;
 }
 
-ul#menu>li ul li a {
-    color: #eee;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    font-size:14px;
-    padding: 5px 0;
-    text-align: center;
-    background: rgba(255,255,255,0.1);
-    margin-bottom:2px;
+
+
+
+ul#menu>li.flight a {
+    width:126px;
+    background-image: url('../design/flight.png');
 }
 
-ul#menu>li ul li a:hover {
-    background: rgba(255,255,255,0.2);
+ul#menu>li.flight h2 {
+    margin-left:20px;
 }
+
+ul#menu>li.plane a {
+    width:204px;
+    background-image: url('../design/plane.png');
+}
+
+ul#menu>li.plane h2 {
+    margin-left:50px;
+}
+
+ul#menu>li.steward a {
+    width:163px;
+    background-image: url('../design/steward.png');
+}
+
+ul#menu>li.steward h2 {
+    margin-left:40px;
+}
+
+ul#menu>li.destination a {
+    width:207px;
+    background-image: url('../design/destination.png');
+}
+
+ul#menu>li.destination h2 {
+    margin-left:40px;
+}
+
+/*********** content ***************/
 
 div#content {
+    position: absolute;
+    top: 340px; left:10px;
     clear: both;
     padding: 10px;
 }
@@ -120,10 +173,41 @@ div#content h2 {
     margin-top: 0;
 }
 
+
 div#content table th.action {
     width: 10em;
 }
 
-div#content input, div#content select {
+div#content form {}
+
+div#content form input, div#content form select {
     width:20em;
+}
+
+div#content label {}
+
+
+
+
+div#content span.info {
+    display:none;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style:dotted;
+}
+
+div#content span.info.success {
+    display: inline;
+    color: green;
+    border-color: green;
+    background: #ccffcc;
+}
+
+div#content span.info.error {
+    display: inline;
+    color: red;
+    border-color: red;
+    background: #ffcccc;
 }

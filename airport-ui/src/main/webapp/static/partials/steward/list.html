@@ -1,6 +1,10 @@
 <div ng-app="" ng-controller="StewardController"> 
     <h2>{{ 'stewardManage' | translate }}</h2>
     
+    <a class="btn btn-success" href="index.html#/steward/create">
+        <span class="glyphicon glyphicon-plus"></span> {{ 'create' | translate }}
+    </a>
+    
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,12 +21,12 @@
                 <td>{{ item.firstName }}</td>
                 <td>{{ item.lastName }}</td>
                 <td>
-                    <a class="btn" href="index.html#/steward/edit/{{item.id}}">
+                    <a class="btn btn-default" href="index.html#/steward/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
                     </a>
                 </td>
                 <td>
-                    <a class="btn" href="index.html#/steward/delete/{{item.id}}">
+                    <a class="btn btn-default" href="index.html#/steward/delete/{{item.id}}">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </a>
                 </td>

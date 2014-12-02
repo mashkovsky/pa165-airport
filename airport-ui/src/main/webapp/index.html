@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     
     <!-- Include stylesheets -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap.css">
     <link rel="stylesheet" media="screen" href="static/css/jquery.datetimepicker.css">
     <link rel="stylesheet" media="screen" href="static/css/styles.css">
     
@@ -30,36 +30,34 @@
     <script src="static/js/controlers/destination.js"></script>
 </head>
 <body>
-    <h1>{{ 'appName' | translate }}</h1>
+    <div id="top_panel">
+        <a href="index.html#"><h1>{{ 'appName' | translate }}</h1></a>
+        
+        <form id="login_form" action="">
+            <label>username:</label>
+            <input type="text">
+            <label>password:</label>
+            <input type="password">
+            <button type="submit">{{ 'login' | translate}}</button>
+        </form>
+    </div>
     
     <ul id="menu">
-        <li>
+        <li class="flight">
+            <a href="index.html#/flight">{{ 'menuView' | translate }}</a>
             <h2>{{ 'menuFlight' | translate }}</h2>
-            <ul>
-                <li><a href="index.html#/flight">{{ 'menuView' | translate }}</a></li>
-                <li><a href="index.html#/flight/create">{{ 'menuCreate' | translate }}</a></li>
-            </ul>
         </li>
-        <li>
+        <li class="plane">
+            <a href="index.html#/plane">{{ 'menuView' | translate }}</a>
             <h2>{{ 'menuPlane' | translate }}</h2>
-            <ul>
-                <li><a href="index.html#/plane">{{ 'menuView' | translate }}</a></li>
-                <li><a href="index.html#/plane/create">{{ 'menuCreate' | translate }}</a></li>
-            </ul>
         </li>
-        <li>
+        <li class="steward">
+            <a href="index.html#/steward">{{ 'menuView' | translate }}</a>
             <h2>{{ 'menuSteward' | translate }}</h2>
-            <ul>
-                <li><a href="index.html#/steward">{{ 'menuView' | translate }}</a></li>
-                <li><a href="index.html#/steward/create">{{ 'menuCreate' | translate }}</a></li>
-            </ul>
         </li>
-        <li>
+        <li class="destination">
+            <a href="index.html#/destination">{{ 'menuView' | translate }}</a>
             <h2>{{ 'menuDestination' | translate }}</h2>
-            <ul>
-                <li><a href="index.html#/destination">{{ 'menuView' | translate }}</a></li>
-                <li><a href="index.html#/destination/create">{{ 'menuCreate' | translate }}</a></li>
-            </ul>
         </li>
     </ul>
     

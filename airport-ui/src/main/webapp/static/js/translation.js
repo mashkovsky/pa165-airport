@@ -11,7 +11,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         
         // menu items
         menuView: 'Spravovat',
-        menuCreate: 'Přidat',
+        login: 'Přihlásit se',
         
         // global
         create: 'Přidat',
@@ -75,7 +75,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         
         // menu items
         menuView: 'Manage',
-        menuCreate: 'Create new',
+        login: 'Login',
         
         // global
         create: 'Create',
