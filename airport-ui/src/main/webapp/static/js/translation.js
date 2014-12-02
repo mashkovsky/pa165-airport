@@ -11,6 +11,8 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         
         // menu items
         menuView: 'Spravovat',
+        username: 'uživatel',
+        password: 'heslo',
         login: 'Přihlásit se',
         
         // global
@@ -75,6 +77,8 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         
         // menu items
         menuView: 'Manage',
+        username: 'username',
+        password: 'password',
         login: 'Login',
         
         // global
