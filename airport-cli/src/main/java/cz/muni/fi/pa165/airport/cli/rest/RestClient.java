@@ -21,7 +21,7 @@ import java.util.Map;
  *
  * @author Mariia Schevchenko
  */
-public abstract class RestClient<T extends BaseDTO> {
+public class RestClient {
 
     /**
      * Content type of all messages sent or received
@@ -64,6 +64,16 @@ public abstract class RestClient<T extends BaseDTO> {
         public Class<?> getClazz() {
             return clazz;
         }
+
+        public static ObjectType getByClass(Class<?> clazz) {
+            for (ObjectType objectType : values()) {
+                if (objectType.clazz.equals(clazz)) {
+                    return objectType;
+                }
+            }
+
+            throw new IllegalArgumentException("Unknown class type = " + clazz);
+        }
     }
 
     /**
@@ -75,7 +85,7 @@ public abstract class RestClient<T extends BaseDTO> {
     /**
      * @param serverUrl server URL to connect to
      */
-    protected RestClient(String serverUrl) {
+    public RestClient(String serverUrl) {
         if (serverUrl == null) {
             throw new IllegalArgumentException("URL is null");
         }
@@ -84,22 +94,17 @@ public abstract class RestClient<T extends BaseDTO> {
     }
 
     /**
-     * Object type for which sublass of this abstract class resides
+     * Creates URL based on actual object class
      */
-    protected abstract ObjectType getObjectType();
-
-    /**
-     * Creates URL based on actual object type
-     */
-    private String buildUrl() {
-        return serverUrl + getObjectType().uri;
+    private String buildUrl(Class<? extends BaseDTO> clazz) {
+        return serverUrl + ObjectType.getByClass(clazz).uri;
     }
 
     /**
-     * Creates URL based on actual object type and ID
+     * Creates URL based on actual object class and ID
      */
-    private String buildUrl(final Long id) {
-        return serverUrl + getObjectType().uri + "/" + id;
+    private String buildUrl(final long id, Class<? extends BaseDTO> clazz) {
+        return buildUrl(clazz) + "/" + id;
     }
 
     /**
@@ -108,16 +113,16 @@ public abstract class RestClient<T extends BaseDTO> {
      *
      * @return created object with pre-filled ID or errorCodes
      */
-    public T create(T obj) {
+    public <T extends BaseDTO> T create(T obj, Class<? extends BaseDTO> clazz) {
         try {
-            HttpResponse<JsonNode> response = Unirest.post(buildUrl())
+            HttpResponse<JsonNode> response = Unirest.post(buildUrl(clazz))
                 .headers(HEADERS)
                 .body(JsonUtils.toJsonString(obj))
                 .asJson();
 
-            return (T) JsonUtils.fromJson(response.getBody().toString(), getObjectType().clazz);
+            return (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
         } catch (UnirestException e) {
-            throw new RuntimeException("Failed to create object = " + obj + " of type = " + getObjectType().clazz, e);
+            throw new RuntimeException("Failed to create object = " + obj + " of type = " + clazz, e);
         }
     }
 
@@ -127,16 +132,16 @@ public abstract class RestClient<T extends BaseDTO> {
      *
      * @return updated object with pre-filled ID or errorCodes
      */
-    public T update(T obj) {
+    public <T extends BaseDTO> T update(T obj, Class<? extends BaseDTO> clazz) {
         try {
-            HttpResponse<JsonNode> response = Unirest.put(buildUrl(obj.getId()))
+            HttpResponse<JsonNode> response = Unirest.put(buildUrl(obj.getId(), clazz))
                 .headers(HEADERS)
                 .body(JsonUtils.toJsonString(obj))
                 .asJson();
 
-            return (T) JsonUtils.fromJson(response.getBody().toString(), getObjectType().clazz);
+            return (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
         } catch (UnirestException e) {
-            throw new RuntimeException("Failed to update object = " + obj + " of type = " + getObjectType().clazz, e);
+            throw new RuntimeException("Failed to update object = " + obj + " of type = " + clazz, e);
         }
     }
 
@@ -146,9 +151,9 @@ public abstract class RestClient<T extends BaseDTO> {
      *
      * @return info about deleted object
      */
-    public DeleteResponseDTO delete(final Long id) {
+    public DeleteResponseDTO delete(final Long id, Class<? extends BaseDTO> clazz) {
         try {
-            HttpResponse<JsonNode> response = Unirest.delete(buildUrl(id))
+            HttpResponse<JsonNode> response = Unirest.delete(buildUrl(id, clazz))
                     .headers(HEADERS)
                     .asJson();
 
@@ -164,13 +169,13 @@ public abstract class RestClient<T extends BaseDTO> {
      *
      * @return fetched object or {@code null}
      */
-    public T get(final Long id) {
+    public <T extends BaseDTO> T get(final Long id, Class<? extends BaseDTO> clazz) {
         try {
-            HttpResponse<JsonNode> response = Unirest.get(buildUrl(id))
+            HttpResponse<JsonNode> response = Unirest.get(buildUrl(id, clazz))
                     .headers(HEADERS)
                     .asJson();
 
-            T result = (T) JsonUtils.fromJson(response.getBody().toString(), getObjectType().clazz);
+            T result = (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
             return (result.getId() == null) ? null : result;
         } catch (UnirestException e) {
             throw new RuntimeException("Failed to fetch object with ID = " + id, e);
@@ -182,13 +187,13 @@ public abstract class RestClient<T extends BaseDTO> {
      *
      * @return fetched objects or empty list
      */
-    public List<T> getAll() {
+    public List getAll(Class<? extends BaseDTO> clazz) {
         try {
-            HttpResponse<JsonNode> response = Unirest.get(buildUrl())
+            HttpResponse<JsonNode> response = Unirest.get(buildUrl(clazz))
                     .headers(HEADERS)
                     .asJson();
 
-            return (List<T>) JsonUtils.fromJson(response.getBody().toString(), List.class);
+            return JsonUtils.fromJson(response.getBody().toString(), List.class);
         } catch (UnirestException e) {
             throw new RuntimeException("Failed to fetch all objects", e);
         }
