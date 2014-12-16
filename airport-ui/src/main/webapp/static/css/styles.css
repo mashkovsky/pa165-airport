@@ -181,7 +181,7 @@ div#content table th.action {
 div#content form {}
 
 div#content form input, div#content form select {
-    width:20em;
+    /*width:20em;*/
 }
 
 div#content label {}
@@ -196,17 +196,18 @@ div#content span.info {
     border-radius: 2px;
     border-width: 1px;
     border-style:dotted;
+    margin: 1em auto;
 }
 
 div#content span.info.success {
-    display: inline;
+    display: block;
     color: green;
     border-color: green;
     background: #ccffcc;
 }
 
 div#content span.info.error {
-    display: inline;
+    display: block;
     color: red;
     border-color: red;
     background: #ffcccc;

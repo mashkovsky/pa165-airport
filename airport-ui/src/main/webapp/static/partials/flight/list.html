@@ -8,7 +8,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>{{ 'id' | translate }}</th>
                 <th>{{ 'origin' | translate }}</th>
                 <th>{{ 'destination' | translate }}</th>
                 <th>{{ 'departure' | translate }}</th>
@@ -22,7 +21,6 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in flights">
-                <td>{{ item.id }}</td>
                 <td>{{ item.origin }}</td>
                 <td>{{ item.destination }}</td>
                 <td>{{ item.departure }}</td>
