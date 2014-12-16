@@ -122,7 +122,7 @@ public class RestClient {
 
             return (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
         } catch (UnirestException e) {
-            throw new RuntimeException("Failed to create object = " + obj + " of type = " + clazz, e);
+            throw new RuntimeException("Failed to create object = " + obj + " of type = " + clazz + ". " + e.getMessage(), e);
         }
     }
 
@@ -141,7 +141,7 @@ public class RestClient {
 
             return (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
         } catch (UnirestException e) {
-            throw new RuntimeException("Failed to update object = " + obj + " of type = " + clazz, e);
+            throw new RuntimeException("Failed to update object = " + obj + " of type = " + clazz + ". " + e.getMessage(), e);
         }
     }
 
@@ -159,7 +159,7 @@ public class RestClient {
 
             return JsonUtils.fromJson(response.getBody().toString(), DeleteResponseDTO.class);
         } catch (UnirestException e) {
-            throw new RuntimeException("Failed to delete object with ID = " + id, e);
+            throw new RuntimeException("Failed to delete object with ID = " + id + ". " + e.getMessage(), e);
         }
     }
 
@@ -177,7 +177,7 @@ public class RestClient {
 
             return (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
         } catch (UnirestException e) {
-            throw new RuntimeException("Failed to fetch object with ID = " + id, e);
+            throw new RuntimeException("Failed to fetch object with ID = " + id + ". " + e.getMessage(), e);
         }
     }
 
@@ -194,7 +194,7 @@ public class RestClient {
 
             return JsonUtils.fromJson(response.getBody().toString(), List.class);
         } catch (UnirestException e) {
-            throw new RuntimeException("Failed to fetch all objects", e);
+            throw new RuntimeException("Failed to fetch all objects. " + e.getMessage(), e);
         }
     }
 
@@ -205,7 +205,7 @@ public class RestClient {
         try {
             Unirest.shutdown();
         } catch (IOException e) {
-            throw new RuntimeException("Failed to shutdown client.", e);
+            throw new RuntimeException("Failed to shutdown client. " + e.getMessage(), e);
         }
     }
 }
