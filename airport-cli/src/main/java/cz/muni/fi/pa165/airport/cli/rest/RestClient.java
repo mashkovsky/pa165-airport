@@ -167,7 +167,7 @@ public class RestClient {
      * Fetches object using GET method by ID
      * @param id objects ID
      *
-     * @return fetched object or {@code null}
+     * @return fetched object
      */
     public <T extends BaseDTO> T get(final Long id, Class<? extends BaseDTO> clazz) {
         try {
@@ -175,8 +175,7 @@ public class RestClient {
                     .headers(HEADERS)
                     .asJson();
 
-            T result = (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
-            return (result.getId() == null) ? null : result;
+            return (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
         } catch (UnirestException e) {
             throw new RuntimeException("Failed to fetch object with ID = " + id, e);
         }
