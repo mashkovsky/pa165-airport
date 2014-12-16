@@ -26,6 +26,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         // messages
         success: 'Operace byla provedena',
         error: 'Operace se nezdařila',
+        emptyTable: 'Nebyly nalezeny žádné záznamy',
         
         // destination
         destinationManage: 'Destinace',
@@ -92,6 +93,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         // messages
         success: 'Operation success',
         error: 'Operation failed',
+        emptyTable: 'No records found',
         
         // destination
         destinationManage: 'Destinations',

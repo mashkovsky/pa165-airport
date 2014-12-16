@@ -5,7 +5,7 @@
         <span class="glyphicon glyphicon-plus"></span> {{ 'create' | translate }}
     </a>
     
-    <table class="table table-striped">
+    <table class="table table-striped" ng-show="destinations.length > 0">
         <thead>
             <tr>
                 <th>{{ 'country' | translate }}</th>
@@ -31,4 +31,6 @@
             </tr>
         </tbody>
     </table>
+    
+    <p class="empty" ng-hide="destinations.length > 0">{{ 'emptyTable' | translate }}.</p>
 </div>

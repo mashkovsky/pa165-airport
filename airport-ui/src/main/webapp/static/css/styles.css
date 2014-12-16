@@ -218,3 +218,8 @@ div#content span.info.error {
     border-color: red;
     background: #ffcccc;
 }
+
+p.empty {
+    font-style: italic;
+    margin-top: 1.5em;
+}
