@@ -14,6 +14,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         username: 'uživatel',
         password: 'heslo',
         login: 'Přihlásit se',
+        back: 'Zpět',
         
         // global
         create: 'Přidat',
@@ -81,6 +82,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         username: 'username',
         password: 'password',
         login: 'Login',
+        back: 'Back',
         
         // global
         create: 'Create',

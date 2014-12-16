@@ -31,11 +31,11 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/destination/create.html',
         controller: 'DestinationController'
       }).
-      when('/destination/edit/:destinationtId', {
+      when('/destination/edit/:destinationId', {
         templateUrl: 'static/partials/destination/edit.html',
         controller: 'DestinationController'
       }).
-      when('/destination/delete/:destinationtId', {
+      when('/destination/delete/:destinationId', {
         templateUrl: 'static/partials/destination/delete.html',
         controller: 'DestinationController'
       }).
