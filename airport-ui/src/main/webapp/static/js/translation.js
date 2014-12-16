@@ -28,7 +28,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         error: 'Operace se nezdařila',
         
         // destination
-        destinationManage: 'Seznam destinací',
+        destinationManage: 'Destinace',
         destinationEdit: 'Upravit destinaci',
         destinationDelete: 'Smazat destinaci',
         destinationCreate: 'Přidat novou destinaci',
@@ -36,7 +36,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         city: 'Město',
         
         // plane
-        planeManage: 'Seznam letadel',
+        planeManage: 'Letadla',
         planeEdit: 'Upravit letadlo',
         planeDelete: 'Smazat letadlo',
         planeCreate: 'Přidat nové letadlo',
@@ -45,7 +45,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         capacity: 'Kapacita',
         
         // steward
-        stewardManage: 'Seznam stevardů',
+        stewardManage: 'Stevardi',
         stewardEdit: 'Upravit stevarda',
         stewardDelete: 'Smazat stevarda',
         stewardCreate: 'Přidat nového stevarda',
@@ -53,7 +53,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         lastName: 'Příjmení',
         
         // flight
-        flightManage: 'Seznam letů',
+        flightManage: 'Lety',
         flightEdit: 'Upravit let',
         flightDelete: 'Smazat let',
         flightCreate: 'Přidat nový let',
@@ -94,7 +94,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         error: 'Operation failed',
         
         // destination
-        destinationManage: 'List of destinations',
+        destinationManage: 'Destinations',
         destinationEdit: 'Edit destination',
         destinationDelete: 'Delete destination',
         destinationCreate: 'Create new destination',
@@ -102,7 +102,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         city: 'City',
         
         // plane
-        planeManage: 'List of planes',
+        planeManage: 'Planes',
         planeEdit: 'Edit plane',
         planeDelete: 'Delete plane',
         planeCreate: 'Create new plane',
@@ -111,7 +111,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         capacity: 'Capacity',
         
         // steward
-        stewardManage: 'List of stewards',
+        stewardManage: 'Stewards',
         stewardEdit: 'Edit steward',
         stewardDelete: 'Delete steward',
         stewardCreate: 'Create new steward',
@@ -119,7 +119,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         lastName: 'Last name',
         
         // flight
-        flightManage: 'List of flights',
+        flightManage: 'Flights',
         flightEdit: 'Edit flight',
         flightDelete: 'Delete flight',
         flightCreate: 'Create new flight',
