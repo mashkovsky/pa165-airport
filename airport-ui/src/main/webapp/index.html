@@ -30,9 +30,10 @@
     <script src="static/js/controlers/destination.js"></script>
 </head>
 <body>
+    
     <div id="top_panel">
         <a href="index.html#"><h1>{{ 'appName' | translate }}</h1></a>
-        
+
         <form id="login_form" action="">
             <label>{{ 'username' | translate }}:</label>
             <input type="text">
@@ -41,27 +42,31 @@
             <button type="submit">{{ 'login' | translate}}</button>
         </form>
     </div>
-    
-    <ul id="menu">
-        <li class="flight">
-            <a href="index.html#/flight">{{ 'menuView' | translate }}</a>
-            <h2>{{ 'menuFlight' | translate }}</h2>
-        </li>
-        <li class="plane">
-            <a href="index.html#/plane">{{ 'menuView' | translate }}</a>
-            <h2>{{ 'menuPlane' | translate }}</h2>
-        </li>
-        <li class="steward">
-            <a href="index.html#/steward">{{ 'menuView' | translate }}</a>
-            <h2>{{ 'menuSteward' | translate }}</h2>
-        </li>
-        <li class="destination">
-            <a href="index.html#/destination">{{ 'menuView' | translate }}</a>
-            <h2>{{ 'menuDestination' | translate }}</h2>
-        </li>
-    </ul>
-    
-    <div id="content" ng-view></div>
+
+    <div id="page">   
+        
+        <ul id="menu">
+            <li class="flight">
+                <a href="index.html#/flight">{{ 'menuView' | translate }}</a>
+                <h2>{{ 'menuFlight' | translate }}</h2>
+            </li>
+            <li class="plane">
+                <a href="index.html#/plane">{{ 'menuView' | translate }}</a>
+                <h2>{{ 'menuPlane' | translate }}</h2>
+            </li>
+            <li class="steward">
+                <a href="index.html#/steward">{{ 'menuView' | translate }}</a>
+                <h2>{{ 'menuSteward' | translate }}</h2>
+            </li>
+            <li class="destination">
+                <a href="index.html#/destination">{{ 'menuView' | translate }}</a>
+                <h2>{{ 'menuDestination' | translate }}</h2>
+            </li>
+        </ul>
+
+        <div id="content" ng-view></div>
+        
+    </div>
     
 </body>
 </html>

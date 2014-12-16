@@ -10,6 +10,7 @@ body {
     background: url('../design/background.png') repeat-x top left;
     font-size: 15px;
     line-height: 1;
+    text-align: center;
 }
 
 *, *:before, *:after {
@@ -19,6 +20,11 @@ body {
 }
 
 h1, h2, h3, a, form#login_form {font-family: Arial, Verdana;}
+
+div#page {
+    margin:auto;
+    width: 1100px;
+}
 
 /*********** top panel ************/
 div#top_panel {
@@ -82,7 +88,7 @@ ul#menu {
     clear: both;
     float: left;
     margin: 0;
-    margin-bottom: 100px;
+    margin-bottom: 120px;
     padding: 30px 0 0 15px;
 }
 
@@ -163,8 +169,8 @@ ul#menu>li.destination h2 {
 /*********** content ***************/
 
 div#content {
-    position: absolute;
-    top: 340px; left:10px;
+    /*float: left; - zuzi formular na delku textu, ne 100% width*/
+    text-align: left;
     clear: both;
     padding: 10px;
 }
@@ -181,7 +187,7 @@ div#content table th.action {
 div#content form {}
 
 div#content form input, div#content form select {
-    /*width:20em;*/
+    max-width:20em;
 }
 
 div#content label {}
