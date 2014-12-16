@@ -68,16 +68,8 @@ public class CliController {
         options.addOption(OPT_UPDATE, true, "Update item by providing JSON data");
         options.addOption(OPT_HELP, false, "Show this help");
 
-
-//        String[] args2 = new String[]{ "--entity=plane", "--delete=208" };
-//        String[] args2 = new String[]{ "--entity=plane", "--create={\"name\":\"ABC\",\"type\":\"AK\",\"capacity\":4}" };
-//        String[] args2 = new String[]{ "--entity=plane", "--update={\"id\":212,\"name\":\"DEF\",\"type\":\"AK47\",\"capacity\":12}" };
-//        String[] args2 = new String[]{ "--entity=plane", "--update={\"id12,\"name\":\"Andrejek\",\"type\":\"AK47\",\"capacity\":12}" };
-//        String[] args2 = new String[]{ "--entity=plane", "--list" };
-        String[] args2 = new String[]{ "--entity=planes", "--get=s" };
-
         try {
-            CommandLine line = parser.parse( options, args2 );
+            CommandLine line = parser.parse( options, args );
 
             if (!line.hasOption(OPT_ENTITY)) {
                 err("Entity is not specified");
@@ -110,7 +102,7 @@ public class CliController {
             }
             // DELETE BY ID
             else if (line.hasOption(OPT_DELETE)) {
-                BaseDTO baseDTO = restClient.delete(getLongValue(line.getOptionValue(OPT_GET)), clazz);
+                BaseDTO baseDTO = restClient.delete(getLongValue(line.getOptionValue(OPT_DELETE)), clazz);
 
                 if (hasErrors(baseDTO)) {
                     printErrors(baseDTO);
@@ -139,6 +131,10 @@ public class CliController {
                 } else {
                     out("Success!");
                 }
+            } else {
+                err("Unknown or unspecified action. Please specify some action to do with entity.");
+                help(options);
+                System.exit(1);
             }
         } catch (Exception e) {
             err("Failed to execute: " + e.getMessage());
