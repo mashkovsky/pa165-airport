@@ -1,1 +1,0 @@
-Main-Class: cz.muni.fi.pa165.airport.cli.CliController
