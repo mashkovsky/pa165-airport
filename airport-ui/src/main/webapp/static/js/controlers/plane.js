@@ -58,10 +58,8 @@ function PlaneController($scope, $http, apiProvider, $routeParams, $translate, $
             },
             function(res) {
                 if(res.$resolved) {
-                    $scope.result = 'success';
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 500);
+                    //$scope.result = 'success';
+                    window.location.reload();
                 } 
                 else {
                     $scope.result = 'error';

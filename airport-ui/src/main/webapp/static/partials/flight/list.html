@@ -22,13 +22,17 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in flights">
-                <td>{{ item.origin }}</td>
-                <td>{{ item.destination }}</td>
-                <td>{{ item.departure }}</td>
-                <td>{{ item.arrival }}</td>
+                <td>{{ item.origin.city + ', ' + item.origin.country }}</td>
+                <td>{{ item.destination.city + ', ' + item.destination.country }}</td>
+                <td>{{ item.departure | date:'yyyy/MM/dd HH:mm' }}</td>
+                <td>{{ item.arrival | date:'yyyy/MM/dd HH:mm' }}</td>
                 <td>{{ item.capacity }}</td>
-                <td>{{ item.plane }}</td>
-                <td>{{ item.stewards }}</td>
+                <td>{{ item.plane.type + ', ' + item.plane.name }}</td>
+                <td>
+                    <ul>
+                        <li ng-repeat="steward in item.stewards">{{ steward.firstName + ' ' + steward.lastName }}</li>
+                    </ul>
+                </td>
                 <td>
                     <a class="btn btn-default" href="index.html#/flight/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}

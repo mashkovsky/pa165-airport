@@ -38,12 +38,26 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
         });
     }
     
+    function getDateTime(dateStr) {
+        // 0123456789
+        // 2014/12/01 23:11
+        var year = parseInt(dateStr.substring(0,4)),
+            month = parseInt(dateStr.substring(5,7)),
+            day = parseInt(dateStr.substring(8,10)),
+            hour = parseInt(dateStr.substring(11,13)),
+            minute = parseInt(dateStr.substring(14,16)),
+            date = new Date(year, month, day, hour, minute);
+    
+        return date.getTime();
+    }
+    
     $scope.createFlight = function() {
+        
         apiProvider.flight().save({
             origin: $scope.flight.origin,
             destination: $scope.flight.destination,
-            departure: $scope.flight.departure,
-            arrival: $scope.flight.arrival,
+            departure: getDateTime($scope.flight.departure),
+            arrival: getDateTime($scope.flight.arrival),
             capacity: $scope.flight.capacity,
             plane: $scope.flight.plane,
             stewards: $scope.flight.stewards
@@ -70,10 +84,8 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
             },
             function(res) {
                 if(res.$resolved) {
-                    $scope.result = 'success';
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 500);
+                    //$scope.result = 'success';
+                    window.location.reload();
                 } 
                 else {
                     $scope.result = 'error';
@@ -96,7 +108,8 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
             !$scope.flight.departure || 
             !$scope.flight.arrival || 
             !$scope.flight.plane || 
-            !$scope.flight.stewards) 
+            !$scope.flight.stewards ||
+            !$scope.flight.stewards.length) 
             {
                 $scope.incomplete = true;
             }

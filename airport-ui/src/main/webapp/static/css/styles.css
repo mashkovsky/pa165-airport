@@ -221,6 +221,29 @@ div#content span.info.error {
     background: #ffcccc;
 }
 
+div#content input, div#content select {
+    float: left;
+}
+
+div#content span.validation {
+    display: block;
+    float: left;
+    color: #aaa;
+    font-size: smaller;
+    vertical-align: bottom;
+    padding-top: 0.8em;
+    margin-left: 1em;
+    
+}
+
+div#content ul.select {
+    float: left;
+    list-style-position: inside;
+    padding-left: 1em;
+    color: #333;
+    font-size: smaller;
+}
+
 p.empty {
     font-style: italic;
     margin-top: 1.5em;

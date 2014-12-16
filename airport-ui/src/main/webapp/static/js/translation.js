@@ -25,10 +25,18 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         choose: 'Vyberte',
         deleteMsg: 'Opravdu chcete chcete tuto položku smazat?',
         
+        // input validation
+        inputEmpty: 'Pole nesmí být prázdné',
+        inputPositiveNumber: 'V poli musí být kladné číslo',
+        inputSelect: 'Zvolte prosím jednu z možností',
+        inputSelectMore: 'Zvolte prosím alespoň jednu položku',
+        inputDateTime: 'Zadejte prosím datum a čas ve formátu RRRR/MM/DD hh:mm',
+        
         // messages
         success: 'Operace byla provedena',
         error: 'Operace se nezdařila',
         emptyTable: 'Nebyly nalezeny žádné záznamy',
+        
         
         // destination
         destinationManage: 'Destinace',
@@ -93,6 +101,13 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         id: 'ID',
         choose: 'Choose',
         deleteMsg: 'Do you really want to delete this item?',
+        
+        // input validation
+        inputEmpty: 'Input cannot be empty',
+        inputPositiveNumber: 'Input must be positive number',
+        inputSelect: 'Choose one option',
+        inputSelectMore: 'Choose at least one option',
+        inputDateTime: 'Enter date and time in format YYYY/MM/DD hh:mm',
         
         // messages
         success: 'Operation success',
