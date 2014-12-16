@@ -188,22 +188,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.eclipse.jetty</groupId>-->
-                <!--<artifactId>jetty-maven-plugin</artifactId>-->
-                <!--<version>9.2.2.v20140723</version>-->
-                <!--<configuration>-->
-                    <!--<useTestClasspath>true</useTestClasspath>-->
-                    <!--<webAppSourceDirectory>${project.basedir}/airport-ui/src/main/webapp</webAppSourceDirectory>-->
-                    <!--<classesDirectory>${project.basedir}/airport-ui/target/classes</classesDirectory>-->
-                    <!--<webApp>-->
-                        <!--<contextPath>/pa165</contextPath>-->
-                    <!--</webApp>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
 </project>
