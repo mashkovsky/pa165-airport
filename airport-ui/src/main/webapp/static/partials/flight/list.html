@@ -1,5 +1,6 @@
 <div ng-app="" ng-controller="FlightController"> 
     <h2>{{ 'flightManage' | translate }}</h2>
+    <span class="info {{result}}">{{ result | translate }}</span>
     
     <a class="btn btn-success" href="index.html#/flight/create">
         <span class="glyphicon glyphicon-plus"></span> {{ 'create' | translate }}
@@ -34,7 +35,7 @@
                     </a>
                 </td>
                 <td>
-                    <a class="btn btn-default" href="index.html#/flight/delete/{{item.id}}">
+                    <a class="btn btn-default" link="" ng-click="deleteFlight(item.id, ('deleteMsg' | translate))">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </a>
                 </td>

@@ -23,6 +23,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         save: 'Uložit',
         id: 'ID',
         choose: 'Vyberte',
+        deleteMsg: 'Opravdu chcete chcete tuto položku smazat?',
         
         // messages
         success: 'Operace byla provedena',
@@ -91,6 +92,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         save: 'Save',
         id: 'ID',
         choose: 'Choose',
+        deleteMsg: 'Do you really want to delete this item?',
         
         // messages
         success: 'Operation success',

@@ -49,22 +49,25 @@ function PlaneController($scope, $http, apiProvider, $routeParams, $translate, $
         });
     }
     
-    $scope.deletePlane = function() {
-        //
-        apiProvider.plane().remove({
-            id: $routeParams.planeId
-        },
-        function(res) {
-            if(res.$resolved) {
-                $scope.result = 'success';
-                setTimeout(function () {
-                    window.location.href = "http://localhost:8080/pa165/index.html#/plane"; //will redirect to your blog page (an ex: blog.html)
-                }, 500);
-            } 
-            else {
-                $scope.result = 'error';
-            }
-        });
+    $scope.deletePlane = function(id, msg) {
+        
+        if(confirm(msg)) {
+            // delete
+            apiProvider.plane().remove({
+                id: id
+            },
+            function(res) {
+                if(res.$resolved) {
+                    $scope.result = 'success';
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 500);
+                } 
+                else {
+                    $scope.result = 'error';
+                }
+            });
+        }
     }
     
     // test inputs

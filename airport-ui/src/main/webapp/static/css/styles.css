@@ -201,8 +201,10 @@ div#content span.info {
     padding: 5px;
     border-radius: 2px;
     border-width: 1px;
-    border-style:dotted;
+    border-style: dashed;
     margin: 1em auto;
+    border-radius: 5px;
+    padding: 7px;
 }
 
 div#content span.info.success {

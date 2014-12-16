@@ -46,22 +46,25 @@ function DestinationController($scope, $http, apiProvider, $routeParams, $transl
         });
     }
     
-    $scope.deleteDestination = function() {
-        //
-        apiProvider.destination().remove({
-            id: $routeParams.destinationId
-        },
-        function(res) {
-            if(res.$resolved) {
-                $scope.result = 'success';
-                setTimeout(function () {
-                    window.location.href = "http://localhost:8080/pa165/index.html#/destination"; //will redirect to your blog page (an ex: blog.html)
-                }, 500);
-            } 
-            else {
-                $scope.result = 'error';
-            }
-        });
+    $scope.deleteDestination = function(id, msg) {
+        
+        if(confirm(msg)) {
+            // delete
+            apiProvider.destination().remove({
+                id: id
+            },
+            function(res) {
+                if(res.$resolved) {
+                    $scope.result = 'success';
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 500);
+                } 
+                else {
+                    $scope.result = 'error';
+                }
+            });
+        }
     }
     
     // test inputs
