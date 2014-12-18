@@ -2,16 +2,12 @@ package cz.muni.fi.pa165.airport.dao.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,7 +67,7 @@ import java.util.List;
 })
 @Entity
 @Table(name = "FLIGHT")
-public class Flight implements Serializable {
+public class Flight extends CommonEntity {
 
     public static final String QUERY_IS_PLANE_AVAILABLE4FLIGHT = "isPlaneAvailable4Flight";
     public static final String QUERY_IS_PLANE_AVAILABLE4FLIGHT_EXCLUSIVE = "isPlaneAvailable4FlightExclusive";
@@ -79,24 +75,13 @@ public class Flight implements Serializable {
     public static final String QUERY_IS_STEWARD_AVAILABLE4FLIGHT_EXCLUSIVE = "isStewardAvailable4FlightExclusive";
 
 
-    private Long id;
     private Date departure;
     private Date arrival;
     private Destination origin;
     private Destination destination;
     private Plane plane;
     private List<Steward> stewards;
-    
-    // id
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
  
     // departure
     @Column(name = "DEPARTURE")
@@ -186,27 +171,8 @@ public class Flight implements Serializable {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if(other == null || !(other instanceof Flight)) { 
-            return false; 
-        } 
-        else if(other == this) { 
-            return true; 
-        } 
-        else { 
-            Flight otherFlight = (Flight)other; 
-            return this.id == otherFlight.id;
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return id.intValue();
-    }
-
-    @Override
     public String toString() {
-        return "Flight #" + id + " : " +
+        return "Flight #" + getId() + " : " +
                 "departure='" + departure + "'" +
                 ", arrival='" + arrival + "'" +
                 ", origin='" + origin + "'" +
