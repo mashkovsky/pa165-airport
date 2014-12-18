@@ -23,46 +23,33 @@ public class FlightController {
     @Autowired
     private IFlightService flightService;
 
-    //POST /flight
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
+
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public FlightDetailDTO create(@RequestBody FlightDetailDTO flight) {
         flightService.createFlight(flight);
         return flight;
     }
 
-    //GET /flight
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<FlightMinimalDTO> index() {
-        List<FlightMinimalDTO> flights = flightService.getAllFlights();
-        return flights;
+    @RequestMapping(method = RequestMethod.GET)
+    public List<FlightMinimalDTO> getAllFlights() {
+        return flightService.getAllFlights();
     }
 
-    //GET /flight/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public FlightDetailDTO index(@PathVariable long id) {
-        FlightDetailDTO flight = flightService.getFlightDetail(id);
-        return flight;
+    public FlightDetailDTO getFlightDetail(@PathVariable long id) {
+        return flightService.getFlightDetail(id);
     }
 
-    //DELETE /flight/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public DeleteResponseDTO delete(@PathVariable long id) {
         flightService.deleteFlight(id);
-
-        return new DeleteResponseDTO(); // TODO fill this
+        return new DeleteResponseDTO();
     }
 
-    //PUT /flight/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public FlightDetailDTO index(@PathVariable long id, @RequestBody FlightDetailDTO flight) {
-
+    public FlightDetailDTO update(@PathVariable long id, @RequestBody FlightDetailDTO flight) {
         flight.setId(id);
         flightService.updateFlight(flight);
         return flight;
     }
-
 }
-//        steward.setErrorCodes(new ArrayList<String>() {{
-//            add("STEWARD_NOT_AVAILABLE");
-//            add("SOMETHING_ELSE");
-//        }});

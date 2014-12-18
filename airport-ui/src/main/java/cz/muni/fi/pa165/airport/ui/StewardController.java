@@ -22,42 +22,34 @@ public class StewardController {
     @Autowired
     private IStewardService stewardService;
 
-    //POST /steward
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
+
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public StewardDTO create(@RequestBody StewardDTO steward) {
         stewardService.createSteward(steward);
         return steward;
     }
 
-    //GET /steward
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<StewardDTO> index() {
-        List<StewardDTO> stewards = stewardService.getAllStewards();
-        return stewards;
+    @RequestMapping(method = RequestMethod.GET)
+    public List<StewardDTO> getAllStewards() {
+        return stewardService.getAllStewards();
     }
 
-    //GET /steward/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public StewardDTO index(@PathVariable long id) {
-        StewardDTO steward = stewardService.getSteward(id);
-        return steward;
+    public StewardDTO getSteward(@PathVariable long id) {
+        return stewardService.getSteward(id);
     }
 
-    //DELETE /steward/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public DeleteResponseDTO delete(@PathVariable long id) {
         stewardService.deleteSteward(id);
 
-        return new DeleteResponseDTO(); // TODO fill this
+        return new DeleteResponseDTO();
     }
 
-    //PUT /steward/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public StewardDTO index(@PathVariable long id, @RequestBody StewardDTO steward) {
-
+    public StewardDTO update(@PathVariable long id, @RequestBody StewardDTO steward) {
         steward.setId(id);
         stewardService.updateSteward(steward);
         return steward;
     }
-
 }

@@ -22,42 +22,33 @@ public class DestinationController {
     @Autowired
     private IDestinationService destinationService;
 
-    //POST /destination
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
+
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public DestinationDTO create(@RequestBody DestinationDTO destination) {
         destinationService.createDestination(destination);
         return destination;
     }
 
-    //GET /destination
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<DestinationDTO> index() {
-        List<DestinationDTO> destinations = destinationService.getAllDestinations();
-        return destinations;
+    @RequestMapping(method = RequestMethod.GET)
+    public List<DestinationDTO> getAllDestinations() {
+        return destinationService.getAllDestinations();
     }
 
-    //GET /destination/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public DestinationDTO index(@PathVariable long id) {
-        DestinationDTO destination = destinationService.getDestination(id);
-        return destination;
+    public DestinationDTO getDestination(@PathVariable long id) {
+        return destinationService.getDestination(id);
     }
 
-    //DELETE /destination/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public DeleteResponseDTO delete(@PathVariable long id) {
         destinationService.deleteDestination(id);
-
-        return new DeleteResponseDTO(); // TODO fill this
+        return new DeleteResponseDTO();
     }
 
-    //PUT /destination/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public DestinationDTO index(@PathVariable long id, @RequestBody DestinationDTO destination) {
-
+    public DestinationDTO update(@PathVariable long id, @RequestBody DestinationDTO destination) {
         destination.setId(id);
         destinationService.updateDestination(destination);
         return destination;
     }
-
 }

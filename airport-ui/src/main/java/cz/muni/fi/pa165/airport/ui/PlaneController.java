@@ -22,46 +22,32 @@ public class PlaneController {
     @Autowired
     private IPlaneService planeService;
 
-    //POST /plane
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public PlaneDTO create(@RequestBody PlaneDTO plane) {
         planeService.createPlane(plane);
         return plane;
     }
 
-    //GET /plane
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<PlaneDTO> index() {
-        List<PlaneDTO> planes = planeService.getAllPlanes();
-        return planes;
+    @RequestMapping(method = RequestMethod.GET)
+    public List<PlaneDTO> getAllPlanes() {
+        return planeService.getAllPlanes();
     }
 
-    //GET /plane/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public PlaneDTO index(@PathVariable long id) {
-        PlaneDTO plane = planeService.getPlane(id);
-        return plane;
+    public PlaneDTO getPlane(@PathVariable long id) {
+        return planeService.getPlane(id);
     }
 
-    //DELETE /plane/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public DeleteResponseDTO delete(@PathVariable long id) {
         planeService.deletePlane(id);
-
-        return new DeleteResponseDTO(); // TODO fill this
+        return new DeleteResponseDTO();
     }
 
-    //PUT /plane/{id}
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public PlaneDTO index(@PathVariable long id, @RequestBody PlaneDTO plane) {
-
+    public PlaneDTO update(@PathVariable long id, @RequestBody PlaneDTO plane) {
         plane.setId(id);
         planeService.updatePlane(plane);
         return plane;
     }
-
 }
-//        steward.setErrorCodes(new ArrayList<String>() {{
-//            add("STEWARD_NOT_AVAILABLE");
-//            add("SOMETHING_ELSE");
-//        }});
