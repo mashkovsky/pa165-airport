@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.airport.api.service;
 import cz.muni.fi.pa165.airport.api.dto.FlightDetailDTO;
 import cz.muni.fi.pa165.airport.api.dto.FlightMinimalDTO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,4 +53,26 @@ public interface IFlightService {
      * @throws IllegalArgumentException if {@code flightId} is {@code null}
      */
     FlightDetailDTO getFlightDetail(Long flightId);
+
+    /**
+     * Check if plane is available for flight
+     * @param planeId plane ID
+     * @param from departure date
+     * @param to arrival date
+     * @param flightId current flight ID (this flight won't be taken into account). May be null - all flights
+     *                 are taken into account
+     * @return true if plane is available, false otherwise
+     */
+    boolean isPlaneAvailableForFlight(Long planeId, Date from, Date to, Long flightId);
+
+    /**
+     * Check if steward is available for flight
+     * @param stewardId steward ID
+     * @param from departure date
+     * @param to arrival date
+     * @param flightId current flight ID (this flight won't be taken into account). May be null - all flights
+     *                 are taken into account
+     * @return true if steward is available, false otherwise
+     */
+    boolean isStewardAvailableForFlight(Long stewardId, Date from, Date to, Long flightId);
 }

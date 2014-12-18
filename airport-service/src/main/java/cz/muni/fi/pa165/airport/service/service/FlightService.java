@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -130,5 +131,27 @@ public class FlightService extends ConversionAware implements IFlightService {
         Flight flight = flightDAO.find(flightId);
 
         return flight == null ? null : mapper.map(flight, FlightDetailDTO.class);
+    }
+
+    @Override
+    public boolean isPlaneAvailableForFlight(Long planeId, Date from, Date to, Long flightId) {
+
+        Flight flight = new Flight();
+        flight.setDeparture(from);
+        flight.setArrival(to);
+        flight.setId(flightId);
+
+        return flightDAO.isPlaneAvailableForFlight(planeId, flight);
+    }
+
+    @Override
+    public boolean isStewardAvailableForFlight(Long stewardId, Date from, Date to, Long flightId) {
+
+        Flight flight = new Flight();
+        flight.setDeparture(from);
+        flight.setArrival(to);
+        flight.setId(flightId);
+
+        return flightDAO.isStewardAvailableForFlight(stewardId, flight);
     }
 }

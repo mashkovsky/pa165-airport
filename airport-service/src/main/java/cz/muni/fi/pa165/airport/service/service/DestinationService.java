@@ -54,17 +54,7 @@ public class DestinationService extends ConversionAware implements IDestinationS
         if (destinationId == null) {
             throw new IllegalArgumentException("Destination ID is null");
         }
-        /*
-        if(destinationDAO.find(destinationId) == null) {
-            throw new IllegalStateException("Destination of id = " + destinationId
-                + " does not exist");
-        }
 
-        if (!destinationDAO.isNotUsedInFlights(destinationId)) {
-                throw new IllegalStateException("Destination of id = " + destinationId
-                        + " is already used in any flight as origin or destination");
-        }
-        */
         destinationDAO.delete(destinationId);
     }
     
@@ -83,5 +73,4 @@ public class DestinationService extends ConversionAware implements IDestinationS
 
         return destination == null ? null : mapper.map(destination, DestinationDTO.class);
     }
-    
 }

@@ -63,6 +63,7 @@ public class PlaneService extends ConversionAware implements IPlaneService {
         return map(planeDAO.getAll(), PlaneDTO.class);
     }
 
+    @Override
     public PlaneDTO getPlane(Long planeId) {
         if (planeId == null) {
             throw new IllegalArgumentException("Plane ID is null");
