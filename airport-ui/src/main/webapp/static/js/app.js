@@ -18,8 +18,8 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/flight/edit.html',
         controller: 'FlightController'
       }).
-      when('/flight/delete/:flightId', {
-        templateUrl: 'static/partials/flight/delete.html',
+      when('/flight/detail/:flightId', {
+        templateUrl: 'static/partials/flight/detail.html',
         controller: 'FlightController'
       }).
       /* destination */
@@ -35,10 +35,6 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/destination/edit.html',
         controller: 'DestinationController'
       }).
-      when('/destination/delete/:destinationId', {
-        templateUrl: 'static/partials/destination/delete.html',
-        controller: 'DestinationController'
-      }).
       /* plane */
       when('/plane', {
         templateUrl: 'static/partials/plane/list.html',
@@ -52,10 +48,6 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/plane/edit.html',
         controller: 'PlaneController'
       }).
-      when('/plane/delete/:planeId', {
-        templateUrl: 'static/partials/plane/delete.html',
-        controller: 'PlaneController'
-      }).
       /* steward */
       when('/steward', {
         templateUrl: 'static/partials/steward/list.html',
@@ -67,10 +59,6 @@ app.config(['$routeProvider',
       }).
       when('/steward/edit/:stewardId', {
         templateUrl: 'static/partials/steward/edit.html',
-        controller: 'StewardController'
-      }).
-      when('/steward/delete/:stewardId', {
-        templateUrl: 'static/partials/steward/delete.html',
         controller: 'StewardController'
       }).
       /* default */

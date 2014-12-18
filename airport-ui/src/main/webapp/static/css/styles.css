@@ -252,3 +252,17 @@ p.empty {
     font-style: italic;
     margin-top: 1.5em;
 }
+
+table.detail th {
+    text-align: right;
+    width:10em;
+    padding-right: 2em !important;
+}
+
+table.detail td ul {
+    list-style-type: disk;
+    list-style-position: inside;
+    margin:0;
+    padding: 0;
+}
+

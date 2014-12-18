@@ -1,7 +1,7 @@
 function FlightController($scope, $http, apiProvider, $routeParams, $translate, $timeout) {
     
     $scope.plane = {id:'', origin:'', destination:'', departure:'', arrival:'', 
-        capacity:'', plane:'', stewards:[]};
+        plane:'', stewards:[]};
     
     if($routeParams.flightId) {
         $scope.flight = apiProvider.flight().get({id: $routeParams.flightId});
@@ -21,7 +21,6 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
             destination: $scope.flight.destination,
             departure: $scope.flight.departure,
             arrival: $scope.flight.arrival,
-            capacity: $scope.flight.capacity,
             plane: $scope.flight.plane,
             stewards: $scope.flight.stewards
         },
@@ -71,7 +70,6 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
             destination: $scope.flight.destination,
             departure: getDateTime($scope.flight.departure),
             arrival: getDateTime($scope.flight.arrival),
-            capacity: $scope.flight.capacity,
             plane: $scope.flight.plane,
             stewards: $scope.flight.stewards
         },
@@ -127,9 +125,7 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
                 $scope.incomplete = true;
             }
         
-        if($scope.flight.capacity == null ||
-            $scope.flight.capacity < 1 ||
-            ($scope.flight.origin && $scope.flight.destination && $scope.flight.origin == $scope.flight.destination) ||
+        if(($scope.flight.origin && $scope.flight.destination && $scope.flight.origin == $scope.flight.destination) ||
             !isDateAfter($scope.flight.departure, $scope.flight.arrival))
             {
                 $scope.error = true;

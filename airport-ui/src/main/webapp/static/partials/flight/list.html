@@ -13,9 +13,7 @@
                 <th>{{ 'destination' | translate }}</th>
                 <th>{{ 'departure' | translate }}</th>
                 <th>{{ 'arrival' | translate }}</th>
-                <th>{{ 'capacity' | translate }}</th>
-                <th>{{ 'plane' | translate }}</th>
-                <th>{{ 'stewards' | translate }}</th>
+                <th>{{ 'details' | translate }}</th>
                 <th class="action">{{ 'edit' | translate }}</th>
                 <th class="action">{{ 'delete' | translate }}</th>
             </tr>
@@ -26,12 +24,10 @@
                 <td>{{ item.destination.city + ', ' + item.destination.country }}</td>
                 <td>{{ item.departure | date:'yyyy/MM/dd HH:mm' }}</td>
                 <td>{{ item.arrival | date:'yyyy/MM/dd HH:mm' }}</td>
-                <td>{{ item.capacity }}</td>
-                <td>{{ item.plane.type + ', ' + item.plane.name }}</td>
                 <td>
-                    <ul>
-                        <li ng-repeat="steward in item.stewards">{{ steward.firstName + ' ' + steward.lastName }}</li>
-                    </ul>
+                    <a class="btn btn-info" href="index.html#/flight/detail/{{item.id}}">
+                        <span class="glyphicon glyphicon-list-alt"></span> {{ 'details' | translate }}
+                    </a>
                 </td>
                 <td>
                     <a class="btn btn-default" href="index.html#/flight/edit/{{item.id}}">

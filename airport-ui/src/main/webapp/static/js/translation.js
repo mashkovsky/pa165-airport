@@ -54,6 +54,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         name: 'Název',
         type: 'Typ',
         capacity: 'Kapacita',
+        seats: 'míst',
         
         // steward
         stewardManage: 'Stevardi',
@@ -68,6 +69,8 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         flightEdit: 'Upravit let',
         flightDelete: 'Smazat let',
         flightCreate: 'Přidat nový let',
+        details: 'Podrobnosti',
+        flightDetail: 'Podrobnosti letu',
         origin: 'Z',
         destination: 'Do',
         departure: 'Odlet',
@@ -132,6 +135,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         name: 'Name',
         type: 'Type',
         capacity: 'Capacity',
+        seats: 'seats',
         
         // steward
         stewardManage: 'Stewards',
@@ -146,6 +150,8 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         flightEdit: 'Edit flight',
         flightDelete: 'Delete flight',
         flightCreate: 'Create new flight',
+        flightDetail: 'Flight detail',
+        details: 'Detail',
         origin: 'Origin',
         destination: 'Destination',
         departure: 'Departure',

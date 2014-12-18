@@ -1,0 +1,51 @@
+<div ng-app="" ng-controller="FlightController">
+    <h2>{{ 'flightDetail' | translate}}</h2>
+    <span class="info {{result}}">{{ result | translate }}</span>
+        
+    <table class="table detail">
+        <tr>
+            <th>{{ 'origin' | translate }}</th>
+            <td>{{ flight.origin.country + ', ' + flight.origin.city }}</td>
+        </tr>
+        
+        <tr>
+            <th>{{ 'destination' | translate }}</th>
+            <td>{{ flight.destination.country + ', ' + flight.destination.city }}</td>
+        </tr>
+        
+        <tr>
+            <th>{{ 'departure' | translate }}</th>
+            <td>{{ flight.departure | date:'yyyy/MM/dd HH:mm' }}</td>
+        </tr>
+        
+        <tr>
+            <th>{{ 'arrival' | translate }}</th>
+            <td>{{ flight.arrival | date:'yyyy/MM/dd HH:mm' }}</td>
+        </tr>
+        
+        <tr>
+            <th>{{ 'plane' | translate }}</th>
+            <td>{{ flight.plane.type + ' ' + flight.plane.name + ' (' + flight.plane.capacity + ' ' + ('seats' | translate) + ')' }}</td>
+        </tr>
+        
+        <tr>
+            <th>{{ 'stewards' | translate }}</th>
+            <td>
+                <ul>
+                        <li ng-repeat="steward in flight.stewards">{{ steward.firstName + ' ' + steward.lastName }}</li>
+                </ul>
+            </td>
+        </tr>
+    
+        <tr>
+            <th></th>
+            <td>
+                <a class="btn btn-default" href="index.html#/flight">
+                    <span class="glyphicon glyphicon-chevron-left">{{ 'back' | translate }}</span>
+                </a> 
+            </td>
+        </tr>
+    
+    </table>
+        
+</div>
