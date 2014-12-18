@@ -236,6 +236,10 @@ div#content span.validation {
     
 }
 
+div#content span.validation.next {
+    clear:both;
+}
+
 div#content ul.select {
     float: left;
     list-style-position: inside;

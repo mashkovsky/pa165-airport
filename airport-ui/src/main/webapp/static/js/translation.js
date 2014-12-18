@@ -73,7 +73,9 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         departure: 'Odlet',
         arrival: 'Přílet',
         plane: 'Letadlo',
-        stewards: 'Stevardi'
+        stewards: 'Stevardi',
+        inputOriginArrival: 'Zdrojová a cílová destinace nesmí být totožné',
+        inputDepartureArrival: 'Datum a čas odletu musí předcházet příletu'
         
     });
     $translateProvider.translations('en', {
@@ -149,7 +151,9 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         departure: 'Departure',
         arrival: 'Arrival',
         plane: 'Plane',
-        stewards: 'Stewards'
+        stewards: 'Stewards',
+        inputOriginArrival: 'Origin and destination must be different',
+        inputDepartureArrival: 'Date and time of departure must be before arrival'
     });
     console.log(apiProvider.getLanguage());
     $translateProvider.preferredLanguage(apiProvider.getLanguage());

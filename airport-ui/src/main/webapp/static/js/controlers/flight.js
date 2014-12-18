@@ -38,6 +38,7 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
         });
     }
     
+    
     function getDateTime(dateStr) {
         // 0123456789
         // 2014/12/01 23:11
@@ -49,6 +50,18 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
             date = new Date(year, month, day, hour, minute);
     
         return date.getTime();
+    }
+    
+    function isDateAfter(departure, arrival) {
+        if(!departure || !arrival) {
+            return false;
+        }
+        return getDateTime(departure) < getDateTime(arrival);
+    }
+    
+    $scope.isDateAfter = function(departure, arrival) {
+        
+        return isDateAfter(departure, arrival);
     }
     
     $scope.createFlight = function() {
@@ -115,7 +128,9 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
             }
         
         if($scope.flight.capacity == null ||
-            $scope.flight.capacity < 1) 
+            $scope.flight.capacity < 1 ||
+            ($scope.flight.origin && $scope.flight.destination && $scope.flight.origin == $scope.flight.destination) ||
+            !isDateAfter($scope.flight.departure, $scope.flight.arrival))
             {
                 $scope.error = true;
             }
