@@ -167,8 +167,12 @@ public class PlaneDAOTest extends BaseDAOTest {
     public void testGetAll() {
         Plane plane1 = createPlane(null, "Airbus", "A180", 30);
         Plane plane2 = createPlane(null, "Airbus", "A256", 123);
+        Plane plane3 = createPlane(null, "Airbus", "A512", 256);
         dao.create(plane1);
         dao.create(plane2);
+        dao.create(plane3);
+
+        dao.delete(plane3.getId());
 
         List<Plane> fromDb = dao.getAll();
         assertEquals(2, fromDb.size());

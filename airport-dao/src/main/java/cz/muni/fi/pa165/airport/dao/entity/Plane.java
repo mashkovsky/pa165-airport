@@ -2,9 +2,6 @@ package cz.muni.fi.pa165.airport.dao.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -12,23 +9,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PLANE")
-public class Plane {
+public class Plane extends CommonEntity {
 
-    private Long id;
     private String type;
     private String name;
     private Integer capacity;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Column(name = "TYPE")
     public String getType() {
@@ -58,26 +44,9 @@ public class Plane {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == null || !(other instanceof Plane)) {
-            return false;
-        } else if (other == this) {
-            return true;
-        } else {
-            Plane plane = (Plane) other;
-            return this.id == plane.id;
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
-
-    @Override
     public String toString() {
         return "Plane{"
-                + "id=" + id
+                + "id=" + getId()
                 + ", Name='" + name + '\''
                 + ", Type='" + type + '\''
                 + ", Capacity='" + capacity + '\''

@@ -108,17 +108,28 @@ public class FlightDAO implements IFlightDAO {
             throw new IllegalArgumentException("Flight with ID " + id + "does not exist");
         }
 
-        em.remove(flight);
+        flight.setArchived(true);
     }
 
     @Override
     public Flight find(Long id) {
-        return em.find(Flight.class, id);
+        if (id == null) {
+            throw new IllegalArgumentException("ID is null");
+        }
+
+        Query query = em.createQuery("SELECT f FROM Flight f WHERE f.archived = :archived AND f.id = :id");
+        query.setParameter("archived", false);
+        query.setParameter("id", id);
+
+        List resultList = query.getResultList();
+
+        return resultList.isEmpty() ? null : (Flight) resultList.get(0);
     }
 
     @Override
     public List<Flight> getAll() {
-        Query query = em.createQuery("SELECT f FROM Flight f ORDER BY f.departure DESC");
+        Query query = em.createQuery("SELECT f FROM Flight f WHERE f.archived = :archived  ORDER BY f.departure DESC");
+        query.setParameter("archived", false);
         return (List<Flight>) query.getResultList();
     }
 

@@ -65,17 +65,28 @@ public class StewardDAO implements IStewardDAO {
             throw new IllegalArgumentException("Steward with ID " + id + "does not exist");
         }
 
-        em.remove(steward);
+        steward.setArchived(true);
     }
 
     @Override
     public Steward find(Long id) {
-        return em.find(Steward.class, id);
+        if (id == null) {
+            throw new IllegalArgumentException("ID is null");
+        }
+
+        Query query = em.createQuery("SELECT s FROM Steward s WHERE s.archived = :archived AND s.id = :id");
+        query.setParameter("archived", false);
+        query.setParameter("id", id);
+
+        List resultList = query.getResultList();
+
+        return resultList.isEmpty() ? null : (Steward) resultList.get(0);
     }
 
     @Override
     public List<Steward> getAll() {
-        Query query = em.createQuery("SELECT s FROM Steward s ORDER BY s.lastName, s.firstName");
+        Query query = em.createQuery("SELECT s FROM Steward s WHERE s.archived = :archived ORDER BY s.lastName, s.firstName");
+        query.setParameter("archived", false);
         return (List<Steward>) query.getResultList();
     }
 }

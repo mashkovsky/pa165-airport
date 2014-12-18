@@ -80,17 +80,28 @@ public class PlaneDAO implements IPlaneDAO {
             throw new IllegalArgumentException("Plane with ID " + id + "does not exist");
         }
 
-        em.remove(plane);
+        plane.setArchived(true);
     }
 
     @Override
     public Plane find(Long id) {
-        return em.find(Plane.class, id);
+        if (id == null) {
+            throw new IllegalArgumentException("ID is null");
+        }
+
+        Query query = em.createQuery("SELECT p FROM Plane p WHERE p.archived = :archived AND p.id = :id");
+        query.setParameter("archived", false);
+        query.setParameter("id", id);
+
+        List resultList = query.getResultList();
+
+        return resultList.isEmpty() ? null : (Plane) resultList.get(0);
     }
 
     @Override
     public List<Plane> getAll() {
-        Query query = em.createQuery("SELECT f FROM Plane f ORDER BY f.name ASC");
+        Query query = em.createQuery("SELECT f FROM Plane f WHERE f.archived = :archived  ORDER BY f.name ASC");
+        query.setParameter("archived", false);
         return (List<Plane>) query.getResultList();
     }
 }

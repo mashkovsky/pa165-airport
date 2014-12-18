@@ -32,7 +32,7 @@ public interface IDestinationDAO {
     void update(Destination destination);
     
     /**
-     * Delete destination.
+     * Archives entity identified by {@code id}.
      *
      * @param id id of destination to delete
      * @throws IllegalArgumentException if {@code id} is {@code null}

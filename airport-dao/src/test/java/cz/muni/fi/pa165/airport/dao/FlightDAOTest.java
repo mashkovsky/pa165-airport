@@ -361,9 +361,13 @@ public class FlightDAOTest extends BaseDAOTest {
     @Test
     public void testGetAll() {
         Flight second = prepareSecondFlight();
+        Flight third = prepareSecondFlight();
 
         flightDAO.create(flight);
         flightDAO.create(second);
+        flightDAO.create(third);
+
+        flightDAO.delete(third.getId());
 
         List<Flight> flights = flightDAO.getAll();
         assertEquals(2, flights.size());
