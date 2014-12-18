@@ -20,6 +20,7 @@
                 <option value="">- {{ 'choose' | translate }} -</option>
             </select>
             <span class="validation" ng-show="!flight.destination">{{ 'inputSelect' | translate }}</span>
+            <span class="validation next" ng-show="flight.origin && flight.destination && flight.origin == flight.destination">{{ 'inputOriginArrival' | translate }}</span>
         </div>
      </div>
         
@@ -36,6 +37,7 @@
         <div class="col-sm-10">
             <input type="text" ng-model="flight.arrival" ng-change="test()" placeholder="{{ 'arrival' | translate }}" class="form-control datetime">
             <span class="validation" ng-show="!flight.arrival">{{ 'inputDateTime' | translate }}</span>
+            <span class="validation next" ng-show="flight.departure  && flight.arrival && !isDateAfter(flight.departure, flight.arrival)">{{ 'inputDepartureArrival' | translate }}</span>
         </div>
      </div>
         
