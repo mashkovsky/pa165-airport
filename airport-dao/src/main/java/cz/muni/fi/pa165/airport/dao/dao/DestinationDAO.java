@@ -65,7 +65,7 @@ public class DestinationDAO implements IDestinationDAO {
             throw new IllegalArgumentException("Destination with ID " + id + "does not exist");
         }
 
-        em.remove(destination);
+        destination.setArchived(true);
     }
 
     @Override
@@ -74,12 +74,19 @@ public class DestinationDAO implements IDestinationDAO {
             throw new IllegalArgumentException("ID is null");
         }
 
-        return em.find(Destination.class, id);
+        Query query = em.createQuery("SELECT d FROM Destination d WHERE d.archived = :archived AND d.id = :id");
+        query.setParameter("archived", false);
+        query.setParameter("id", id);
+
+        List resultList = query.getResultList();
+
+        return resultList.isEmpty() ? null : (Destination) resultList.get(0);
     }
 
     @Override
     public List<Destination> getAll() {
-        Query query = em.createQuery("SELECT d FROM Destination d ORDER BY d.country, d.city");
+        Query query = em.createQuery("SELECT d FROM Destination d WHERE d.archived = :archived  ORDER BY d.country, d.city");
+        query.setParameter("archived", false);
         return (List<Destination>) query.getResultList();
     }
     

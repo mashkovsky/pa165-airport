@@ -8,12 +8,12 @@ import cz.muni.fi.pa165.airport.dao.entity.Destination;
 import cz.muni.fi.pa165.airport.dao.entity.Flight;
 import cz.muni.fi.pa165.airport.dao.entity.Plane;
 import cz.muni.fi.pa165.airport.dao.entity.Steward;
-import java.util.ArrayList;
-import java.util.Date;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -149,7 +149,7 @@ public class DestinationDAOTest extends BaseDAOTest {
     @Test
     public void testDelete() {        
         Destination destination1 = createDestination(null, "CZ", "Brno");
-        Destination destination2 = createDestination(null, "GE", "München");
+        Destination destination2 = createDestination(null, "GE", "Mï¿½nchen");
         destinationDAO.create(destination1);
         destinationDAO.create(destination2);
         
@@ -165,9 +165,13 @@ public class DestinationDAOTest extends BaseDAOTest {
     @Test
     public void testGetAll() {
         Destination destination1 = createDestination(null, "CZ", "Brno");
-        Destination destination2 = createDestination(null, "GE", "München");
+        Destination destination2 = createDestination(null, "GE", "Munchen");
+        Destination destination3 = createDestination(null, "GE", "Prague");
         destinationDAO.create(destination1);
         destinationDAO.create(destination2);
+        destinationDAO.create(destination3);
+
+        destinationDAO.delete(destination3.getId());
 
         List<Destination> fromDb = destinationDAO.getAll();
         assertEquals(2, fromDb.size());

@@ -30,7 +30,7 @@ public interface IStewardDAO {
     void update(Steward steward);
 
     /**
-     * Delete steward record identified by {@code id}.
+     * Archives entity identified by {@code id}.
      *
      * @param id steward unique identifier
      * @throws IllegalArgumentException if {@code id} is {@code null}

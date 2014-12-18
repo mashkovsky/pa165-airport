@@ -29,7 +29,7 @@ public interface IPlaneDAO {
     void update(Plane plane);
 
     /**
-     * Delete plane record identified by {@code id}.
+     * Archives entity identified by {@code id}.
      *
      * @param id plane unique identifier
      * @throws IllegalArgumentException if {@code id} is {@code null}

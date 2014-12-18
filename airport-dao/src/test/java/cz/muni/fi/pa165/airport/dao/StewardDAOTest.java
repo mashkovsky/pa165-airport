@@ -146,8 +146,12 @@ public class StewardDAOTest extends BaseDAOTest {
     public void testGetAll() {
         Steward steward1 = createSteward(null, "Janko", "Mrkvi?ka");
         Steward steward2 = createSteward(null, "Homer", "Simpson");
+        Steward steward3 = createSteward(null, "Marge", "Simpson");
         dao.create(steward1);
         dao.create(steward2);
+        dao.create(steward3);
+
+        dao.delete(steward3.getId());
 
         List<Steward> fromDb = dao.getAll();
         assertEquals(2, fromDb.size());

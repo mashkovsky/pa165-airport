@@ -37,7 +37,7 @@ public interface IFlightDAO {
     void update(Flight flight);
 
     /**
-     * Delete flight record identified by {@code id}.
+     * Archives entity identified by {@code id}.
      *
      * @param id flight unique identifier
      * @throws IllegalArgumentException if {@code id} is {@code null}
