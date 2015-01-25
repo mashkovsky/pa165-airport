@@ -33,15 +33,7 @@ public class UserDAO implements IUserDAO {
         if (user.getName() == null) {
             throw new IllegalArgumentException("User name is null.");
         }
-        if (user.getCapacity() == null) {
-            throw new IllegalArgumentException("User capacity is null.");
-        }
-        if (user.getCapacity() < 1) {
-            throw new IllegalArgumentException("Capacity can not be smaller than 1");
-        }
-        if (user.getType() == null) {
-            throw new IllegalArgumentException("User type is null.");
-        }
+
 
         em.persist(user);
     }
@@ -57,15 +49,7 @@ public class UserDAO implements IUserDAO {
         if (user.getName() == null) {
             throw new IllegalArgumentException("User name is null.");
         }
-        if (user.getCapacity() == null) {
-            throw new IllegalArgumentException("User capacity is null.");
-        }
-        if (user.getCapacity() < 1) {
-            throw new IllegalArgumentException("Capacity can not be smaller than zero");
-        }
-        if (user.getType() == null) {
-            throw new IllegalArgumentException("User type is null.");
-        }
+
 
         em.merge(user);
     }

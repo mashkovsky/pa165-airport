@@ -8,7 +8,7 @@ import javax.persistence.Table;
  * @author Matej Chrenko
  */
 @Entity
-@Table(name = "PLANE")
+@Table(name = "USER")
 public class User extends CommonEntity {
 
     private String name;
@@ -45,7 +45,7 @@ public class User extends CommonEntity {
 
     @Override
     public String toString() {
-        return "Plane{"
+        return "User{"
                 + "id=" + getId()
                 + ", Name='" + name + '\''
                 + ", Email='" + email + '\''
