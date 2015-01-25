@@ -33,14 +33,8 @@ public class UserDAO implements IUserDAO {
         if (user.getName() == null) {
             throw new IllegalArgumentException("User name is null.");
         }
-        if (user.getCapacity() == null) {
-            throw new IllegalArgumentException("User capacity is null.");
-        }
-        if (user.getCapacity() < 1) {
-            throw new IllegalArgumentException("Capacity can not be smaller than 1");
-        }
-        if (user.getType() == null) {
-            throw new IllegalArgumentException("User type is null.");
+        if (user.getPassword() == null) {
+            throw new IllegalArgumentException("User password is null.");
         }
 
         em.persist(user);
@@ -57,14 +51,8 @@ public class UserDAO implements IUserDAO {
         if (user.getName() == null) {
             throw new IllegalArgumentException("User name is null.");
         }
-        if (user.getCapacity() == null) {
-            throw new IllegalArgumentException("User capacity is null.");
-        }
-        if (user.getCapacity() < 1) {
-            throw new IllegalArgumentException("Capacity can not be smaller than zero");
-        }
-        if (user.getType() == null) {
-            throw new IllegalArgumentException("User type is null.");
+        if (user.getPassword() == null) {
+            throw new IllegalArgumentException("User password is null.");
         }
 
         em.merge(user);
@@ -92,6 +80,39 @@ public class UserDAO implements IUserDAO {
         Query query = em.createQuery("SELECT p FROM User p WHERE p.archived = :archived AND p.id = :id");
         query.setParameter("archived", false);
         query.setParameter("id", id);
+
+        List resultList = query.getResultList();
+
+        return resultList.isEmpty() ? null : (User) resultList.get(0);
+    }
+
+    public User findByUsernameAndPassword(String username, String password) {
+        if (username == null) {
+            throw new IllegalArgumentException("Username is null");
+        }
+
+        if (password == null) {
+            throw new IllegalArgumentException("Passwords is null");
+        }
+
+        Query query = em.createQuery("SELECT u FROM User u WHERE u.archived = :archived AND u.username = :username AND u.password = :password");
+        query.setParameter("archived", false);
+        query.setParameter("username", username);
+                query.setParameter("password", password);
+
+        List resultList = query.getResultList();
+
+        return resultList.isEmpty() ? null : (User) resultList.get(0);
+    }
+
+    public User findByToken(String token) {
+        if (token == null) {
+            throw new IllegalArgumentException("Token is null");
+        }
+
+        Query query = em.createQuery("SELECT u FROM User u WHERE u.archived = :archived AND u.token = :token");
+        query.setParameter("archived", false);
+        query.setParameter("token", token);
 
         List resultList = query.getResultList();
 

@@ -46,6 +46,29 @@ public interface IUserDAO {
      * @throws IllegalArgumentException if {@code id} is {@code null}
      */
     User find(Long id);
+    
+        /**
+     * Find user identified with {@code token}.
+     *
+     * @param token user unique identifier
+     * @return user instance or {@code null} if user with given {@code id}
+     * does not exist
+     * @throws IllegalArgumentException if {@code token} is {@code null}
+     */
+    User findByToken(String token);
+    
+        /**
+     * Find user identified with {@code username}.
+     *
+     * @param username user unique identifier
+     * @param password
+     * @return user instance or {@code null} if user with given {@code id}
+     * does not exist
+     * @throws IllegalArgumentException if {@code username} is {@code null}
+     */
+    User findByUsernameAndPassword(String username, String password);
+      
+    
 
     /**
      * Get all users from storage ordered by last name then first name.

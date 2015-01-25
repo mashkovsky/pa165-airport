@@ -13,8 +13,9 @@ public class User extends CommonEntity {
 
     private String name;
     private String email;
+    private String token;
     private String password;
-
+    private String archived;
 
     @Column(name = "EMAIL")
     public String getEmail() {
@@ -40,7 +41,25 @@ public class User extends CommonEntity {
     }
 
     public void setPassword(String password) {
-            this.password = password;
+        this.password = password;
+    }
+
+    @Column(name = "TOKEN")
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String password) {
+        this.token = token;
+    }
+
+    @Column(name = "ARCHIVED")
+    public String getArchived() {
+        return archived;
+    }
+
+    public void setArchived(String password) {
+        this.archived = archived;
     }
 
     @Override
