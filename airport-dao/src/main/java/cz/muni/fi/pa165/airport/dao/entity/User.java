@@ -8,14 +8,13 @@ import javax.persistence.Table;
  * @author Matej Chrenko
  */
 @Entity
-@Table(name = "PLANE")
+@Table(name = "USER")
 public class User extends CommonEntity {
 
     private String name;
     private String email;
     private String token;
     private String password;
-    private String archived;
 
     @Column(name = "EMAIL")
     public String getEmail() {
@@ -49,18 +48,10 @@ public class User extends CommonEntity {
         return token;
     }
 
-    public void setToken(String password) {
+    public void setToken(String token) {
         this.token = token;
     }
 
-    @Column(name = "ARCHIVED")
-    public String getArchived() {
-        return archived;
-    }
-
-    public void setArchived(String password) {
-        this.archived = archived;
-    }
 
     @Override
     public String toString() {

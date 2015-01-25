@@ -69,7 +69,6 @@ public interface IUserDAO {
     User findByUsernameAndPassword(String username, String password);
       
     
-
     /**
      * Get all users from storage ordered by last name then first name.
      *

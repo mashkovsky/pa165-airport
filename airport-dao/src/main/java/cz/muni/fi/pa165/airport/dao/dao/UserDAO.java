@@ -95,10 +95,10 @@ public class UserDAO implements IUserDAO {
             throw new IllegalArgumentException("Passwords is null");
         }
 
-        Query query = em.createQuery("SELECT u FROM User u WHERE u.archived = :archived AND u.username = :username AND u.password = :password");
+        Query query = em.createQuery("SELECT u FROM User u WHERE u.archived = :archived AND u.password = :password AND u.name = :username");
         query.setParameter("archived", false);
         query.setParameter("username", username);
-                query.setParameter("password", password);
+        query.setParameter("password", password);
 
         List resultList = query.getResultList();
 
