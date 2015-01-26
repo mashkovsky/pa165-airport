@@ -31,17 +31,19 @@
     <script src="static/js/controlers/login.js"></script>
 </head>
 <body>
-    
     <div id="top_panel">
         <a href="index.html#"><h1>{{ 'appName' | translate }}</h1></a>
 
-        <form id="login_form" action="">
+        <form id="login_form" action="" ng-hide="true">
             <label>{{ 'username' | translate }}:</label>
             <input type="text">
             <label>{{ 'password' | translate }}:</label>
             <input type="password">
             <button type="submit">{{ 'login' | translate}}</button>
         </form>
+        <div ng-show="authUser && authUser.id > 0">
+            {{authUser.name}}
+        </div>
     </div>
 
     <div id="page">   
