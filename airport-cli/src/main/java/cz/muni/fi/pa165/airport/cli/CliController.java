@@ -71,6 +71,11 @@ public class CliController {
         try {
             CommandLine line = parser.parse( options, args );
 
+            if (!restClient.login()) {
+                err("Login to application with hardcoded credentials failed.");
+                System.exit(1);
+            }
+
             if (!line.hasOption(OPT_ENTITY)) {
                 err("Entity is not specified");
                 help(options);

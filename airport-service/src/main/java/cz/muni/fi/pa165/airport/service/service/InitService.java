@@ -21,6 +21,7 @@ import javax.annotation.PostConstruct;
 public class InitService {
 
     private static final String ADMIN_EMAIL = "admin@airport.com";
+    private static final String REST_EMAIL = "rest@airport.com";
 
 
     @Autowired
@@ -47,6 +48,17 @@ public class InitService {
                     user.setName("Admin");
                     user.setEmail(ADMIN_EMAIL);
                     user.setPassword(passwordEncoder.encode("admin"));
+                    user.setPrivileged(true);
+
+                    userDAO.create(user);
+                }
+
+                User restUser = userDAO.getUserByEmail(REST_EMAIL);
+                if (restUser == null) {
+                    User user = new User();
+                    user.setName("REST app");
+                    user.setEmail(REST_EMAIL);
+                    user.setPassword(passwordEncoder.encode("rest"));
                     user.setPrivileged(true);
 
                     userDAO.create(user);
