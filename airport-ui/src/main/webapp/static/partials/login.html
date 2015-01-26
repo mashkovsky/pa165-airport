@@ -1,0 +1,11 @@
+<h3>Login with Username and Password</h3>
+<div ng-show="error">
+    Chyba
+</div>
+<form name='f' ng-submit="login()">
+ <table>
+    <tr><td>User:</td><td><input type='text' ng-model="username" required value=''></td></tr>
+    <tr><td>Password:</td><td><input type='password' required ng-model='password'/></td></tr>
+    <tr><td colspan='2'><input name="submit" type="button" ng-click="login()" value="Odeslat"/></td></tr>
+  </table>
+</form>

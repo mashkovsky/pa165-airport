@@ -1,10 +1,17 @@
 var app = angular.module('airport', ['ngResource', 'ngRoute', 'pascalprecht.translate'], function($anchorScrollProvider) { 
     $anchorScrollProvider.disableAutoScrolling();
 });
-        
+
+app.config(['$httpProvider', function($httpProvider) {  
+    $httpProvider.responseInterceptors.push('redirectInterceptor');
+}]);
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
+      when('/login', {
+        templateUrl: 'static/partials/login.html',
+        controller: 'LoginController'
+      }).
       /* flight */
       when('/flight', {
         templateUrl: 'static/partials/flight/list.html',
@@ -68,6 +75,36 @@ app.config(['$routeProvider',
       });
   }]);
 
+app.factory('redirectInterceptor', ['$location', '$q', function($location, $q) { return function(promise) {
+   promise.then(
+        function(response) {
+            if (typeof response.data === 'string') {
+                if (response.data.indexOf('<html>') != -1) {
+                    $location.path("/login");
+                }
+            }
+            return response;
+        },
+        function(response) {
+            return $q.reject(response);
+        }
+    );
+    return promise;
+};
+}]);
+
+/*app.factory('sessionInjector', ['SessionService', function(SessionService) {  
+    var sessionInjector = {
+        request: function(config) {
+            if (!SessionService.isAnonymus) {
+                config.headers['x-session-token'] = SessionService.token;
+            }
+            return config;
+        }
+    };
+    return sessionInjector;
+}]);*/
+
 app.provider('apiProvider', function apiProvider() {
     this.baseUrl = null;
     this.token = null;
@@ -89,6 +126,14 @@ app.provider('apiProvider', function apiProvider() {
             },
             baseUrl: function() {
               return baseUrl;
+            },
+            loggedUser: function() {
+              return $resource(baseUrl + '/user',
+                { token : this.token, 
+                  lang : this.language
+                },
+                this.actions
+              );
             },
             destination: function() {
               return $resource(baseUrl + '/destinations/:id',
