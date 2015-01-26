@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function LoginController($scope, $http, apiProvider, $routeParams, $translate, $timeout, $location) {
+function LoginController($scope, $http, apiProvider, $routeParams, $translate, $timeout, $location, $rootScope) {
     $scope.username = '';
     $scope.password = '';
     $scope.showError = false;
@@ -19,7 +19,10 @@ function LoginController($scope, $http, apiProvider, $routeParams, $translate, $
             data: $.param(datas)
         }).success(function(data, status, headers, config) {
             apiProvider.loggedUser().get(function(user) {
+                
                 if(user.id) {
+                    $rootScope.authUser = user;
+                    console.log(app);
                     $scope.showError = false;
                     $location.path("/");
                 } else {
@@ -32,6 +35,6 @@ function LoginController($scope, $http, apiProvider, $routeParams, $translate, $
     }
 }
 
-LoginController.$inject = ['$scope', '$http', 'apiProvider', '$routeParams', '$translate', '$timeout', '$location'];
+LoginController.$inject = ['$scope', '$http', 'apiProvider', '$routeParams', '$translate', '$timeout', '$location', '$rootScope'];
 app.controller('LoginController', LoginController);
 

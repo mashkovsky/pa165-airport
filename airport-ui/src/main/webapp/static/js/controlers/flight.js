@@ -1,5 +1,4 @@
-function FlightController($scope, $http, apiProvider, $routeParams, $translate, $timeout) {
-    
+function FlightController($scope, $http, apiProvider, $routeParams, $translate, $timeout, $rootScope) {
     $scope.plane = {id:'', origin:'', destination:'', departure:'', arrival:'', 
         plane:'', stewards:[]};
     
@@ -133,5 +132,5 @@ function FlightController($scope, $http, apiProvider, $routeParams, $translate, 
     }
 }
 
-FlightController.$inject = ['$scope', '$http', 'apiProvider', '$routeParams', '$translate', '$timeout'];
+FlightController.$inject = ['$scope', '$http', 'apiProvider', '$routeParams', '$translate', '$timeout', '$rootScope'];
 app.controller('FlightController', FlightController);

@@ -5,6 +5,7 @@ var app = angular.module('airport', ['ngResource', 'ngRoute', 'pascalprecht.tran
 app.config(['$httpProvider', function($httpProvider) {  
     $httpProvider.responseInterceptors.push('redirectInterceptor');
 }]);
+
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -110,10 +111,11 @@ app.provider('apiProvider', function apiProvider() {
     this.token = null;
     this.language = null;
 
-    this.$get = ['$http', '$resource', function($http, $resource) {
+    this.$get = ['$http', '$resource', '$rootScope', function($http, $resource, $rootScope) {
         var baseUrl = this.baseUrl;
         var token = this.token;
         var language = this.language;
+        
         return {
             language : language,
             token : token,
@@ -204,6 +206,14 @@ app.config(['apiProviderProvider', function(apiProvider){
       apiProvider.setLanguage(lang);
 }]);
 
+
+app.run(['$rootScope', '$location', 'apiProvider', function ($rootScope, $location, apiProvider) {
+    $rootScope.$on('$routeChangeStart', function (event) {    
+        if(!$rootScope.authUser) {
+            $rootScope.authUser = apiProvider.loggedUser().get();
+        }
+    });
+}]);
 // bootstrap
 angular.element(document).ready(function() {
     angular.bootstrap(document, ['airport']);
