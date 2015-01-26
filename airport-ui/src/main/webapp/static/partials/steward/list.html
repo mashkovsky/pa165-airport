@@ -2,7 +2,7 @@
     <h2>{{ 'stewardManage' | translate }}</h2>
     <span class="info {{result}}">{{ result | translate }}</span>
     
-    <a class="btn btn-success" href="index.html#/steward/create">
+    <a ng-controller="LoginController" ng-show="authUser && authUser.privileged" class="btn btn-success" href="index.html#/steward/create">
         <span class="glyphicon glyphicon-plus"></span> {{ 'create' | translate }}
     </a>
     
@@ -11,20 +11,20 @@
             <tr>
                 <th>{{ 'firstName' | translate }}</th>
                 <th>{{ 'lastName' | translate }}</th>
-                <th class="action">{{ 'edit' | translate }}</th>
-                <th class="action">{{ 'delete' | translate }}</th>
+                <th class="action" ng-controller="LoginController" ng-show="authUser && authUser.privileged">{{ 'edit' | translate }}</th>
+                <th class="action" ng-controller="LoginController" ng-show="authUser && authUser.privileged">{{ 'delete' | translate }}</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in stewards">
                 <td>{{ item.firstName }}</td>
                 <td>{{ item.lastName }}</td>
-                <td>
+                <td ng-controller="LoginController" ng-show="authUser && authUser.privileged">
                     <a class="btn btn-default" href="index.html#/steward/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
                     </a>
                 </td>
-                <td>
+                <td ng-controller="LoginController" ng-show="authUser && authUser.privileged">
                     <a class="btn btn-default" link="" ng-click="deleteSteward(item.id, ('deleteMsg' | translate))">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </a>

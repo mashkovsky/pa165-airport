@@ -7,7 +7,6 @@ function LoginController($scope, $http, apiProvider, $routeParams, $translate, $
     $scope.username = '';
     $scope.password = '';
     $scope.showError = false;
-    $scope.logged = false;
     
     $scope.login = function() {
         var datas = {};
@@ -24,19 +23,15 @@ function LoginController($scope, $http, apiProvider, $routeParams, $translate, $
                 if(user.id) {
                     $rootScope.authUser = user;
                     
-                    $scope.logged = true;
-                    
                     console.log(app);
                     $scope.showError = false;
                     $location.path("/");
                 } else {
                     $scope.showError = true;
-                    $scope.logged = false;
                 }
             });            
         }).error(function(data, status, headers, config) {
              $scope.showError = true;
-             $scope.logged = false;
         });
     }
     

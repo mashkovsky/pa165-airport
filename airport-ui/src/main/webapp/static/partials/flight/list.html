@@ -2,7 +2,7 @@
     <h2>{{ 'flightManage' | translate }}</h2>
     <span class="info {{result}}">{{ result | translate }}</span>
     
-    <a class="btn btn-success" href="index.html#/flight/create">
+    <a ng-controller="LoginController" ng-show="authUser && authUser.privileged" class="btn btn-success" href="index.html#/flight/create">
         <span class="glyphicon glyphicon-plus"></span> {{ 'create' | translate }}
     </a>
     
@@ -14,8 +14,8 @@
                 <th>{{ 'departure' | translate }}</th>
                 <th>{{ 'arrival' | translate }}</th>
                 <th>{{ 'details' | translate }}</th>
-                <th class="action">{{ 'edit' | translate }}</th>
-                <th class="action">{{ 'delete' | translate }}</th>
+                <th class="action" ng-controller="LoginController" ng-show="authUser && authUser.privileged">{{ 'edit' | translate }}</th>
+                <th class="action" ng-controller="LoginController" ng-show="authUser && authUser.privileged">{{ 'delete' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,12 +29,12 @@
                         <span class="glyphicon glyphicon-list-alt"></span> {{ 'details' | translate }}
                     </a>
                 </td>
-                <td>
+                <td ng-controller="LoginController" ng-show="authUser && authUser.privileged">
                     <a class="btn btn-default" href="index.html#/flight/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
                     </a>
                 </td>
-                <td>
+                <td ng-controller="LoginController" ng-show="authUser && authUser.privileged">
                     <a class="btn btn-default" link="" ng-click="deleteFlight(item.id, ('deleteMsg' | translate))">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </a>

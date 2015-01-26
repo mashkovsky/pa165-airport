@@ -34,17 +34,14 @@
     <div id="top_panel">
         <a href="index.html#"><h1>{{ 'appName' | translate }}</h1></a>
         <div class="user" ng-controller="LoginController">
-            <span ng-show="logged">{{ 'loginLoggedAs' | translate }} {{authUser.name}}</span>
-            <span ng-hide="logged">{{ 'loginNotLogged' | translate }}</span>
-        </div>
-        <div ng-controller="LoginController">
-            <span ng-show="logged">{{authUser.name}}  dsadasd</span>
+            <span ng-show="authUser.id">{{ 'loginLoggedAs' | translate }} {{authUser.name}}</span>
+            <span ng-hide="authUser.id">{{ 'loginNotLogged' | translate }}</span>
         </div>
     </div>
 
     <div id="page">   
         
-        <ul id="menu">
+        <ul id="menu" ng-controller="LoginController" ng-class="{'disabled' : !authUser.id}">
             <li class="flight">
                 <a href="index.html#/flight">{{ 'menuView' | translate }}</a>
                 <h2>{{ 'menuFlight' | translate }}</h2>

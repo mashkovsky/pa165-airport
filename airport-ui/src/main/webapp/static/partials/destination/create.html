@@ -2,7 +2,7 @@
     <h2>{{ 'destinationCreate' | translate}}</h2>
     <span class="info {{result}}">{{ result | translate }}</span>
     
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" role="form" ng-controller="LoginController" ng-show="authUser && authUser.privileged">
       <div class="form-group">
         <label class="col-sm-2 control-label">{{ 'country' | translate }}</label>
         <div class="col-sm-10">

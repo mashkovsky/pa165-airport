@@ -2,7 +2,7 @@
     <h2>{{ 'destinationManage' | translate }}</h2>
     <span class="info {{result}}">{{ result | translate }}</span>
     
-    <a class="btn btn-success" href="index.html#/destination/create">
+    <a ng-controller="LoginController" ng-show="authUser && authUser.privileged" class="btn btn-success" href="index.html#/destination/create">
         <span class="glyphicon glyphicon-plus"></span> {{ 'create' | translate }}
     </a>
     
@@ -11,20 +11,20 @@
             <tr>
                 <th>{{ 'country' | translate }}</th>
                 <th>{{ 'city' | translate }}</th>
-                <th class="action">{{ 'edit' | translate }}</th>
-                <th class="action">{{ 'delete' | translate }}</th>
+                <th class="action" ng-controller="LoginController" ng-show="authUser && authUser.privileged">{{ 'edit' | translate }}</th>
+                <th class="action" ng-controller="LoginController" ng-show="authUser && authUser.privileged">{{ 'delete' | translate }}</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in destinations">
                 <td>{{ item.country }}</td>
                 <td>{{ item.city }}</td>
-                <td>
+                <td ng-controller="LoginController" ng-show="authUser && authUser.privileged">                    
                     <a class="btn btn-default" href="index.html#/destination/edit/{{item.id}}">
                         <span class="glyphicon glyphicon-pencil"></span> {{ 'edit' | translate }}
                     </a>
                 </td>
-                <td>
+                <td ng-controller="LoginController" ng-show="authUser && authUser.privileged">
                     <a class="btn btn-default" link="" ng-click="deleteDestination(item.id, ('deleteMsg' | translate))">
                         <span class="glyphicon glyphicon-trash"></span> {{ 'delete' | translate }}
                     </a>
