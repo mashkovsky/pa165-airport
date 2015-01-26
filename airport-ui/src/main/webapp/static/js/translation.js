@@ -2,7 +2,10 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
     $translateProvider.translations('cs', {
         appName: 'Správa letiště',
         appWellcome: 'Vítejte v informačním systému správy letiště.',
-        
+        // login
+        login: 'Přihlásit se',
+        loginError: 'Špatné uživatelské jmeno nebo heslo',
+        loginTitle: 'Přihlášení',
             // menu headers
         menuFlight: 'Lety',
         menuPlane: 'Letadla',
@@ -84,6 +87,10 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
     $translateProvider.translations('en', {
         appName: 'Airport manager',
         appWellcome: 'Welcome to the information system of airport management.',
+        // login
+        login: 'Login',
+        loginError: 'Wrong username or password',
+        loginTitle: 'Login',
         
         // menu headers
         menuFlight: 'Flights',
