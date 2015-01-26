@@ -6,6 +6,9 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         login: 'Přihlásit se',
         loginError: 'Špatné uživatelské jmeno nebo heslo',
         loginTitle: 'Přihlášení',
+        loginLoggedAs: 'Přihlášen jako',
+        loginNotLogged: 'Uživatel nepřihlášen',
+        
             // menu headers
         menuFlight: 'Lety',
         menuPlane: 'Letadla',
@@ -91,6 +94,8 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         login: 'Login',
         loginError: 'Wrong username or password',
         loginTitle: 'Login',
+        loginLoggedAs: 'Logged as',
+        loginNotLogged: 'User not logged',
         
         // menu headers
         menuFlight: 'Flights',

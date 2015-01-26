@@ -33,16 +33,12 @@
 <body>
     <div id="top_panel">
         <a href="index.html#"><h1>{{ 'appName' | translate }}</h1></a>
-
-        <form id="login_form" action="" ng-hide="true">
-            <label>{{ 'username' | translate }}:</label>
-            <input type="text">
-            <label>{{ 'password' | translate }}:</label>
-            <input type="password">
-            <button type="submit">{{ 'login' | translate}}</button>
-        </form>
-        <div ng-show="authUser && authUser.id > 0">
-            {{authUser.name}}
+        <div class="user" ng-controller="LoginController">
+            <span ng-show="logged">{{ 'loginLoggedAs' | translate }} {{authUser.name}}</span>
+            <span ng-hide="logged">{{ 'loginNotLogged' | translate }}</span>
+        </div>
+        <div ng-controller="LoginController">
+            <span ng-show="logged">{{authUser.name}}  dsadasd</span>
         </div>
     </div>
 
