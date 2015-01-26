@@ -2,8 +2,10 @@ package cz.muni.fi.pa165.airport.ui;
 
 import cz.muni.fi.pa165.airport.api.dto.DeleteResponseDTO;
 import cz.muni.fi.pa165.airport.api.dto.DestinationDTO;
+import cz.muni.fi.pa165.airport.api.security.CustomRole;
 import cz.muni.fi.pa165.airport.api.service.IDestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/destinations")
+@PreAuthorize("hasRole('" + CustomRole.LOGGED + "')")
 public class DestinationController {
 
     @Autowired

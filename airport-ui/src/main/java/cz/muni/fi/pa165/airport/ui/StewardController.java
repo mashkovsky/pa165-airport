@@ -2,10 +2,12 @@ package cz.muni.fi.pa165.airport.ui;
 
 import cz.muni.fi.pa165.airport.api.dto.DeleteResponseDTO;
 import cz.muni.fi.pa165.airport.api.dto.StewardDTO;
+import cz.muni.fi.pa165.airport.api.security.CustomRole;
 import cz.muni.fi.pa165.airport.api.service.IFlightService;
 import cz.muni.fi.pa165.airport.api.service.IStewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/stewards")
+@PreAuthorize("hasRole('" + CustomRole.LOGGED + "')")
 public class StewardController {
 
     private static final String DATE_TIME_FORMAT = "yyyy-MM-dd-hh:mm:ss";
