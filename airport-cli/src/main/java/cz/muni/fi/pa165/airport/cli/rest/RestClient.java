@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airport.cli.rest;
 
+import com.mashape.unirest.http.Headers;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -11,10 +12,8 @@ import cz.muni.fi.pa165.airport.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airport.cli.utils.JsonUtils;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * REST client for airport entities. Remember to call #shutdown() after finishing your work.
@@ -27,14 +26,7 @@ public class RestClient {
      * Content type of all messages sent or received
      */
     private static final String JSON_CONTENT_TYPE = "application/json";
-
-    /**
-     * Headers sent with all requests
-     */
-    private static final Map<String, String> HEADERS = Collections.unmodifiableMap(new HashMap<String, String>(){{
-        put("accept", JSON_CONTENT_TYPE);
-        put("Content-Type", JSON_CONTENT_TYPE);
-    }});
+    private static final String HEADER_SET_COOKIE = "set-cookie";
 
     /**
      * Object type that is allowed to communicate through this REST client
@@ -81,6 +73,8 @@ public class RestClient {
      */
     private final String serverUrl;
 
+    private String jSessionIdCookie;
+
 
     /**
      * @param serverUrl server URL to connect to
@@ -107,6 +101,17 @@ public class RestClient {
         return buildUrl(clazz) + "/" + id;
     }
 
+    private HashMap<String, String> getHeaders() {
+        return new HashMap<String, String>(){{
+            put("accept", JSON_CONTENT_TYPE);
+            put("Content-Type", JSON_CONTENT_TYPE);
+            if (jSessionIdCookie != null) {
+                put("Cookie", jSessionIdCookie + ";");
+            }
+
+        }};
+    }
+
     /**
      * Sends POST request which will trigger object creation
      * @param obj object to create
@@ -116,7 +121,7 @@ public class RestClient {
     public <T extends BaseDTO> T create(T obj, Class<? extends BaseDTO> clazz) {
         try {
             HttpResponse<JsonNode> response = Unirest.post(buildUrl(clazz))
-                .headers(HEADERS)
+                .headers(getHeaders())
                 .body(JsonUtils.toJsonString(obj))
                 .asJson();
 
@@ -135,7 +140,7 @@ public class RestClient {
     public <T extends BaseDTO> T update(T obj, Class<? extends BaseDTO> clazz) {
         try {
             HttpResponse<JsonNode> response = Unirest.put(buildUrl(obj.getId(), clazz))
-                .headers(HEADERS)
+                .headers(getHeaders())
                 .body(JsonUtils.toJsonString(obj))
                 .asJson();
 
@@ -154,7 +159,7 @@ public class RestClient {
     public DeleteResponseDTO delete(final Long id, Class<? extends BaseDTO> clazz) {
         try {
             HttpResponse<JsonNode> response = Unirest.delete(buildUrl(id, clazz))
-                    .headers(HEADERS)
+                    .headers(getHeaders())
                     .asJson();
 
             return JsonUtils.fromJson(response.getBody().toString(), DeleteResponseDTO.class);
@@ -172,7 +177,7 @@ public class RestClient {
     public <T extends BaseDTO> T get(final Long id, Class<? extends BaseDTO> clazz) {
         try {
             HttpResponse<JsonNode> response = Unirest.get(buildUrl(id, clazz))
-                    .headers(HEADERS)
+                    .headers(getHeaders())
                     .asJson();
 
             return (T) JsonUtils.fromJson(response.getBody().toString(), clazz);
@@ -189,12 +194,45 @@ public class RestClient {
     public List getAll(Class<? extends BaseDTO> clazz) {
         try {
             HttpResponse<JsonNode> response = Unirest.get(buildUrl(clazz))
-                    .headers(HEADERS)
+                    .headers(getHeaders())
                     .asJson();
 
             return JsonUtils.fromJson(response.getBody().toString(), List.class);
         } catch (UnirestException e) {
             throw new RuntimeException("Failed to fetch all objects. " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Logins to application with hardcoded username and email.
+     * Every other request will use JSESSION ID for authentization
+     *
+     * @return true if login is success, false otherwise.
+     */
+    public boolean login() {
+        try {
+            HttpResponse<String> response = Unirest.post("http://localhost:8080/pa165/j_spring_security_check")
+                    .field("j_username", "rest@airport.com")
+                    .field("j_password", "rest")
+                    .asString();
+
+            Headers headers = response.getHeaders();
+
+            if (headers.containsKey(HEADER_SET_COOKIE)) {
+                for (String cookie : headers.get(HEADER_SET_COOKIE)) {
+                    if (cookie.startsWith("JSESSIONID=")) {
+                        jSessionIdCookie = cookie;
+                        if (jSessionIdCookie.contains(";")) {
+                            jSessionIdCookie = jSessionIdCookie.substring(0, jSessionIdCookie.indexOf(";"));
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return (jSessionIdCookie != null);
+        } catch (UnirestException e) {
+            throw new RuntimeException("Failed to login. " + e.getMessage(), e);
         }
     }
 

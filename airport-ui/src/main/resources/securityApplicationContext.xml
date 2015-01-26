@@ -19,7 +19,7 @@
         <security:anonymous enabled="false"/>
         <security:custom-filter ref="anonymousAuthFilter" position="ANONYMOUS_FILTER" />
         <!--<security:form-login login-processing-url="/j_spring_security_check"  login-page="/login" />-->
-        <!--<security:logout logout-url="/logout" logout-success-url="/"/>-->
+        <security:logout logout-url="/logout" logout-success-url="/"/>
     </security:http>
 
     <security:authentication-manager>
