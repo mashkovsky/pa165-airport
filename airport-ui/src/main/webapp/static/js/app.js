@@ -13,6 +13,11 @@ app.config(['$routeProvider',
         templateUrl: 'static/partials/login.html',
         controller: 'LoginController'
       }).
+      /* user */
+      when('/user', {
+        templateUrl: 'static/partials/user.html',
+        controller: 'UserController'
+      }).
       /* flight */
       when('/flight', {
         templateUrl: 'static/partials/flight/list.html',

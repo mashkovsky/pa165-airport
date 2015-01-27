@@ -29,12 +29,13 @@
     <script src="static/js/controlers/steward.js"></script>
     <script src="static/js/controlers/destination.js"></script>
     <script src="static/js/controlers/login.js"></script>
+    <script src="static/js/controlers/user.js"></script>
 </head>
 <body>
     <div id="top_panel">
         <a href="index.html#"><h1>{{ 'appName' | translate }}</h1></a>
         <div class="user" ng-controller="LoginController">
-            <span ng-show="authUser.id">{{ 'loginLoggedAs' | translate }} {{authUser.name}}</span>
+            <span ng-show="authUser.id">{{ 'loginLoggedAs' | translate }} <a class="user" href="index.html#/user">{{authUser.name}}</a></span>
             <span ng-hide="authUser.id">{{ 'loginNotLogged' | translate }}</span>
         </div>
     </div>

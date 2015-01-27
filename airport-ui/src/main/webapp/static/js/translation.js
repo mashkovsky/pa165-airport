@@ -9,7 +9,15 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         loginLoggedAs: 'Přihlášen jako',
         loginNotLogged: 'Uživatel nepřihlášen',
         
-            // menu headers
+        // user
+        userInfo_1: 'Uživatel',
+        userInfo_2: 'má oprávnění',
+        userInfoAdmin: 'správce',
+        userInfoUser: 'stardartního uživatele',
+        userRights: 'prohlížet informace o letech, stevarder, destinacích a letadlech',
+        adminRights: 'spravovat informace o letech, stevarder, destinacích a letadlech a vytvářet nové uživatele',
+        
+        // menu headers
         menuFlight: 'Lety',
         menuPlane: 'Letadla',
         menuSteward: 'Stevardi',
@@ -19,6 +27,8 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         menuView: 'Spravovat',
         username: 'uživatel',
         password: 'heslo',
+        passwordConfirm: 'potvrzení hesla',
+        createNewUser: 'Vytvořit nového uživatele',
         login: 'Přihlásit se',
         back: 'Zpět',
         
@@ -42,6 +52,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         success: 'Operace byla provedena',
         error: 'Operace se nezdařila',
         emptyTable: 'Nebyly nalezeny žádné záznamy',
+        passwordsNotMatch: 'Zadaná hesla se neshodují',
         
         
         // destination
@@ -97,6 +108,14 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         loginLoggedAs: 'Logged as',
         loginNotLogged: 'User not logged',
         
+        // user
+        userInfo_1: 'User',
+        userInfo_2: 'has rights of',
+        userInfoAdmin: 'administrator',
+        userInfoUser: 'standart user',
+        userRights: 'view informations about flights, destinations, stewards and planes',
+        adminRights: 'manage informations about flights, destinations, stewards and planes and create new users',
+        
         // menu headers
         menuFlight: 'Flights',
         menuPlane: 'Planes',
@@ -107,6 +126,8 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         menuView: 'Manage',
         username: 'username',
         password: 'password',
+        passwordConfirm: 'confirm password',
+        createNewUser: 'Create new user',
         login: 'Login',
         back: 'Back',
         
@@ -130,6 +151,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         success: 'Operation success',
         error: 'Operation failed',
         emptyTable: 'No records found',
+        passwordsNotMatch: 'Input passwords do not match',
         
         // destination
         destinationManage: 'Destinations',

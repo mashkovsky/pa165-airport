@@ -1,0 +1,50 @@
+<div ng-app="" ng-controller="UserController">
+    <div ng-controller="LoginController">
+        <p>{{ 'userInfo_1' | translate}} <strong>{{authUser.name}}</strong> 
+            {{ 'userInfo_2' | translate}} 
+            <span ng-show="authUser && authUser.privileged">
+                <strong>{{ 'userInfoAdmin' | translate}}</strong> ({{ 'adminRights' | translate}}).
+            </span>
+            <span ng-show="authUser && !authUser.privileged">
+                <strong>{{ 'userInfoUser' | translate}}</strong> ({{ 'userRights' | translate}}).
+            </span>
+            <br><br>
+        </p>
+
+        <form ng-show="authUser && authUser.privileged" class="form-horizontal" role="form" ng-submit="createNewUser()">
+          <h2>{{ 'createNewUser' | translate }}</h2>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ 'username' | translate }}</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="newUserName" ng-change="test()" placeholder="{{ 'firstName' | translate }}" class="form-control">
+                <span class="validation" ng-show="!newUserName.length">{{ 'inputEmpty' | translate }}</span>
+            </div>
+          </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label">{{ 'password' | translate }}</label>
+            <div class="col-sm-10">
+                <input type="password" ng-model="newPassword" ng-change="testPassword()" placeholder="{{ 'password' | translate }}" class="form-control">
+                <span class="validation" ng-show="!newPassword.length">{{ 'inputEmpty' | translate }}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ 'passwordConfirm' | translate }}</label>
+            <div class="col-sm-10">
+                <input type="password" ng-model="newPasswordConfirm" ng-change="testPassword()" placeholder="{{ 'password' | translate }}" class="form-control">
+                <span class="validation" ng-show="!newPasswordConfirm.length">{{ 'inputEmpty' | translate }}</span>
+                <span class="validation" ng-show="newPassword != newPasswordConfirm">{{ 'passwordsNotMatch' | translate }}</span>
+            </div>
+          </div>  
+
+
+          <div class="form-group">        
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-success" ng-disabled="!newUserName.length && !newPassword.length && newPassword != newPasswordConfirm" ng-click="createNewUser()">
+                  <span class="glyphicon glyphicon-plus"></span> {{ 'createNewUser' | translate }}
+                </button>
+              </div>
+            </div>
+        </form>
+    </div>
+    
+</div>
