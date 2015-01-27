@@ -25,9 +25,10 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         
         // menu items
         menuView: 'Spravovat',
-        username: 'uživatel',
-        password: 'heslo',
-        passwordConfirm: 'potvrzení hesla',
+        useremail: 'Email',
+        username: 'Jméno',
+        password: 'Heslo',
+        passwordConfirm: 'Potvrzení hesla',
         createNewUser: 'Vytvořit nového uživatele',
         login: 'Přihlásit se',
         back: 'Zpět',
@@ -43,6 +44,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         
         // input validation
         inputEmpty: 'Pole nesmí být prázdné',
+        inputEmail: 'Musí být zadán platný email',
         inputPositiveNumber: 'V poli musí být kladné číslo',
         inputSelect: 'Zvolte prosím jednu z možností',
         inputSelectMore: 'Zvolte prosím alespoň jednu položku',
@@ -124,9 +126,10 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         
         // menu items
         menuView: 'Manage',
-        username: 'username',
-        password: 'password',
-        passwordConfirm: 'confirm password',
+        useremail: 'Email',
+        username: 'User name',
+        password: 'Password',
+        passwordConfirm: 'Confirm password',
         createNewUser: 'Create new user',
         login: 'Login',
         back: 'Back',
@@ -142,6 +145,7 @@ app.config(['$translateProvider', 'apiProviderProvider', function ($translatePro
         
         // input validation
         inputEmpty: 'Input cannot be empty',
+        inputEmail: 'Input must be valid email address',
         inputPositiveNumber: 'Input must be positive number',
         inputSelect: 'Choose one option',
         inputSelectMore: 'Choose at least one option',

@@ -13,6 +13,16 @@
 
         <form ng-show="authUser && authUser.privileged" class="form-horizontal" role="form" ng-submit="createNewUser()">
           <h2>{{ 'createNewUser' | translate }}</h2>
+          <span class="info {{result}}">{{ result | translate }}</span>
+          <br> 
+           
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ 'useremail' | translate }} (login)</label>
+            <div class="col-sm-10">
+                <input type="email" ng-model="newUserEmail" placeholder="email@example.com" class="form-control">
+                <span class="validation" ng-show="!newUserEmail.length">{{ 'inputEmail' | translate }}</span>
+            </div>
+          </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">{{ 'username' | translate }}</label>
             <div class="col-sm-10">
@@ -39,7 +49,7 @@
 
           <div class="form-group">        
               <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-success" ng-disabled="!newUserName.length || !newPassword.length || newPassword != newPasswordConfirm" ng-click="createNewUser()">
+                <button class="btn btn-success" ng-disabled="!newUserEmail || !newUserName.length || !newPassword.length || newPassword != newPasswordConfirm">
                   <span class="glyphicon glyphicon-plus"></span> {{ 'createNewUser' | translate }}
                 </button>
               </div>

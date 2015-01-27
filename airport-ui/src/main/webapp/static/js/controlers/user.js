@@ -5,28 +5,32 @@
  */
 function UserController($scope, $http, apiProvider, $routeParams, $translate, $timeout, $location, $rootScope) {
    
+    $scope.newUserEmail = '';
     $scope.newUserName = '';
     $scope.newPassword = '';
     $scope.newPasswordConfirm = '';
     
     
-    $scope.createNewUser = function() {
-        //
+    $scope.createNewUser = function() {   
+                
         apiProvider.newUser().save({
-            username: $scope.newUserName,
-            password: $scope.newPassword
+            email: $scope.newUserEmail,
+            name: $scope.newUserName,
+            password: $scope.newPassword,
+            is_privileged: 0
         },
         function(res) {
             if(res.$resolved) {
                 $scope.result = 'success';
                 setTimeout(function () {
                     window.location.href = "http://localhost:8080/pa165/index.html#/user"; //will redirect to your blog page (an ex: blog.html)
-                }, 1000);
+                }, 500);
             } 
             else {
                 $scope.result = 'error';
             }
         });
+       
     }
 }
 

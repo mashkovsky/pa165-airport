@@ -142,6 +142,14 @@ app.provider('apiProvider', function apiProvider() {
                 this.actions
               );
             },
+            newUser: function() {
+              return $resource(baseUrl + '/user',
+                { token : this.token, 
+                  lang : this.language
+                },
+                this.actions
+              );
+            },
             destination: function() {
               return $resource(baseUrl + '/destinations/:id',
                 { id:'@id',
