@@ -39,7 +39,7 @@
 
           <div class="form-group">        
               <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-success" ng-disabled="!newUserName.length && !newPassword.length && newPassword != newPasswordConfirm" ng-click="createNewUser()">
+                <button class="btn btn-success" ng-disabled="!newUserName.length || !newPassword.length || newPassword != newPasswordConfirm" ng-click="createNewUser()">
                   <span class="glyphicon glyphicon-plus"></span> {{ 'createNewUser' | translate }}
                 </button>
               </div>
