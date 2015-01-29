@@ -1,5 +1,5 @@
 function FlightController($scope, $http, apiProvider, $routeParams, $translate, $timeout, $rootScope) {
-    $scope.plane = {id:'', origin:'', destination:'', departure:'', arrival:'', 
+    $scope.flight = {id:'', origin:'', destination:'', departure:'', arrival:'', 
         plane:'', stewards:[]};
     
     if($routeParams.flightId) {
